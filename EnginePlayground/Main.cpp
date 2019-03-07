@@ -16,18 +16,21 @@ int main()
 	Loader loader;
 	Renderer renderer;
 
-	std::vector<float> vertices = {
-		// Left bottom triangle
-		-0.5f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f,
-		// Right top triangle
-		0.5f, 0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f
+	std::vector<GLfloat> vertices =
+	{
+		-0.5f, 0.5f, 0,  // Vertice 0
+		-0.5f, -0.5f, 0, // Vertice 1
+		0.5f, -0.5f, 0,  // Vertice 2
+		0.5f, 0.5f, 0    // Vertice 3
 	};
 
-	RawModel model = loader.loadToVAO( vertices );
+	std::vector<GLuint> indices = 
+	{
+		0, 1, 3, // First Triangle
+		3, 1, 2  // Second Triangle
+	};
+
+	RawModel model = loader.loadToVAO( vertices, indices );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
