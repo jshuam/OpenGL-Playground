@@ -18,10 +18,10 @@ int main()
 
 	std::vector<GLfloat> vertices =
 	{
-		-0.5f, 0.5f, 0,  // Vertice 0
-		-0.5f, -0.5f, 0, // Vertice 1
-		0.5f, -0.5f, 0,  // Vertice 2
-		0.5f, 0.5f, 0    // Vertice 3
+		-0.5f, 0.5f, 0,  // Vertex 0
+		-0.5f, -0.5f, 0, // Vertex 1
+		0.5f, -0.5f, 0,  // Vertex 2
+		0.5f, 0.5f, 0    // Vertex 3
 	};
 
 	std::vector<GLuint> indices = 
