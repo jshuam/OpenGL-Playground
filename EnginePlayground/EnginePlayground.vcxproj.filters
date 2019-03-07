@@ -10,6 +10,9 @@
     <Filter Include="Src\EngineTester">
       <UniqueIdentifier>{f03f2744-d8e3-4a31-a7fd-93bc17bf337f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Shaders">
+      <UniqueIdentifier>{e1015ee5-f9a2-43e4-835a-8e5acd19ad28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
@@ -26,6 +29,12 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Src\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Src\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticShader.h">
+      <Filter>Src\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,8 +53,22 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Src\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticShader.cpp">
+      <Filter>Src\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vertex_shader.txt">
+      <Filter>Src\Shaders</Filter>
+    </Text>
+    <Text Include="fragment_shader.txt">
+      <Filter>Src\Shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

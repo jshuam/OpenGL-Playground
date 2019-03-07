@@ -120,6 +120,8 @@
     <ClInclude Include="RawModel.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="StaticShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DisplayManager.cpp" />
@@ -127,9 +129,15 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RawModel.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="StaticShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fragment_shader.txt" />
+    <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

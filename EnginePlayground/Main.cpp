@@ -1,6 +1,7 @@
 #include "DisplayManager.h"
 #include "Loader.h"
 #include "Renderer.h"
+#include "StaticShader.h"
 
 void error_callback( int error, const char* description )
 {
@@ -9,12 +10,20 @@ void error_callback( int error, const char* description )
 
 int main()
 {
-	glfwInit();
+	try
+	{
+		glfwInit();
+	}
+	catch( std::exception& e )
+	{
+		std::cout << "\n" << e.what() << std::endl;
+	}
 
 	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720, "OpenGL Playground" );
 
 	Loader loader;
 	Renderer renderer;
+	StaticShader shader;
 
 	std::vector<GLfloat> vertices =
 	{
@@ -35,10 +44,13 @@ int main()
 	while( !glfwWindowShouldClose( window ) )
 	{
 		renderer.prepare();
+		shader.start();
 		renderer.render( model );
+		shader.stop();
 		DisplayManager::updateDisplay();
 	}
 
+	shader.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();
 
