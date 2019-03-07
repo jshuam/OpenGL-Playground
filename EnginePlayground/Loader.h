@@ -7,12 +7,12 @@
 class Loader
 {
 public:
-	RawModel loadToVAO( std::vector<GLfloat> positions );
+	RawModel loadToVAO( const std::vector<GLfloat>& positions );
 	void cleanUp();
 
 private:
 	GLuint createVAO();
-	void storeDataInAttributeList( GLuint attribute_number, std::vector<GLfloat> data );
+	void storeDataInAttributeList( GLuint attribute_number, const std::vector<GLfloat>& data );
 	void unbindVAO();
 	std::vector<GLuint> vaos;
 	std::vector<GLuint> vbos;

@@ -2,11 +2,11 @@
 
 void Renderer::prepare()
 {
-	glClearColor( 1, 0, 0, 1 );
 	glClear( GL_COLOR_BUFFER_BIT );
+	glClearColor( 1, 0, 0, 1 );
 }
 
-void Renderer::render(RawModel model)
+void Renderer::render( const RawModel& model )
 {
 	glBindVertexArray( model.getVaoId() );
 	glEnableVertexAttribArray( 0 );

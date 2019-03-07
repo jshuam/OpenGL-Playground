@@ -20,11 +20,11 @@ int main()
 		// Left bottom triangle
 		-0.5f, 0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		// Right top triangle
-		0.5f, -0.5f, 0.0f,
 		0.5f, 0.5f, 0.0f,
-		-0.5f, 0.5f, 0.0f
+		// Right top triangle
+		0.5f, 0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f
 	};
 
 	RawModel model = loader.loadToVAO( vertices );

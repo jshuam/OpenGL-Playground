@@ -1,6 +1,6 @@
 #include "Loader.h"
 
-RawModel Loader::loadToVAO( std::vector<GLfloat> positions )
+RawModel Loader::loadToVAO( const std::vector<GLfloat>& positions )
 {
 	GLuint vao_id = createVAO();
 	storeDataInAttributeList( 0, positions );
@@ -23,7 +23,7 @@ void Loader::cleanUp()
 	glDeleteBuffers( vbos.size(), vbos.data() );
 }
 
-void Loader::storeDataInAttributeList( GLuint attribute_number, std::vector<GLfloat> data )
+void Loader::storeDataInAttributeList( GLuint attribute_number, const std::vector<GLfloat>& data )
 {
 	GLuint vbo_id;
 	glGenBuffers( 1, &vbo_id );

@@ -6,12 +6,12 @@ RawModel::RawModel( GLuint vao_id, GLuint vertex_count )
 	this->vertex_count = vertex_count;
 }
 
-GLuint RawModel::getVaoId()
+GLuint RawModel::getVaoId() const
 {
 	return vao_id;
 }
 
-GLuint RawModel::getVertexCount()
+GLuint RawModel::getVertexCount() const
 {
 	return vertex_count;
 }
