@@ -13,12 +13,18 @@
     <Filter Include="Src\Shaders">
       <UniqueIdentifier>{e1015ee5-f9a2-43e4-835a-8e5acd19ad28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Res">
+      <UniqueIdentifier>{12370c2c-11b5-4490-801c-76786d196863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Textures">
+      <UniqueIdentifier>{8b18e47c-8018-454a-892c-add19a70c3a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{8f9519a7-76c0-4be3-8653-87508711ed0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
-      <Filter>Src\RenderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="RawModel.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">
@@ -36,15 +42,20 @@
     <ClInclude Include="StaticShader.h">
       <Filter>Src\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Src\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelTexture.h" />
+    <ClInclude Include="RawModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Src\EngineTester</Filter>
     </ClCompile>
     <ClCompile Include="DisplayManager.cpp">
-      <Filter>Src\RenderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="RawModel.cpp">
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
@@ -59,6 +70,11 @@
     <ClCompile Include="StaticShader.cpp">
       <Filter>Src\Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="ModelTexture.cpp" />
+    <ClCompile Include="RawModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc" />
@@ -70,5 +86,10 @@
     <Text Include="fragment_shader.txt">
       <Filter>Src\Shaders</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="wooden_container.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

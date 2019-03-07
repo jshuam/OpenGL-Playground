@@ -2,6 +2,8 @@
 #include "Loader.h"
 #include "Renderer.h"
 #include "StaticShader.h"
+#include "ModelTexture.h"
+#include "TexturedModel.h"
 
 void error_callback( int error, const char* description )
 {
@@ -33,19 +35,29 @@ int main()
 		0.5f, 0.5f, 0    // Vertex 3
 	};
 
-	std::vector<GLuint> indices = 
+	std::vector<GLuint> indices =
 	{
 		0, 1, 3, // First Triangle
 		3, 1, 2  // Second Triangle
 	};
 
-	RawModel model = loader.loadToVAO( vertices, indices );
+	std::vector<GLfloat> texture_coords = 
+	{
+		0, 0,    // Vertex 0
+		0, 1,    // Vertex 1
+		1, 1,    // Vertex 2
+		1, 0     // Vertex 3
+	};
+
+	RawModel model(loader.loadToVAO( vertices, indices ));
+	ModelTexture texture( loader.loadTexture( "wooden_container" ) );
+	TexturedModel textured_model( model, texture );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
 		renderer.prepare();
 		shader.start();
-		renderer.render( model );
+		renderer.render( textured_model );
 		shader.stop();
 		DisplayManager::updateDisplay();
 	}

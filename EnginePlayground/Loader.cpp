@@ -1,6 +1,8 @@
 #include "Loader.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
-RawModel Loader::loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLuint>& indices )
+RawModel Loader::loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLfloat>& texture_coords, const std::vector<GLuint>& indices )
 {
 	GLuint vao_id = createVAO();
 	bindIndicesBuffer( indices );
@@ -20,8 +22,47 @@ GLuint Loader::createVAO()
 
 void Loader::cleanUp()
 {
-	glDeleteVertexArrays( vaos.size(), vaos.data() );
-	glDeleteBuffers( vbos.size(), vbos.data() );
+	for( auto& vao : vaos )
+	{
+		glDeleteVertexArrays( 1, &vao );
+	}
+	for( auto& vbo : vbos )
+	{
+		glDeleteBuffers( 1, &vbo );
+	}
+	for( auto& texture : textures )
+	{
+		glDeleteTextures( 1, &texture );
+	}
+
+	vaos.clear();
+	vbos.clear();
+	textures.clear();
+}
+
+GLuint Loader::loadTexture( std::string filename )
+{
+	GLint width, height, channels;
+	GLuint texture;
+	filename += ".png";
+	unsigned char* data = stbi_load( filename.c_str(), &width, &height, &channels, 0 );
+
+	if( data == nullptr )
+	{
+		throw( std::string( "Failed to load textures." ) );
+	}
+
+	glGenTextures( 1, &texture );
+	glBindTexture( GL_TEXTURE_2D, texture );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data );
+	glGenerateMipmap( GL_TEXTURE_2D );
+	glBindTexture( GL_TEXTURE_2D, 0 );
+	stbi_image_free( data );
+
+	textures.push_back( texture );
+	return texture;
 }
 
 void Loader::storeDataInAttributeList( GLuint attribute_number, const std::vector<GLfloat>& data )

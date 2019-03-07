@@ -7,8 +7,9 @@
 class Loader
 {
 public:
-	RawModel loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLuint>& indices );
+	RawModel loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLfloat>& texture_coords, const std::vector<GLuint>& indices );
 	void cleanUp();
+	GLuint loadTexture( std::string filename );
 
 private:
 	GLuint createVAO();
@@ -17,5 +18,6 @@ private:
 	void bindIndicesBuffer( const std::vector<GLuint>& indices );
 	std::vector<GLuint> vaos;
 	std::vector<GLuint> vbos;
+	std::vector<GLuint> textures;
 };
 

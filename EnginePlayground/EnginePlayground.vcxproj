@@ -117,20 +117,25 @@
   <ItemGroup>
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Loader.h" />
+    <ClInclude Include="ModelTexture.h" />
     <ClInclude Include="RawModel.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="StaticShader.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TexturedModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="RawModel.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="StaticShader.cpp" />
+    <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc" />
@@ -138,6 +143,9 @@
   <ItemGroup>
     <Text Include="fragment_shader.txt" />
     <Text Include="vertex_shader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="wooden_container.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
