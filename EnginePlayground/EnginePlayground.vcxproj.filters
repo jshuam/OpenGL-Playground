@@ -19,7 +19,7 @@
     <Filter Include="Src\Textures">
       <UniqueIdentifier>{8b18e47c-8018-454a-892c-add19a70c3a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
+    <Filter Include="Src\Models">
       <UniqueIdentifier>{8f9519a7-76c0-4be3-8653-87508711ed0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -45,11 +45,15 @@
     <ClInclude Include="stb_image.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="ModelTexture.h" />
     <ClInclude Include="RawModel.h">
-      <Filter>Models</Filter>
+      <Filter>Src\Models</Filter>
     </ClInclude>
-    <ClInclude Include="TexturedModel.h" />
+    <ClInclude Include="ModelTexture.h">
+      <Filter>Src\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedModel.h">
+      <Filter>Src\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -70,11 +74,15 @@
     <ClCompile Include="StaticShader.cpp">
       <Filter>Src\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="RawModel.cpp">
-      <Filter>Models</Filter>
+      <Filter>Src\Models</Filter>
     </ClCompile>
-    <ClCompile Include="TexturedModel.cpp" />
+    <ClCompile Include="ModelTexture.cpp">
+      <Filter>Src\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedModel.cpp">
+      <Filter>Src\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc" />

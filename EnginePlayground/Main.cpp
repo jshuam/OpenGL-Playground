@@ -43,13 +43,13 @@ int main()
 
 	std::vector<GLfloat> texture_coords = 
 	{
-		0, 0,    // Vertex 0
-		0, 1,    // Vertex 1
-		1, 1,    // Vertex 2
-		1, 0     // Vertex 3
+		0.0f, 0.0f,    // Vertex 0
+		0.0f, 1.0f,    // Vertex 1
+		1.0f, 1.0f,    // Vertex 2
+		1.0f, 0.0f     // Vertex 3 
 	};
 
-	RawModel model(loader.loadToVAO( vertices, indices ));
+	RawModel model(loader.loadToVAO( vertices, texture_coords, indices ));
 	ModelTexture texture( loader.loadTexture( "wooden_container" ) );
 	TexturedModel textured_model( model, texture );
 

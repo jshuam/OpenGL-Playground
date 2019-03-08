@@ -15,15 +15,13 @@ public:
 	void cleanUp();
 
 protected:
-	ShaderProgram( std::string vertex_filename, std::string fragment_filename );
+	ShaderProgram() = default;
 	virtual void bindAttributes() = 0;
 	void bindAttribute( GLuint attribute, std::string variable_name );
 	virtual ~ShaderProgram() = default;
-
-private:
 	static GLuint loadShader( std::string filename, GLuint type );
 
-private:
+protected:
 	GLuint program_id;
 	GLuint vertex_shader_id;
 	GLuint fragment_shader_id;

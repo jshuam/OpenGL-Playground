@@ -22,17 +22,6 @@ void ShaderProgram::cleanUp()
 	glDeleteProgram( program_id );
 }
 
-ShaderProgram::ShaderProgram( std::string vertex_filename, std::string fragment_filename )
-{
-	vertex_shader_id = loadShader( vertex_filename, GL_VERTEX_SHADER );
-	fragment_shader_id = loadShader( fragment_filename, GL_FRAGMENT_SHADER );
-	program_id = glCreateProgram();
-	glAttachShader( program_id, vertex_shader_id );
-	glAttachShader( program_id, fragment_shader_id );
-	glLinkProgram( program_id );
-	glValidateProgram( program_id );
-}
-
 void ShaderProgram::bindAttribute( GLuint attribute, std::string variable_name )
 {
 	glBindAttribLocation( program_id, attribute, variable_name.c_str() );

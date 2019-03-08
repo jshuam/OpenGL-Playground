@@ -13,7 +13,7 @@ public:
 
 private:
 	GLuint createVAO();
-	void storeDataInAttributeList( GLuint attribute_number, const std::vector<GLfloat>& data );
+	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<GLfloat>& data );
 	void unbindVAO();
 	void bindIndicesBuffer( const std::vector<GLuint>& indices );
 	std::vector<GLuint> vaos;
