@@ -10,10 +10,21 @@ StaticShader::StaticShader() : ShaderProgram()
 	bindAttributes();
 	glLinkProgram( program_id );
 	glValidateProgram( program_id );
+	getAllUniformLocations();
+}
+
+void StaticShader::loadTransformationMatrix( glm::mat4 matrix )
+{
+	loadMatrix( location_transform_mat, matrix );
 }
 
 void StaticShader::bindAttributes()
 {
 	bindAttribute( 0, "position" );
 	bindAttribute( 1, "texture_coords" );
+}
+
+void StaticShader::getAllUniformLocations()
+{
+	location_transform_mat = getUniformLocation( "transformation_matrix" );
 }

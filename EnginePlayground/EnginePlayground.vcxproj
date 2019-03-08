@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Loader.h" />
+    <ClInclude Include="Maths.h" />
     <ClInclude Include="ModelTexture.h" />
     <ClInclude Include="RawModel.h" />
     <ClInclude Include="Renderer.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Maths.cpp" />
     <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="RawModel.cpp" />
     <ClCompile Include="Renderer.cpp" />

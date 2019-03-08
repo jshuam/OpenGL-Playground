@@ -64,3 +64,28 @@ GLuint ShaderProgram::loadShader( std::string filename, GLuint type )
 		std::cout << e.what() << std::endl;
 	}
 }
+
+GLuint ShaderProgram::getUniformLocation( std::string uniform_name )
+{
+	return glGetUniformLocation( program_id, uniform_name.c_str() );
+}
+
+void ShaderProgram::loadFloat( GLuint location, GLfloat value )
+{
+	glUniform1f( location, value );
+}
+
+void ShaderProgram::loadVector( GLuint location, glm::vec3 vector )
+{
+	glUniform3f( location, vector.x, vector.y, vector.z );
+}
+
+void ShaderProgram::loadBool( GLuint location, GLboolean value )
+{
+	glUniform1f( location, static_cast<GLfloat>( value ? 1 : 0 ) );
+}
+
+void ShaderProgram::loadMatrix( GLuint location, glm::mat4 matrix )
+{
+	glUniformMatrix4fv( location, 1, GL_FALSE, glm::value_ptr( matrix ) );
+}
