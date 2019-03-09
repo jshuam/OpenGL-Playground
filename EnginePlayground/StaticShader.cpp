@@ -13,7 +13,7 @@ StaticShader::StaticShader() : ShaderProgram()
 	getAllUniformLocations();
 }
 
-void StaticShader::loadTransformationMatrix( glm::mat4 matrix )
+void StaticShader::loadTransformationMatrix( const glm::mat4& matrix ) const
 {
 	loadMatrix( location_transform_mat, matrix );
 }

@@ -4,6 +4,7 @@
 #include "StaticShader.h"
 #include "ModelTexture.h"
 #include "TexturedModel.h"
+#include "Entity.h"
 
 void error_callback( int error, const char* description )
 {
@@ -41,7 +42,7 @@ int main()
 		3, 1, 2  // Second Triangle
 	};
 
-	std::vector<GLfloat> texture_coords = 
+	std::vector<GLfloat> texture_coords =
 	{
 		0.0f, 0.0f,    // Vertex 0
 		0.0f, 1.0f,    // Vertex 1
@@ -49,15 +50,18 @@ int main()
 		1.0f, 0.0f     // Vertex 3 
 	};
 
-	RawModel model(loader.loadToVAO( vertices, texture_coords, indices ));
+	RawModel model( loader.loadToVAO( vertices, texture_coords, indices ) );
 	ModelTexture texture( loader.loadTexture( "wooden_container" ) );
 	TexturedModel textured_model( model, texture );
+	Entity entity( textured_model, glm::vec3( -1, 0, 0 ), 0, 0, 0, 1 );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
+		entity.increasePosition( 0.002f, 0, 0 );
+		entity.increaseRotation( 0, 1, 0 );
 		renderer.prepare();
 		shader.start();
-		renderer.render( textured_model );
+		renderer.render( entity, shader );
 		shader.stop();
 		DisplayManager::updateDisplay();
 	}

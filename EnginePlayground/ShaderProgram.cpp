@@ -70,22 +70,22 @@ GLuint ShaderProgram::getUniformLocation( std::string uniform_name )
 	return glGetUniformLocation( program_id, uniform_name.c_str() );
 }
 
-void ShaderProgram::loadFloat( GLuint location, GLfloat value )
+void ShaderProgram::loadFloat( const GLuint & location, const GLfloat & value ) const
 {
 	glUniform1f( location, value );
 }
 
-void ShaderProgram::loadVector( GLuint location, glm::vec3 vector )
+void ShaderProgram::loadVector( const GLuint & location, const glm::vec3 & vector ) const
 {
 	glUniform3f( location, vector.x, vector.y, vector.z );
 }
 
-void ShaderProgram::loadBool( GLuint location, GLboolean value )
+void ShaderProgram::loadBool( const GLuint & location, const GLboolean & value ) const
 {
 	glUniform1f( location, static_cast<GLfloat>( value ? 1 : 0 ) );
 }
 
-void ShaderProgram::loadMatrix( GLuint location, glm::mat4 matrix )
+void ShaderProgram::loadMatrix( const GLuint & location, const glm::mat4 & matrix ) const
 {
 	glUniformMatrix4fv( location, 1, GL_FALSE, glm::value_ptr( matrix ) );
 }

@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Maths.h" />
     <ClInclude Include="ModelTexture.h" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DisplayManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Maths.cpp" />

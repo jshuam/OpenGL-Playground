@@ -8,6 +8,6 @@
 class Maths
 {
 public:
-	glm::mat4 createTransformationMatrix( glm::vec3 translation, GLfloat rx, GLfloat ry, GLfloat rz, GLfloat scale );
+	static glm::mat4 createTransformationMatrix( glm::vec3 translation, GLfloat rx, GLfloat ry, GLfloat rz, GLfloat scale );
 };
 

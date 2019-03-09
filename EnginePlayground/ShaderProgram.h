@@ -25,10 +25,10 @@ protected:
 	virtual ~ShaderProgram() = default;
 	static GLuint loadShader( std::string filename, GLuint type );
 	GLuint getUniformLocation( std::string uniform_name );
-	void loadFloat( GLuint location, GLfloat value );
-	void loadVector( GLuint location, glm::vec3 vector );
-	void loadBool( GLuint location, GLboolean value );
-	void loadMatrix( GLuint location, glm::mat4 matrix );
+	void loadFloat( const GLuint& location, const GLfloat& value ) const;
+	void loadVector( const GLuint& location, const glm::vec3& vector ) const;
+	void loadBool( const GLuint& location, const GLboolean& value ) const;
+	void loadMatrix( const GLuint& location, const glm::mat4& matrix ) const;
 
 protected:
 	GLuint program_id;

@@ -10,7 +10,7 @@ public:
 	StaticShader();
 	~StaticShader() = default;
 
-	void loadTransformationMatrix( glm::mat4 matrix );
+	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 
 protected:
 	void bindAttributes() override;

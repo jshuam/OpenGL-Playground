@@ -25,6 +25,9 @@
     <Filter Include="Src\Toolbox">
       <UniqueIdentifier>{17384512-c5e1-4a41-819b-7f1e5b18fda8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Entities">
+      <UniqueIdentifier>{5eca45c1-154b-4da5-9c20-2a8c5f060dad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
@@ -60,6 +63,7 @@
     <ClInclude Include="Maths.h">
       <Filter>Src\Toolbox</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -92,6 +96,7 @@
     <ClCompile Include="Maths.cpp">
       <Filter>Src\Toolbox</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
