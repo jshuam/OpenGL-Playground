@@ -1,5 +1,15 @@
 #include "Renderer.h"
 
+#include "DisplayManager.h"
+
+Renderer::Renderer( StaticShader shader )
+{
+	createProjectionMatrix();
+	shader.start();
+	shader.loadProjectionMatrix( projection_matrix );
+	shader.stop();
+}
+
 void Renderer::prepare()
 {
 	glClear( GL_COLOR_BUFFER_BIT );
@@ -21,4 +31,10 @@ void Renderer::render( const Entity& entity, const StaticShader& shader )
 	glDisableVertexAttribArray( 0 );
 	glDisableVertexAttribArray( 1 );
 	glBindVertexArray( 0 );
+}
+
+void Renderer::createProjectionMatrix()
+{
+	float aspect_ratio = static_cast<float>( DisplayManager::getWidth() ) / static_cast<float>( DisplayManager::getHeight() );
+	projection_matrix = glm::perspective( glm::radians( FOV ), aspect_ratio, NEAR_PLANE, FAR_PLANE );
 }

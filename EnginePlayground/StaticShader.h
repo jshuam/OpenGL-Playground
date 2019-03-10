@@ -11,6 +11,7 @@ public:
 	~StaticShader() = default;
 
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
+	void loadProjectionMatrix( const glm::mat4& matrix ) const;
 
 protected:
 	void bindAttributes() override;
@@ -21,4 +22,5 @@ private:
 	static constexpr const char* fragment_file = "fragment_shader.txt";
 
 	GLuint location_transform_mat;
+	GLuint location_projection_mat;
 };

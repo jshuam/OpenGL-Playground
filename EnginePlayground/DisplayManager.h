@@ -53,6 +53,14 @@ public:
 	{
 		glfwDestroyWindow( window );
 	}
+	static const GLint getWidth()
+	{
+		return pixel_width;
+	}
+	static const GLint getHeight()
+	{
+		return pixel_height;
+	}
 
 private:
 	static GLFWwindow* window;

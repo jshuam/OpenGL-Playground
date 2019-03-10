@@ -25,8 +25,8 @@ int main()
 	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720, "OpenGL Playground" );
 
 	Loader loader;
-	Renderer renderer;
 	StaticShader shader;
+	Renderer renderer( shader );
 
 	std::vector<GLfloat> vertices =
 	{
@@ -53,12 +53,12 @@ int main()
 	RawModel model( loader.loadToVAO( vertices, texture_coords, indices ) );
 	ModelTexture texture( loader.loadTexture( "wooden_container" ) );
 	TexturedModel textured_model( model, texture );
-	Entity entity( textured_model, glm::vec3( -1, 0, 0 ), 0, 0, 0, 1 );
+	Entity entity( textured_model, glm::vec3( 0, 0, -1 ), 0, 0, 0, 1 );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increasePosition( 0.002f, 0, 0 );
-		entity.increaseRotation( 0, 1, 0 );
+		entity.increasePosition( 0, 0, -0.02f );
+		entity.increaseRotation( 0, 0, 0 );
 		renderer.prepare();
 		shader.start();
 		renderer.render( entity, shader );
