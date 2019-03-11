@@ -66,6 +66,7 @@
     <ClInclude Include="Entity.h">
       <Filter>Src\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="OBJLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -101,6 +102,7 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -114,10 +116,23 @@
     <Image Include="wooden_container.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="stallTexture.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc">
       <Filter>Res</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="stall.blend">
+      <Filter>Res</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="stall.obj">
+      <Filter>Res</Filter>
+    </Object>
   </ItemGroup>
 </Project>
