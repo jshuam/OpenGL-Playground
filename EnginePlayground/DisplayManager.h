@@ -37,8 +37,7 @@ public:
 		glfwGetFramebufferSize( window, &pixel_width, &pixel_height );
 		glViewport( 0, 0, pixel_width, pixel_height );
 
-		// Setting a swap interval of 1 (as recommended by GLFW docs) to prevent screen tearing
-		glfwSwapInterval( 1 );
+		glfwSwapInterval( 0 );
 
 		return window;
 	}

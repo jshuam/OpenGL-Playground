@@ -57,8 +57,7 @@ int main()
 
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increasePosition( 0, 0, -0.02f );
-		entity.increaseRotation( 0, 0, 0 );
+		entity.increasePosition( 0, 0, -0.002f );
 		renderer.prepare();
 		shader.start();
 		renderer.render( entity, shader );
