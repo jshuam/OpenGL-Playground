@@ -5,6 +5,7 @@
 #include "ModelTexture.h"
 #include "TexturedModel.h"
 #include "Entity.h"
+#include "OBJLoader.h"
 
 void error_callback( int error, const char* description )
 {
@@ -27,37 +28,13 @@ int main()
 	Loader loader;
 	StaticShader shader;
 	Renderer renderer( shader );
-
-	std::vector<GLfloat> vertices =
-	{
-		-0.5f, 0.5f, 0,  // Vertex 0
-		-0.5f, -0.5f, 0, // Vertex 1
-		0.5f, -0.5f, 0,  // Vertex 2
-		0.5f, 0.5f, 0    // Vertex 3
-	};
-
-	std::vector<GLuint> indices =
-	{
-		0, 1, 3, // First Triangle
-		3, 1, 2  // Second Triangle
-	};
-
-	std::vector<GLfloat> texture_coords =
-	{
-		0.0f, 0.0f,    // Vertex 0
-		0.0f, 1.0f,    // Vertex 1
-		1.0f, 1.0f,    // Vertex 2
-		1.0f, 0.0f     // Vertex 3 
-	};
-
-	RawModel model( loader.loadToVAO( vertices, texture_coords, indices ) );
-	ModelTexture texture( loader.loadTexture( "wooden_container" ) );
-	TexturedModel textured_model( model, texture );
-	Entity entity( textured_model, glm::vec3( 0, 0, -1 ), 0, 0, 0, 1 );
+	RawModel model( OBJLoader::loadObjModel( "stall", loader ) );
+	TexturedModel textured_model( model, loader.loadTexture( "stallTexture" ) );
+	Entity entity( textured_model, glm::vec3( 0, 0, -15 ), 0, 0, 0, 1 );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increasePosition( 0, 0, -0.002f );
+		entity.increaseRotation( 0, 0.009, 0 );
 		renderer.prepare();
 		shader.start();
 		renderer.render( entity, shader );

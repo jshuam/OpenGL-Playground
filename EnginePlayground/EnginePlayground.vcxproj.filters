@@ -66,7 +66,15 @@
     <ClInclude Include="Entity.h">
       <Filter>Src\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="OBJLoader.h">
+      <Filter>Src\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Src\Toolbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Src\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -96,13 +104,15 @@
     <ClCompile Include="TexturedModel.cpp">
       <Filter>Src\Models</Filter>
     </ClCompile>
-    <ClCompile Include="Maths.cpp">
-      <Filter>Src\Toolbox</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="OBJLoader.cpp">
+      <Filter>Src\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Src\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -124,15 +134,5 @@
     <ResourceCompile Include="EnginePlayground.rc">
       <Filter>Res</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="stall.blend">
-      <Filter>Res</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="stall.obj">
-      <Filter>Res</Filter>
-    </Object>
   </ItemGroup>
 </Project>

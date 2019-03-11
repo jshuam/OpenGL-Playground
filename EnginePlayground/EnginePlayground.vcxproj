@@ -115,8 +115,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Maths.h" />
     <ClInclude Include="ModelTexture.h" />
@@ -130,11 +132,11 @@
     <ClInclude Include="TexturedModel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Maths.cpp" />
     <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="RawModel.cpp" />
@@ -153,12 +155,6 @@
   <ItemGroup>
     <Image Include="stallTexture.png" />
     <Image Include="wooden_container.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="stall.blend" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="stall.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

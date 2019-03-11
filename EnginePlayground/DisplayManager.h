@@ -61,6 +61,11 @@ public:
 		return pixel_height;
 	}
 
+	static const GLint getKey( const GLint& key )
+	{
+		return glfwGetKey( window, key );
+	}
+
 private:
 	static GLFWwindow* window;
 	static GLint pixel_width;

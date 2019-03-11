@@ -23,6 +23,11 @@ void StaticShader::loadProjectionMatrix( const glm::mat4& matrix ) const
 	loadMatrix( location_projection_mat, matrix );
 }
 
+void StaticShader::loadViewMatrix( const glm::mat4& matrix ) const
+{
+	loadMatrix( location_view_mat, matrix );
+}
+
 void StaticShader::bindAttributes()
 {
 	bindAttribute( 0, "position" );
@@ -33,4 +38,5 @@ void StaticShader::getAllUniformLocations()
 {
 	location_transform_mat = getUniformLocation( "transformation_matrix" );
 	location_projection_mat = getUniformLocation( "projection_matrix" );
+	location_view_mat = getUniformLocation( "view_matrix" );
 }

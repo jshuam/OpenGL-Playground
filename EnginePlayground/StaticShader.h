@@ -12,6 +12,7 @@ public:
 
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
+	void loadViewMatrix( const glm::mat4& matrix ) const;
 
 protected:
 	void bindAttributes() override;
@@ -23,4 +24,5 @@ private:
 
 	GLuint location_transform_mat;
 	GLuint location_projection_mat;
+	GLuint location_view_mat;
 };
