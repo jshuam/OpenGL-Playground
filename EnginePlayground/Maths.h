@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "Camera.h"
+#include "Camera.h"
 #include "glm/matrix.hpp"
 #include "glm/vec3.hpp"
 #include <glm/gtc/matrix_transform.hpp>
@@ -20,7 +20,7 @@ public:
 		return matrix;
 	}
 
-	/*static glm::mat4 createViewMatrix( const Camera& camera )
+	static glm::mat4 createViewMatrix( const Camera& camera )
 	{
 		glm::mat4 matrix( 1.0f );
 		matrix = glm::rotate( matrix, glm::radians( camera.getPitch() ), glm::vec3( 1, 0, 0 ) );
@@ -30,7 +30,7 @@ public:
 		matrix = glm::translate( matrix, negative_camera_pos );
 
 		return matrix;
-	}*/
+	}
 
 };
 

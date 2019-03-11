@@ -30,13 +30,15 @@ int main()
 	Renderer renderer( shader );
 	RawModel model( OBJLoader::loadObjModel( "stall", loader ) );
 	TexturedModel textured_model( model, loader.loadTexture( "stallTexture" ) );
-	Entity entity( textured_model, glm::vec3( 0, 0, -15 ), 0, 0, 0, 1 );
+	Entity entity( textured_model, glm::vec3( 0, -5, -50 ), 0, 0, 0, 1 );
+	Camera camera;
 
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increaseRotation( 0, 0.009, 0 );
+		camera.move();
 		renderer.prepare();
 		shader.start();
+		shader.loadViewMatrix( camera );
 		renderer.render( entity, shader );
 		shader.stop();
 		DisplayManager::updateDisplay();

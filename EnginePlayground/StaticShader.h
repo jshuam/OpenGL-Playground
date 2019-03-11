@@ -1,6 +1,7 @@
 #pragma once
 #include "ShaderProgram.h"
 #include "glm/mat4x4.hpp"
+#include "Camera.h"
 
 class StaticShader : public ShaderProgram
 {
@@ -12,7 +13,7 @@ public:
 
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
-	void loadViewMatrix( const glm::mat4& matrix ) const;
+	void loadViewMatrix( const Camera& camera ) const;
 
 protected:
 	void bindAttributes() override;

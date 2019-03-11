@@ -1,4 +1,5 @@
 #include "StaticShader.h"
+#include "Maths.h"
 
 StaticShader::StaticShader() : ShaderProgram()
 {
@@ -23,9 +24,10 @@ void StaticShader::loadProjectionMatrix( const glm::mat4& matrix ) const
 	loadMatrix( location_projection_mat, matrix );
 }
 
-void StaticShader::loadViewMatrix( const glm::mat4& matrix ) const
+void StaticShader::loadViewMatrix( const Camera& camera ) const
 {
-	loadMatrix( location_view_mat, matrix );
+	glm::mat4 view_matrix = Maths::createViewMatrix( camera );
+	loadMatrix( location_view_mat, view_matrix );
 }
 
 void StaticShader::bindAttributes()
