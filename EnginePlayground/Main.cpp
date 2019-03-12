@@ -6,6 +6,7 @@
 #include "TexturedModel.h"
 #include "Entity.h"
 #include "OBJLoader.h"
+#include "Light.h"
 
 void error_callback( int error, const char* description )
 {
@@ -30,7 +31,8 @@ int main()
 	Renderer renderer( shader );
 	RawModel model( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel textured_model( model, loader.loadTexture( "white" ) );
-	Entity entity( textured_model, glm::vec3( 0, -0.5, -20 ), 0, 0, 0, 1 );
+	Entity entity( textured_model, glm::vec3( 0, -0.5, -25 ), 0, 0, 0, 1 );
+	Light light( glm::vec3( 0, 0, -20 ), glm::vec3( 1, 1, 1 ) );
 	Camera camera;
 
 	while( !glfwWindowShouldClose( window ) )
@@ -39,6 +41,7 @@ int main()
 		camera.move();
 		renderer.prepare();
 		shader.start();
+		shader.loadLight( light );
 		shader.loadViewMatrix( camera );
 		renderer.render( entity, shader );
 		shader.stop();

@@ -9,17 +9,17 @@ class OBJLoader
 	 * LINK TO HIS REPO (Shortened) https://goo.gl/5qas4V
 	 */
 public:
-	static RawModel loadObjModel( const std::string& fileName, Loader& loader )
+	static RawModel loadObjModel( const std::string& filename, Loader& loader )
 	{
 		// Open the file as read only
 		FILE* file;
-		if( fopen_s( &file, ( fileName + ".obj" ).c_str(), "r" ) != 0 )
+		if( fopen_s( &file, ( filename + ".obj" ).c_str(), "r" ) != 0 )
 		{
-			printf( "Failed to open: %s\n", fileName );
+			printf( "Failed to open: %s\n", filename );
 		}
 
 		// Storage variables
-		std::vector<float> vertices, texturesArray, normalsArray;
+		std::vector<float> vertices, f_textures, f_normals;
 		std::vector<glm::vec2> textures;
 		std::vector<glm::vec3> normals;
 		std::vector<int> indices;
@@ -65,21 +65,22 @@ public:
 				if( indices.size() == 0 )
 				{
 					// Set the size of the array
-					texturesArray.resize( ( vertices.size() / 3 ) * 2 );
-					normalsArray.resize( vertices.size() );
+					f_textures.resize( ( vertices.size() / 3 ) * 2 );
+					f_normals.resize( vertices.size() );
 				}
 				// Process set of vertex data
-				processVertices( token, indices, textures, texturesArray, normals, normalsArray );
+				processVertices( token, indices, textures, f_textures, normals, f_normals );
 			}
 		}
 		fclose( file );
 
-		return loader.loadToVAO( vertices.data(), indices.data(), texturesArray.data(), vertices.size(), indices.size(), texturesArray.size() );
+		return loader.loadToVAO( vertices.data(), indices.data(), f_textures.data(), f_normals.data(),
+								 vertices.size(), indices.size(), f_textures.size(), f_normals.size() );
 	}
 
 
 	void static processVertices( char* vertexData, std::vector<int>& indices, std::vector<glm::vec2>& textures,
-									 std::vector<float>& texturesArray, std::vector<glm::vec3>& normals, std::vector<float>& normalsArray )
+									 std::vector<float>& f_textures, std::vector<glm::vec3>& normals, std::vector<float>& f_normals )
 	{
 		char *stop;
 		int vertexPointer;
@@ -91,14 +92,14 @@ public:
 			vertexData = stop + 1; // Move to the next value
 			// Get and store texture points
 			glm::vec2 texture = textures[strtol( vertexData, &stop, 10 ) - 1];
-			texturesArray[vertexPointer * 2] = texture.x;
-			texturesArray[vertexPointer * 2 + 1] = 1 - texture.y;
+			f_textures[vertexPointer * 2] = texture.x;
+			f_textures[vertexPointer * 2 + 1] = 1 - texture.y;
 			vertexData = stop + 1; // Move to the next value
 			// Get and store normal points
 			glm::vec3 normal = normals[strtol( vertexData, &stop, 10 ) - 1];
-			normalsArray[vertexPointer * 3] = normal.x;
-			normalsArray[vertexPointer * 3 + 1] = normal.y;
-			normalsArray[vertexPointer * 3 + 2] = normal.z;
+			f_normals[vertexPointer * 3] = normal.x;
+			f_normals[vertexPointer * 3 + 1] = normal.y;
+			f_normals[vertexPointer * 3 + 2] = normal.z;
 			vertexData = stop + 1; // Move to the next value
 		}
 

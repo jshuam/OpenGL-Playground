@@ -8,7 +8,8 @@
 class Loader
 {
 public:
-	RawModel loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLint vert_count, GLint ind_count, GLint tex_count );
+	RawModel loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLfloat* normals,
+						GLint vert_count, GLint ind_count, GLint tex_count, GLint norm_count );
 	void cleanUp();
 	GLuint loadTexture( std::string filename );
 

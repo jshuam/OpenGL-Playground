@@ -24,6 +24,7 @@ void Renderer::render( const Entity& entity, const StaticShader& shader )
 	glBindVertexArray( raw_model.getVaoId() );
 	glEnableVertexAttribArray( 0 );
 	glEnableVertexAttribArray( 1 );
+	glEnableVertexAttribArray( 2 );
 	glm::mat4 transformation_matrix = Maths::createTransformationMatrix( entity.getPosition(), entity.getRotX(), entity.getRotY(), entity.getRotZ(), entity.getScale() );
 	shader.loadTransformationMatrix( transformation_matrix );
 	glActiveTexture( GL_TEXTURE0 );
@@ -31,6 +32,7 @@ void Renderer::render( const Entity& entity, const StaticShader& shader )
 	glDrawElements( GL_TRIANGLES, raw_model.getVertexCount(), GL_UNSIGNED_INT, 0 );
 	glDisableVertexAttribArray( 0 );
 	glDisableVertexAttribArray( 1 );
+	glDisableVertexAttribArray( 2 );
 	glBindVertexArray( 0 );
 }
 

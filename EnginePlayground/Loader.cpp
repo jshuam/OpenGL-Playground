@@ -2,12 +2,14 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-RawModel Loader::loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLint vert_count, GLint ind_count, GLint tex_count )
+RawModel Loader::loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLfloat* normals,
+							GLint vert_count, GLint ind_count, GLint tex_count, GLint norm_count )
 {
 	GLuint vao_id = createVAO();
 	bindIndicesBuffer( indices, ind_count );
 	storeDataInAttributeList( 0, 3, vertices, vert_count );
 	storeDataInAttributeList( 1, 2, tex_coords, tex_count );
+	storeDataInAttributeList( 2, 3, normals, norm_count );
 	unbindVAO();
 	return RawModel( vao_id, ind_count );
 }

@@ -75,6 +75,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Src\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Src\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -108,6 +111,9 @@
       <Filter>Src\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
+      <Filter>Src\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
   </ItemGroup>
