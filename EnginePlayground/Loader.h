@@ -3,19 +3,20 @@
 #include <glad/glad.h>
 #include <vector>
 #include "RawModel.h"
+#include "tiny_obj_loader.h"
 
 class Loader
 {
 public:
-	RawModel loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLfloat>& texture_coords, const std::vector<GLuint>& indices );
+	RawModel loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLint vert_count, GLint ind_count, GLint tex_count );
 	void cleanUp();
 	GLuint loadTexture( std::string filename );
 
 private:
 	GLuint createVAO();
-	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<GLfloat>& data );
+	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, GLfloat* data, GLint& count );
 	void unbindVAO();
-	void bindIndicesBuffer( const std::vector<GLuint>& indices );
+	void bindIndicesBuffer( GLint* indices, GLint& count );
 	std::vector<GLuint> vaos;
 	std::vector<GLuint> vbos;
 	std::vector<GLuint> textures;

@@ -28,8 +28,8 @@ int main()
 	Loader loader;
 	StaticShader shader;
 	Renderer renderer( shader );
-	RawModel model( OBJLoader::loadObjModel( "stall", loader ) );
-	TexturedModel textured_model( model, loader.loadTexture( "stallTexture" ) );
+	RawModel model( OBJLoader::loadObjModel( "dragon", loader ) );
+	TexturedModel textured_model( model, loader.loadTexture( "white" ) );
 	Entity entity( textured_model, glm::vec3( 0, -0.5, -20 ), 0, 0, 0, 1 );
 	Camera camera;
 

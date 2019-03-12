@@ -1,116 +1,107 @@
 #pragma once
 
-#include <string>
-#include "Loader.h"
-#include "RawModel.h"
-#include "Utils.h"
-#include <fstream>
-#include <glm/vec3.hpp>
-#include <glm/vec2.hpp>
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "tiny_obj_loader.h"
 
 class OBJLoader
 {
+	/* ALL CREDIT TO iZastic FOR HIS IMPROVED OBJ LOADER CODE 
+	 * LINK TO HIS REPO (Shortened) https://goo.gl/5qas4V
+	 */
 public:
-	static RawModel loadObjModel( std::string filename, Loader loader )
+	static RawModel loadObjModel( const std::string& fileName, Loader& loader )
 	{
-		std::fstream in( filename + ".obj" );
+		// Open the file as read only
+		FILE* file;
+		if( fopen_s( &file, ( fileName + ".obj" ).c_str(), "r" ) != 0 )
+		{
+			printf( "Failed to open: %s\n", fileName );
+		}
 
-		// These are for storing the initial read in values (which are out of order)
+		// Storage variables
+		std::vector<float> vertices, texturesArray, normalsArray;
 		std::vector<glm::vec2> textures;
 		std::vector<glm::vec3> normals;
+		std::vector<int> indices;
 
-		/* These are for storing the indices, textures and normals in order.
-		 * The reasoning for this is because Blender initially writes everything out of order,
-		 * So we need to re-order it so that a indice (that points to a vertex) lines up with its
-		 * appropriate texture/normal.
-		 * I.e. 41/2/2, Index 41 (-1 as Blender is 1 based) uses textures at position 2 and normals at position 2
-		 * Which keep in mind are at Index * 2 for textures (as there are 2 floats per texture)
-		 * And index * 3 for normals as there are 3 normal floats per vertex
-		 */
-		std::vector<GLfloat> vertices;
-		std::vector<GLuint> indices;
-		std::vector<GLfloat> f_textures;
-		std::vector<GLfloat> f_normals;
-
-		std::string line;
-		std::getline( in, line );
-
-		while( !in.eof() )
+		char *type, *token, *stop = 0;
+		char line[256];
+		while( fgets( line, 256, file ) != NULL )
 		{
-			std::vector<std::string> split = Utils::split( line );
-
-			if( split.size() == 0 )
+			token = NULL;
+			type = strtok_s( line, " ", &token );
+			// V is vertex points
+			if( type[0] == 'v' && type[1] == NULL )
 			{
-				continue;
+				// Store a new vertex
+				vertices.push_back( strtof( token, &stop ) );
+				token = stop + 1; // Move to the next value
+				vertices.push_back( strtof( token, &stop ) );
+				token = stop + 1; // Move to the next value
+				vertices.push_back( strtof( token, &stop ) );
 			}
-			else if( split[0] == "v" )
+			// VT is vertex texture coordinates
+			else if( type[0] == 'v' && type[1] == 't' )
 			{
-				for( GLint i = 1; i <= 3; i++ )
+				double x = strtod( token, &stop );
+				token = stop + 1; // Move to the next value
+				double y = strtod( token, &stop );
+				// Store a new texture
+				textures.push_back( glm::vec2( x, y ) );
+			}
+			else if( type[0] == 'v' && type[1] == 'n' )
+			{
+				double x = strtod( token, &stop );
+				token = stop + 1; // Move to the next value
+				double y = strtod( token, &stop );
+				token = stop + 1; // Move to the next value
+				double z = strtod( token, &stop );
+				// Store a new normal
+				normals.push_back( glm::vec3( x, y, z ) );
+			}
+			// F is the index list for faces
+			else if( type[0] == 'f' )
+			{
+				if( indices.size() == 0 )
 				{
-					vertices.push_back( std::stof( split[i] ) );
+					// Set the size of the array
+					texturesArray.resize( ( vertices.size() / 3 ) * 2 );
+					normalsArray.resize( vertices.size() );
 				}
+				// Process set of vertex data
+				processVertices( token, indices, textures, texturesArray, normals, normalsArray );
 			}
-			else if( split[0] == "vt" )
-			{
-				glm::vec2 texture { std::stof( split[1] ), std::stof( split[2] ) };
-				textures.push_back( texture );
-			}
-			else if( split[0] == "vn" )
-			{
-				glm::vec3 normal { std::stof( split[1] ), std::stof( split[2] ), std::stof( split[3] ) };
-				normals.push_back( normal );
-			}
-			else if( split[0] == "s" )
-			{
-				// Reserving sizes for the vectors
-				f_textures.resize( ( vertices.size() / 2 ) * 2 );
-				f_normals.resize( vertices.size() );
-				break;
-			}
-
-			std::getline( in, line );
 		}
+		fclose( file );
 
-		std::getline( in, line );
-
-		while( !in.eof() )
-		{
-			std::vector<std::string> split = Utils::split( line );
-			char delimiter = '/';
-			// Vertex 1's Data
-			std::vector<std::string> vertex_1 = Utils::split( split[1], '/' );
-			// Vertex 2's Data
-			std::vector<std::string> vertex_2 = Utils::split( split[2], '/' );
-			// Vertex 3's Data
-			std::vector<std::string> vertex_3 = Utils::split( split[3], '/' );
-
-			processVertex( vertex_1, indices, textures, normals, f_textures, f_normals );
-			processVertex( vertex_2, indices, textures, normals, f_textures, f_normals );
-			processVertex( vertex_3, indices, textures, normals, f_textures, f_normals );
-
-			std::getline( in, line );
-		}
-
-		in.close();
-
-		return loader.loadToVAO( vertices, f_textures, indices );
+		return loader.loadToVAO( vertices.data(), indices.data(), texturesArray.data(), vertices.size(), indices.size(), texturesArray.size() );
 	}
 
-private:
-	static void processVertex( std::vector<std::string>& vertex_data, std::vector<GLuint>& indices,
-							   std::vector<glm::vec2>& textures, std::vector<glm::vec3>& normals,
-							   std::vector<GLfloat>& f_textures, std::vector<GLfloat>& f_normals )
+
+	void static processVertices( char* vertexData, std::vector<int>& indices, std::vector<glm::vec2>& textures,
+									 std::vector<float>& texturesArray, std::vector<glm::vec3>& normals, std::vector<float>& normalsArray )
 	{
-		GLuint current_vertex = std::stoi( vertex_data[0] ) - 1;
-		GLuint current_texture = std::stoi( vertex_data[1] ) - 1;
-		GLuint current_normal = std::stoi( vertex_data[2] ) - 1;
-		indices.push_back( current_vertex );
-		f_textures[current_vertex * 2] = textures[current_texture].x;
-		// 1 - here as OpenGL starts from top left, Blender starts from bottom left (of textures)
-		f_textures[current_vertex * 2 + 1] = ( 1 - textures[current_texture].y );
-		f_normals[current_vertex * 3] = normals[current_normal].x;
-		f_normals[current_vertex * 3 + 1] = normals[current_normal].y;
-		f_normals[current_vertex * 3 + 2] = normals[current_normal].z;
+		char *stop;
+		int vertexPointer;
+		for( unsigned int i = 0; i < 3; i++ )
+		{
+			// Get and store index
+			vertexPointer = strtol( vertexData, &stop, 10 ) - 1;
+			indices.push_back( vertexPointer );
+			vertexData = stop + 1; // Move to the next value
+			// Get and store texture points
+			glm::vec2 texture = textures[strtol( vertexData, &stop, 10 ) - 1];
+			texturesArray[vertexPointer * 2] = texture.x;
+			texturesArray[vertexPointer * 2 + 1] = 1 - texture.y;
+			vertexData = stop + 1; // Move to the next value
+			// Get and store normal points
+			glm::vec3 normal = normals[strtol( vertexData, &stop, 10 ) - 1];
+			normalsArray[vertexPointer * 3] = normal.x;
+			normalsArray[vertexPointer * 3 + 1] = normal.y;
+			normalsArray[vertexPointer * 3 + 2] = normal.z;
+			vertexData = stop + 1; // Move to the next value
+		}
+
 	}
 };
 

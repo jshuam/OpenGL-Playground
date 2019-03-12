@@ -2,14 +2,14 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-RawModel Loader::loadToVAO( const std::vector<GLfloat>& positions, const std::vector<GLfloat>& texture_coords, const std::vector<GLuint>& indices )
+RawModel Loader::loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLint vert_count, GLint ind_count, GLint tex_count )
 {
 	GLuint vao_id = createVAO();
-	bindIndicesBuffer( indices );
-	storeDataInAttributeList( 0, 3, positions );
-	storeDataInAttributeList( 1, 2, texture_coords );
+	bindIndicesBuffer( indices, ind_count );
+	storeDataInAttributeList( 0, 3, vertices, vert_count );
+	storeDataInAttributeList( 1, 2, tex_coords, tex_count );
 	unbindVAO();
-	return RawModel( vao_id, indices.size() );
+	return RawModel( vao_id, ind_count );
 }
 
 GLuint Loader::createVAO()
@@ -69,13 +69,13 @@ GLuint Loader::loadTexture( std::string filename )
 	return texture;
 }
 
-void Loader::storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<GLfloat>& data )
+void Loader::storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, GLfloat* data, GLint& count )
 {
 	GLuint vbo_id;
 	glGenBuffers( 1, &vbo_id );
 	vbos.push_back( vbo_id );
 	glBindBuffer( GL_ARRAY_BUFFER, vbo_id );
-	glBufferData( GL_ARRAY_BUFFER, data.size() * sizeof( GLfloat ), data.data(), GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, sizeof( GLfloat ) * count, data, GL_STATIC_DRAW );
 	glVertexAttribPointer( attribute_number, coordinate_size, GL_FLOAT, false, 0, 0 );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 }
@@ -85,11 +85,11 @@ void Loader::unbindVAO()
 	glBindVertexArray( 0 );
 }
 
-void Loader::bindIndicesBuffer( const std::vector<GLuint>& indices )
+void Loader::bindIndicesBuffer( GLint* indices, GLint& count )
 {
 	GLuint vbo_id;
 	glGenBuffers( 1, &vbo_id );
 	vbos.push_back( vbo_id );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vbo_id );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof( GLuint ), indices.data(), GL_STATIC_DRAW );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(GLint) * count, indices, GL_STATIC_DRAW );
 }

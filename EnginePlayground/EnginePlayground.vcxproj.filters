@@ -107,9 +107,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="OBJLoader.cpp">
-      <Filter>Src\RenderEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
