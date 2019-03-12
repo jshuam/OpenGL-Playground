@@ -30,9 +30,12 @@ int main()
 	StaticShader shader;
 	Renderer renderer( shader );
 	RawModel model( OBJLoader::loadObjModel( "dragon", loader ) );
-	TexturedModel textured_model( model, loader.loadTexture( "white" ) );
+	TexturedModel textured_model( model, loader.loadTexture( "red" ) );
+	ModelTexture texture = textured_model.getTexture();
+	texture.setShineDamper( 10 );
+	texture.setReflectivity( 1 );
 	Entity entity( textured_model, glm::vec3( 0, -0.5, -25 ), 0, 0, 0, 1 );
-	Light light( glm::vec3( 0, 0, -20 ), glm::vec3( 1, 1, 1 ) );
+	Light light( glm::vec3( 200, 200, 100 ), glm::vec3( 1, 1, 1 ) );
 	Camera camera;
 
 	while( !glfwWindowShouldClose( window ) )

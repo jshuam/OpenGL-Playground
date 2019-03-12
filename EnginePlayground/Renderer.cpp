@@ -27,6 +27,7 @@ void Renderer::render( const Entity& entity, const StaticShader& shader )
 	glEnableVertexAttribArray( 2 );
 	glm::mat4 transformation_matrix = Maths::createTransformationMatrix( entity.getPosition(), entity.getRotX(), entity.getRotY(), entity.getRotZ(), entity.getScale() );
 	shader.loadTransformationMatrix( transformation_matrix );
+	shader.loadShineVariables( textured_model.getTexture().getShineDamper(), textured_model.getTexture().getReflectivity() );
 	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, textured_model.getTexture().getID() );
 	glDrawElements( GL_TRIANGLES, raw_model.getVertexCount(), GL_UNSIGNED_INT, 0 );

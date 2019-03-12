@@ -154,7 +154,9 @@
     <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="red.png" />
     <Image Include="stallTexture.png" />
+    <Image Include="white.png" />
     <Image Include="wooden_container.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

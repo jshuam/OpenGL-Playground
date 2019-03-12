@@ -132,6 +132,12 @@
     <Image Include="stallTexture.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="red.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="white.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc">

@@ -8,8 +8,8 @@ class TexturedModel
 public:
 	TexturedModel() = default;
 	TexturedModel( RawModel raw_model, ModelTexture texture );
-	RawModel getRawModel() const;
-	ModelTexture getTexture() const;
+	RawModel& getRawModel();
+	ModelTexture& getTexture();
 
 private:
 	RawModel raw_model;

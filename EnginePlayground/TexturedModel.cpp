@@ -6,12 +6,12 @@ TexturedModel::TexturedModel( RawModel raw_model, ModelTexture texture )
 	this->texture = texture;
 }
 
-RawModel TexturedModel::getRawModel() const
+RawModel& TexturedModel::getRawModel()
 {
 	return raw_model;
 }
 
-ModelTexture TexturedModel::getTexture() const
+ModelTexture& TexturedModel::getTexture()
 {
 	return texture;
 }
