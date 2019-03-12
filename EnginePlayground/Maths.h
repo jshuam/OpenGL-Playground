@@ -22,14 +22,7 @@ public:
 
 	static glm::mat4 createViewMatrix( const Camera& camera )
 	{
-		glm::mat4 matrix( 1.0f );
-		matrix = glm::rotate( matrix, glm::radians( camera.getPitch() ), glm::vec3( 1, 0, 0 ) );
-		matrix = glm::rotate( matrix, glm::radians( camera.getYaw() ), glm::vec3( 0, 1, 0 ) );
-		glm::vec3 camera_pos = camera.getPosition();
-		glm::vec3 negative_camera_pos = glm::vec3( -camera_pos.x, -camera_pos.y, -camera_pos.z );
-		matrix = glm::translate( matrix, negative_camera_pos );
-
-		return matrix;
+		return glm::lookAt( camera.getPosition(), camera.getPosition() + glm::vec3( 0, 0, -1 ), glm::vec3( 0, 1, 0 ) );
 	}
 
 };

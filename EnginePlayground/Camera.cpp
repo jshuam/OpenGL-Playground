@@ -1,23 +1,27 @@
 #include "Camera.h"
 
 Camera::Camera()
-{
-	position = { 0, 0, 0 };
-}
+	:
+	position{ 0, 0, 0 }
+{}
 
 void Camera::move()
 {
 	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
-		position.z -= 0.02f;
+		position.z -= 0.002f;
+	}
+	if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS )
+	{
+		position.z += 0.002f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_D ) == GLFW_PRESS )
 	{
-		position.x += 0.02f;
+		position.x += 0.002f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_A ) == GLFW_PRESS )
 	{
-		position.x -= 0.02f;
+		position.x -= 0.002f;
 	}
 }
 
