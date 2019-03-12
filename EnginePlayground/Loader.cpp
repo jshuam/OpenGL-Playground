@@ -43,23 +43,25 @@ void Loader::cleanUp()
 
 GLuint Loader::loadTexture( std::string filename )
 {
-	GLint width, height;
+	GLint width, height, channels;
 	GLuint texture;
 	filename += ".png";
-	unsigned char* data = stbi_load( filename.c_str(), &width, &height, 0, 0 );
+	stbi_uc* data = stbi_load( filename.c_str(), &width, &height, &channels, 0 );
 
 	if( data == nullptr )
 	{
 		throw( std::string( "Failed to load textures." ) );
 	}
-	glActiveTexture( GL_TEXTURE0 );
+
+	GLint format = channels == 3 ? GL_RGB : GL_RGBA;
+
 	glGenTextures( 1, &texture );
 	glBindTexture( GL_TEXTURE_2D, texture );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTexImage2D( GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data );
 	glGenerateMipmap( GL_TEXTURE_2D );
 	stbi_image_free( data );
 

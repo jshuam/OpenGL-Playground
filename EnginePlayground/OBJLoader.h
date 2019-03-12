@@ -39,7 +39,11 @@ public:
 		{
 			std::vector<std::string> split = Utils::split( line );
 
-			if( split[0] == "v" )
+			if( split.size() == 0 )
+			{
+				continue;
+			}
+			else if( split[0] == "v" )
 			{
 				for( GLint i = 1; i <= 3; i++ )
 				{
@@ -59,8 +63,8 @@ public:
 			else if( split[0] == "s" )
 			{
 				// Reserving sizes for the vectors
-				f_textures.resize( vertices.size() * 2 );
-				f_normals.resize( vertices.size() * 3 );
+				f_textures.resize( ( vertices.size() / 2 ) * 2 );
+				f_normals.resize( vertices.size() );
 				break;
 			}
 
@@ -104,9 +108,9 @@ private:
 		f_textures[current_vertex * 2] = textures[current_texture].x;
 		// 1 - here as OpenGL starts from top left, Blender starts from bottom left (of textures)
 		f_textures[current_vertex * 2 + 1] = ( 1 - textures[current_texture].y );
-		f_textures[current_vertex * 3] = normals[current_normal].x;
-		f_textures[current_vertex * 3 + 1] = normals[current_normal].y;
-		f_textures[current_vertex * 3 + 2] = normals[current_normal].z;
+		f_normals[current_vertex * 3] = normals[current_normal].x;
+		f_normals[current_vertex * 3 + 1] = normals[current_normal].y;
+		f_normals[current_vertex * 3 + 2] = normals[current_normal].z;
 	}
 };
 

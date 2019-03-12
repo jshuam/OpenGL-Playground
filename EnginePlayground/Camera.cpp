@@ -23,6 +23,14 @@ void Camera::move()
 	{
 		position.x -= 0.002f;
 	}
+	if( DisplayManager::getKey( GLFW_KEY_SPACE ) == GLFW_PRESS )
+	{
+		position.y += 0.002f;
+	}
+	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS )
+	{
+		position.y -= 0.002f;
+	}
 }
 
 const glm::vec3& Camera::getPosition() const
