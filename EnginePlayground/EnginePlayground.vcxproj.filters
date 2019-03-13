@@ -87,6 +87,12 @@
     <ClInclude Include="EntityRenderer.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
+    <ClInclude Include="TerrainShader.h">
+      <Filter>Src\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainRenderer.h">
+      <Filter>Src\RenderEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -131,12 +137,24 @@
     <ClCompile Include="EntityRenderer.cpp">
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainShader.cpp">
+      <Filter>Src\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainRenderer.cpp">
+      <Filter>Src\RenderEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
       <Filter>Src\Shaders</Filter>
     </Text>
     <Text Include="fragment_shader.txt">
+      <Filter>Src\Shaders</Filter>
+    </Text>
+    <Text Include="terrain_fragment_shader.txt">
+      <Filter>Src\Shaders</Filter>
+    </Text>
+    <Text Include="terrain_vertex_shader.txt">
       <Filter>Src\Shaders</Filter>
     </Text>
   </ItemGroup>

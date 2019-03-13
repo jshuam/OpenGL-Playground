@@ -121,6 +121,8 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MasterRenderer.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainRenderer.h" />
+    <ClInclude Include="TerrainShader.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Maths.h" />
@@ -148,6 +150,8 @@
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="StaticShader.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainRenderer.cpp" />
+    <ClCompile Include="TerrainShader.cpp" />
     <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragment_shader.txt" />
+    <Text Include="terrain_fragment_shader.txt" />
+    <Text Include="terrain_vertex_shader.txt" />
     <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>

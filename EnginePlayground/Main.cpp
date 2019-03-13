@@ -1,6 +1,6 @@
 #include "DisplayManager.h"
 #include "Loader.h"
-#include "Renderer.h"
+#include "EntityRenderer.h"
 #include "StaticShader.h"
 #include "ModelTexture.h"
 #include "TexturedModel.h"

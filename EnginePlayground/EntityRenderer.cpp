@@ -2,12 +2,9 @@
 
 #include "DisplayManager.h"
 
-EntityRenderer::EntityRenderer( StaticShader shader )
+EntityRenderer::EntityRenderer( StaticShader shader, glm::mat4 projection_matrix )
 {
 	this->shader = shader;
-	glEnable( GL_CULL_FACE );
-	glCullFace( GL_BACK );
-	createProjectionMatrix();
 	shader.start();
 	shader.loadProjectionMatrix( projection_matrix );
 	shader.stop();
@@ -29,11 +26,6 @@ void EntityRenderer::render( const std::unordered_map<TexturedModel, std::vector
 	}
 }
 
-void EntityRenderer::createProjectionMatrix()
-{
-	float aspect_ratio = static_cast<float>( DisplayManager::getWidth() ) / static_cast<float>( DisplayManager::getHeight() );
-	projection_matrix = glm::perspective( glm::radians( FOV ), aspect_ratio, NEAR_PLANE, FAR_PLANE );
-}
 
 void EntityRenderer::prepareTexturedModel( const TexturedModel& model )
 {

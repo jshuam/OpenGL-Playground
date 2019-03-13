@@ -3,9 +3,12 @@
 MasterRenderer::MasterRenderer()
 	:
 	shader(),
-	renderer( shader ),
+	renderer( shader, createProjectionMatrix() ),
 	entities()
-{}
+{
+	glEnable( GL_CULL_FACE );
+	glCullFace( GL_BACK );
+}
 
 void MasterRenderer::prepare() const
 {
@@ -13,6 +16,14 @@ void MasterRenderer::prepare() const
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glClearColor( 0.25, 0.25, 0.25, 1 );
 }
+
+glm::mat4& MasterRenderer::createProjectionMatrix()
+{
+	float aspect_ratio = static_cast<float>( DisplayManager::getWidth() ) / static_cast<float>( DisplayManager::getHeight() );
+	projection_matrix = glm::perspective( glm::radians( FOV ), aspect_ratio, NEAR_PLANE, FAR_PLANE );
+	return projection_matrix;
+}
+
 
 void MasterRenderer::cleanUp()
 {

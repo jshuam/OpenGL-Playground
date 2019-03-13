@@ -12,16 +12,11 @@
 class EntityRenderer
 {
 public:
-	EntityRenderer( StaticShader shader );
+	EntityRenderer( StaticShader shader, glm::mat4 projection_matrix );
 	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities );
 
 private:
 	StaticShader shader;
-	static constexpr float FOV = 70.0f;
-	static constexpr float NEAR_PLANE = 0.1f;
-	static constexpr float FAR_PLANE = 1000.0f;
-	glm::mat4 projection_matrix;
-	void createProjectionMatrix();
 	void prepareTexturedModel( const TexturedModel& model );
 	void unbindTexturedModel();
 	void prepareInstance( const Entity& entity );
