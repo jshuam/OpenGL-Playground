@@ -120,13 +120,14 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MasterRenderer.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Maths.h" />
     <ClInclude Include="ModelTexture.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="RawModel.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="StaticShader.h" />
@@ -143,9 +144,10 @@
     <ClCompile Include="MasterRenderer.cpp" />
     <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="RawModel.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="StaticShader.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>

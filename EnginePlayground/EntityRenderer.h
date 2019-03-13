@@ -9,11 +9,10 @@
 #include "Maths.h"
 #include <unordered_map>
 
-class Renderer
+class EntityRenderer
 {
 public:
-	Renderer( StaticShader shader );
-	void prepare() const;
+	EntityRenderer( StaticShader shader );
 	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities );
 
 private:

@@ -24,13 +24,14 @@ class MasterRenderer
 {
 public:
 	MasterRenderer();
+	void prepare() const;
 	void cleanUp();
 	void render( const Light& light, const Camera& camera );
 	void processEntity( const Entity& entity );
 
 private:
 	StaticShader shader;
-	Renderer renderer;
+	EntityRenderer renderer;
 	std::unordered_map<TexturedModel, std::vector<Entity>> entities;
 };
 

@@ -28,15 +28,15 @@
     <Filter Include="Src\Entities">
       <UniqueIdentifier>{5eca45c1-154b-4da5-9c20-2a8c5f060dad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Terrains">
+      <UniqueIdentifier>{0fac96c7-9cbb-4ba8-8c8f-73aabeb89c09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">
-      <Filter>Src\RenderEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -81,6 +81,12 @@
     <ClInclude Include="MasterRenderer.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Src\Terrains</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityRenderer.h">
+      <Filter>Src\RenderEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -90,9 +96,6 @@
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
-      <Filter>Src\RenderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
@@ -120,6 +123,12 @@
       <Filter>Src\Entities</Filter>
     </ClCompile>
     <ClCompile Include="MasterRenderer.cpp">
+      <Filter>Src\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Src\Terrains</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityRenderer.cpp">
       <Filter>Src\RenderEngine</Filter>
     </ClCompile>
   </ItemGroup>

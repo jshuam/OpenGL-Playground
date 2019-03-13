@@ -7,6 +7,13 @@ MasterRenderer::MasterRenderer()
 	entities()
 {}
 
+void MasterRenderer::prepare() const
+{
+	glEnable( GL_DEPTH_TEST );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	glClearColor( 0.25, 0.25, 0.25, 1 );
+}
+
 void MasterRenderer::cleanUp()
 {
 	shader.cleanUp();
@@ -14,7 +21,7 @@ void MasterRenderer::cleanUp()
 
 void MasterRenderer::render( const Light& light, const Camera& camera )
 {
-	renderer.prepare();
+	prepare();
 	shader.start();
 	shader.loadLight( light );
 	shader.loadViewMatrix( camera );
