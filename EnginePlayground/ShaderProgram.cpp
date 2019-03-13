@@ -63,6 +63,8 @@ GLuint ShaderProgram::loadShader( std::string filename, GLuint type )
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+	return 0;
 }
 
 GLuint ShaderProgram::getUniformLocation( std::string uniform_name )

@@ -31,16 +31,25 @@ int main()
 	RawModel model( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel textured_model( model, loader.loadTexture( "red" ) );
 	textured_model.getTexture().setShineDamper( 1000 );
-	textured_model.getTexture().setReflectivity( 100 );
-	Entity entity( textured_model, glm::vec3( 0, -0.5, -25 ), 0, 0, 0, 1 );
+	textured_model.getTexture().setReflectivity( 150 );
+
+	std::vector<Entity> entities;
+	for( int i = 0; i < 1; i++ )
+	{
+		entities.emplace_back( textured_model, glm::vec3( 0, -5, -15 ), 0, 0, 0, 1 );
+	}
+
 	Light light( glm::vec3( 200, 200, 100 ), glm::vec3( 1, 1, 1 ) );
 	Camera camera;
 
 	MasterRenderer renderer;
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increaseRotation( 0, 0.08, 0 );
-		renderer.processEntity( entity );
+		for( auto& entity : entities )
+		{
+			entity.increaseRotation( 0, 0.08f, 0 );
+			renderer.processEntity( entity );
+		}
 		camera.move();
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();

@@ -15,7 +15,7 @@ public:
 		FILE* file;
 		if( fopen_s( &file, ( filename + ".obj" ).c_str(), "r" ) != 0 )
 		{
-			printf( "Failed to open: %s\n", filename );
+			printf( "Failed to open: %s\n", filename.c_str() );
 		}
 
 		// Storage variables
