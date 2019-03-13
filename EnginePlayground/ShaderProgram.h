@@ -13,8 +13,8 @@
 class ShaderProgram
 {
 public:
-	void start();
-	void stop();
+	void start() const;
+	void stop() const;
 	void cleanUp();
 
 protected:

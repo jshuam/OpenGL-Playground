@@ -7,7 +7,7 @@ class ModelTexture
 public:
 	ModelTexture() = default;
 	ModelTexture(GLuint texture_id);
-	GLuint getID();
+	const GLuint& getID() const;
 	void setShineDamper( const GLfloat& shine_damper );
 	void setReflectivity( const GLfloat& reflectivity );
 	const GLfloat& getShineDamper() const;
@@ -15,7 +15,7 @@ public:
 
 private:
 	GLuint texture_id;
-	GLfloat shine_damper;
-	GLfloat reflectivity;
+	GLfloat shine_damper = 1;
+	GLfloat reflectivity = 0;
 };
 

@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "OBJLoader.h"
 #include "Light.h"
+#include "MasterRenderer.h"
 
 void error_callback( int error, const char* description )
 {
@@ -27,31 +28,25 @@ int main()
 	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720, "OpenGL Playground" );
 
 	Loader loader;
-	StaticShader shader;
-	Renderer renderer( shader );
 	RawModel model( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel textured_model( model, loader.loadTexture( "red" ) );
-	ModelTexture texture = textured_model.getTexture();
-	texture.setShineDamper( 10 );
-	texture.setReflectivity( 1 );
+	textured_model.getTexture().setShineDamper( 1000 );
+	textured_model.getTexture().setReflectivity( 100 );
 	Entity entity( textured_model, glm::vec3( 0, -0.5, -25 ), 0, 0, 0, 1 );
 	Light light( glm::vec3( 200, 200, 100 ), glm::vec3( 1, 1, 1 ) );
 	Camera camera;
 
+	MasterRenderer renderer;
 	while( !glfwWindowShouldClose( window ) )
 	{
-		entity.increaseRotation( 0, 0.008, 0 );
+		entity.increaseRotation( 0, 0.08, 0 );
+		renderer.processEntity( entity );
 		camera.move();
-		renderer.prepare();
-		shader.start();
-		shader.loadLight( light );
-		shader.loadViewMatrix( camera );
-		renderer.render( entity, shader );
-		shader.stop();
+		renderer.render( light, camera );
 		DisplayManager::updateDisplay();
 	}
 
-	shader.cleanUp();
+	renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();
 

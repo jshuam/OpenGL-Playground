@@ -8,11 +8,12 @@ class TexturedModel
 public:
 	TexturedModel() = default;
 	TexturedModel( RawModel raw_model, ModelTexture texture );
-	RawModel& getRawModel();
+	const RawModel& getRawModel() const;
+	const ModelTexture& getTexture() const;
 	ModelTexture& getTexture();
+	bool operator==( const TexturedModel& rhs ) const;
 
 private:
 	RawModel raw_model;
 	ModelTexture texture;
 };
-

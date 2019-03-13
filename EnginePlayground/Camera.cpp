@@ -9,27 +9,27 @@ void Camera::move()
 {
 	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
-		position.z -= 0.002f;
+		position.z -= 0.02f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS )
 	{
-		position.z += 0.002f;
+		position.z += 0.02f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_D ) == GLFW_PRESS )
 	{
-		position.x += 0.002f;
+		position.x += 0.02f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_A ) == GLFW_PRESS )
 	{
-		position.x -= 0.002f;
+		position.x -= 0.02f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_SPACE ) == GLFW_PRESS )
 	{
-		position.y += 0.002f;
+		position.y += 0.02f;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS )
 	{
-		position.y -= 0.002f;
+		position.y -= 0.02f;
 	}
 }
 

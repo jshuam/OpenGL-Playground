@@ -2,12 +2,10 @@
 
 ModelTexture::ModelTexture( GLuint texture_id )
 	:
-	texture_id( texture_id ),
-	shine_damper( 1 ),
-	reflectivity( 0 )
+	texture_id( texture_id )
 {}
 
-GLuint ModelTexture::getID()
+const GLuint& ModelTexture::getID() const
 {
 	return texture_id;
 }

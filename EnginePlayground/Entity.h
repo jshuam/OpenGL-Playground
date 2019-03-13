@@ -7,6 +7,7 @@
 class Entity
 {
 public:
+	Entity() = default;
 	Entity( TexturedModel model, glm::vec3 position, GLfloat rot_x, GLfloat rot_y, GLfloat rot_z, GLfloat scale );
 
 	void increasePosition( const GLfloat& dx, const GLfloat& dy, const GLfloat& dz );

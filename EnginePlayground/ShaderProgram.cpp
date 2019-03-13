@@ -2,12 +2,12 @@
 
 
 
-void ShaderProgram::start()
+void ShaderProgram::start() const
 {
 	glUseProgram( program_id );
 }
 
-void ShaderProgram::stop()
+void ShaderProgram::stop() const
 {
 	glUseProgram( 0 );
 }
