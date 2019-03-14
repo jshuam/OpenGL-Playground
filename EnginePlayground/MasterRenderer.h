@@ -1,6 +1,8 @@
 #pragma once
 
 #include "EntityRenderer.h"
+#include "TerrainRenderer.h"
+#include "TerrainShader.h"
 
 #include <unordered_map>
 #include <vector>
@@ -27,15 +29,20 @@ class MasterRenderer
 public:
 	MasterRenderer();
 	void prepare() const;
-	glm::mat4& createProjectionMatrix();
+	void createProjectionMatrix();
 	void cleanUp();
 	void render( const Light& light, const Camera& camera );
 	void processEntity( const Entity& entity );
+	void processTerrain( const Terrain& terrain );
 
 private:
 	StaticShader shader;
 	EntityRenderer renderer;
 	std::unordered_map<TexturedModel, std::vector<Entity>> entities;
+
+	TerrainShader terrain_shader;
+	TerrainRenderer terrain_renderer;
+	std::vector<Terrain> terrains;
 
 	// Projection Matrix
 	static constexpr float FOV = 70.0f;

@@ -171,6 +171,9 @@
     <Image Include="white.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="grass.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc">

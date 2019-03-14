@@ -34,12 +34,18 @@ int main()
 	textured_model.getTexture().setReflectivity( 150 );
 
 	std::vector<Entity> entities;
-	for( int i = 0; i < 1; i++ )
+	for( int i = 0; i < 3; i++ )
 	{
-		entities.emplace_back( textured_model, glm::vec3( 0, -5, -15 ), 0, 0, 0, 1 );
+		entities.emplace_back( textured_model, glm::vec3( 5 * i + 45 , 0, 45 ), 0, 0, 0, 0.1 );
 	}
 
 	Light light( glm::vec3( 200, 200, 100 ), glm::vec3( 1, 1, 1 ) );
+
+	std::vector<Terrain> terrains;
+
+	terrains.emplace_back( Terrain( 0, 0, loader, ModelTexture( loader.loadTexture( "grass" ) ) ) );
+	terrains.emplace_back( Terrain( 1, 0, loader, ModelTexture( loader.loadTexture( "grass" ) ) ) );
+
 	Camera camera;
 
 	MasterRenderer renderer;
@@ -49,6 +55,10 @@ int main()
 		{
 			entity.increaseRotation( 0, 0.08f, 0 );
 			renderer.processEntity( entity );
+		}
+		for( auto& terrain : terrains )
+		{
+			renderer.processTerrain( terrain );
 		}
 		camera.move();
 		renderer.render( light, camera );

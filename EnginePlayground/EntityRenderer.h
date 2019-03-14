@@ -12,6 +12,7 @@
 class EntityRenderer
 {
 public:
+	EntityRenderer() = default;
 	EntityRenderer( StaticShader shader, glm::mat4 projection_matrix );
 	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities );
 

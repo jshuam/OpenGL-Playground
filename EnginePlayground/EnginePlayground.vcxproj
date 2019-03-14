@@ -164,6 +164,7 @@
     <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="grass.png" />
     <Image Include="red.png" />
     <Image Include="stallTexture.png" />
     <Image Include="white.png" />

@@ -2,7 +2,7 @@
 
 Camera::Camera()
 	:
-	position{ 0, 0, 0 }
+	position{ 50, 1, 50 }
 {}
 
 void Camera::move()
