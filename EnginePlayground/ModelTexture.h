@@ -10,10 +10,12 @@ public:
 	const GLuint& getID() const;
 	void setShineDamper( const GLfloat& shine_damper );
 	void setReflectivity( const GLfloat& reflectivity );
+	const bool& getTransparency() const;
 	const GLfloat& getShineDamper() const;
 	const GLfloat& getReflectivity() const;
 
 private:
+	bool has_transparency = false;
 	GLuint texture_id;
 	GLfloat shine_damper = 1;
 	GLfloat reflectivity = 0;

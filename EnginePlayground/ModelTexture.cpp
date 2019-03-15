@@ -20,6 +20,11 @@ void ModelTexture::setReflectivity( const GLfloat& reflectivity )
 	this->reflectivity = reflectivity;
 }
 
+const bool & ModelTexture::getTransparency() const
+{
+	return has_transparency;
+}
+
 const GLfloat& ModelTexture::getShineDamper() const
 {
 	return shine_damper;

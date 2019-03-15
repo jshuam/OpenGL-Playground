@@ -39,23 +39,22 @@ int main()
 	TexturedModel fern_texture( fern, loader.loadTexture( "fern" ) );
 
 	std::vector<Entity> entities;
-	std::uniform_real_distribution<GLfloat> x_dist( 0, 700 );
-	std::uniform_real_distribution<GLfloat> z_dist( 0, 700 );
+	std::uniform_real_distribution<GLfloat> x_dist( 15, 200 );
+	std::uniform_real_distribution<GLfloat> z_dist( 15, 200 );
 	std::random_device rt;
 	std::mt19937 mt( rt() );
 	for( int i = 0; i < 500; i++ )
 	{
 		entities.emplace_back( tree_texture, glm::vec3( x_dist( mt ), -0.5, z_dist( mt ) ), 0, 0, 0, 0.4 );
-		entities.emplace_back( grass_texture, glm::vec3( x_dist( mt ), 0, z_dist( mt ) ), 0, 0, 0, 0.4 );
 		entities.emplace_back( fern_texture, glm::vec3( x_dist( mt ), -0.2, z_dist( mt ) ), 0, 0, 0, 0.4 );
+		entities.emplace_back( grass_texture, glm::vec3( x_dist( mt ), 0, x_dist( mt ) ), 0, 0, 0, 1 );
 	}
 
-	Light light( glm::vec3( 2000, 2000, 2000 ), glm::vec3( 1, 1, 1 ) );
+	Light light( glm::vec3( 20000, 20000, 2000 ), glm::vec3( 1, 1, 1 ) );
 
 	std::vector<Terrain> terrains;
 
 	terrains.emplace_back( Terrain( 0, 0, loader, ModelTexture( loader.loadTexture( "grass" ) ) ) );
-	terrains.emplace_back( Terrain( 1, 0, loader, ModelTexture( loader.loadTexture( "grass" ) ) ) );
 
 	Camera camera;
 

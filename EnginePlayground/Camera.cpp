@@ -2,7 +2,7 @@
 
 Camera::Camera()
 	:
-	position { 50, 1, 50 }
+	position { 150, 1, 150 }
 {}
 
 void Camera::move( const GLfloat& delta_time )

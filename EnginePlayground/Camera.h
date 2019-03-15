@@ -20,6 +20,6 @@ private:
 	GLfloat yaw;
 	GLfloat roll;
 	GLfloat delta_time;
-	static constexpr GLfloat speed = 0.2f;
+	static constexpr GLfloat speed = 0.02f;
 };
 
