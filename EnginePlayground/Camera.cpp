@@ -7,7 +7,7 @@ Camera::Camera()
 
 void Camera::move( const GLfloat& delta_time )
 {
-	this->delta_time -= delta_time;
+	this->delta_time = glfwGetTime() - delta_time;
 	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
 		position.z -= speed * delta_time;

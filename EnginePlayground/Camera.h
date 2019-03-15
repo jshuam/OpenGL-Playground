@@ -19,7 +19,7 @@ private:
 	GLfloat pitch;
 	GLfloat yaw;
 	GLfloat roll;
-	GLfloat delta_time;
+	GLfloat delta_time = 0.0f;
 	static constexpr GLfloat speed = 0.02f;
 };
 
