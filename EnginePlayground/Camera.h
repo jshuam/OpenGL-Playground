@@ -7,7 +7,7 @@ class Camera
 {
 public:
 	Camera();
-	void move();
+	void move( const GLfloat& delta_time );
 
 	const glm::vec3& getPosition() const;
 	const GLfloat& getPitch() const;
@@ -19,5 +19,7 @@ private:
 	GLfloat pitch;
 	GLfloat yaw;
 	GLfloat roll;
+	GLfloat delta_time;
+	static constexpr GLfloat speed = 0.2f;
 };
 

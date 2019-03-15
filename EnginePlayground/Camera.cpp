@@ -2,34 +2,35 @@
 
 Camera::Camera()
 	:
-	position{ 50, 1, 50 }
+	position { 50, 1, 50 }
 {}
 
-void Camera::move()
+void Camera::move( const GLfloat& delta_time )
 {
+	this->delta_time -= delta_time;
 	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
-		position.z -= 1.5f;
+		position.z -= speed * delta_time;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS )
 	{
-		position.z += 1.5f;
+		position.z += speed * delta_time;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_D ) == GLFW_PRESS )
 	{
-		position.x += 1.5f;
+		position.x += speed * delta_time;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_A ) == GLFW_PRESS )
 	{
-		position.x -= 1.5f;
+		position.x -= speed * delta_time;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_SPACE ) == GLFW_PRESS )
 	{
-		position.y += 1.5f;
+		position.y += speed * delta_time;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS )
 	{
-		position.y -= 1.5f;
+		position.y -= speed * delta_time;
 	}
 }
 

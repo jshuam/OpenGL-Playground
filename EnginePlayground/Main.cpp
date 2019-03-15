@@ -70,7 +70,7 @@ int main()
 		{
 			renderer.processTerrain( terrain );
 		}
-		camera.move();
+		camera.move( glfwGetTime() );
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();
 	}
