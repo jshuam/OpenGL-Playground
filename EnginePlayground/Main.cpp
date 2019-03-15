@@ -9,6 +9,8 @@
 #include "Light.h"
 #include "MasterRenderer.h"
 
+#include <random>
+
 void error_callback( int error, const char* description )
 {
 	throw std::exception( description );
@@ -28,15 +30,22 @@ int main()
 	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720, "OpenGL Playground" );
 
 	Loader loader;
-	RawModel model( OBJLoader::loadObjModel( "grassModel", loader ) );
-	TexturedModel textured_model( model, loader.loadTexture( "grassTexture" ) );
-	textured_model.getTexture().setShineDamper( 1000 );
-	textured_model.getTexture().setReflectivity( 150 );
+	RawModel tree( OBJLoader::loadObjModel( "lowPolyTree", loader ) );
+	RawModel grass( OBJLoader::loadObjModel( "grassModel", loader ) );
+	RawModel fern( OBJLoader::loadObjModel( "fern", loader ) );
+
+	TexturedModel tree_texture( tree, loader.loadTexture( "lowPolyTree" ) );
+	TexturedModel grass_texture( tree, loader.loadTexture( "grassTexture" ) );
+	TexturedModel fern_texture( tree, loader.loadTexture( "fern" ) );
 
 	std::vector<Entity> entities;
-	for( int i = 0; i < 3; i++ )
+	std::uniform_real_distribution<GLfloat> x_dist( 0, 1500 );
+	std::uniform_real_distribution<GLfloat> z_dist( 0, 700 );
+	std::random_device rt;
+	std::mt19937 mt( rt() );
+	for( int i = 0; i < 1000; i++ )
 	{
-		entities.emplace_back( textured_model, glm::vec3( 5 * i + 45 , 0, 45 ), 0, 0, 0, 1 );
+		entities.emplace_back( tree_texture, glm::vec3( x_dist( mt ), -0.5, z_dist( mt ) ), 0, 0, 0, 0.4 );
 	}
 
 	Light light( glm::vec3( 2000, 2000, 2000 ), glm::vec3( 1, 1, 1 ) );
