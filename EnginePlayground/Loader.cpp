@@ -47,7 +47,7 @@ GLuint Loader::loadTexture( std::string filename )
 {
 	GLint width, height, channels;
 	GLuint texture;
-	filename += ".png";
+	filename = "res/" + filename + ".png";
 	stbi_uc* data = stbi_load( filename.c_str(), &width, &height, &channels, 0 );
 
 	if( data == nullptr )

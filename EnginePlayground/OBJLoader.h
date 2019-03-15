@@ -13,7 +13,7 @@ public:
 	{
 		// Open the file as read only
 		FILE* file;
-		if( fopen_s( &file, ( filename + ".obj" ).c_str(), "r" ) != 0 )
+		if( fopen_s( &file, ( "res/" + filename + ".obj" ).c_str(), "r" ) != 0 )
 		{
 			printf( "Failed to open: %s\n", filename.c_str() );
 		}
