@@ -29,6 +29,7 @@ protected:
 	void loadVector( const GLuint& location, const glm::vec3& vector ) const;
 	void loadBool( const GLuint& location, const GLboolean& value ) const;
 	void loadMatrix( const GLuint& location, const glm::mat4& matrix ) const;
+	void loadInt( const GLuint& location, const GLuint& value ) const;
 
 protected:
 	GLuint program_id;

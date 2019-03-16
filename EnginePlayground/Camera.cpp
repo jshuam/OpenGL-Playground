@@ -59,4 +59,4 @@ const GLfloat& Camera::getRoll() const
 }
 
 GLfloat Camera::speed = 2.0f;
-GLfloat Camera::boost_speed = 10.0f;
+GLfloat Camera::boost_speed = 100.0f;

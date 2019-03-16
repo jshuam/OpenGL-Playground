@@ -3,6 +3,8 @@
 #include "Loader.h"
 #include "ModelTexture.h"
 #include "RawModel.h"
+#include "TerrainTexture.h"
+#include "TerrainTexturePack.h"
 
 #include <GLFW/glfw3.h>
 
@@ -10,13 +12,14 @@ class Terrain
 {
 public:
 	Terrain() = default;
-	Terrain( GLuint x, GLuint z, Loader loader, ModelTexture texture );
+	Terrain( GLuint x, GLuint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map );
 	~Terrain() = default;
 
 	const GLfloat& getX() const;
 	const GLfloat& getZ() const;
 	const RawModel& getModel() const;
-	const ModelTexture& getTexture() const;
+	const TerrainTexture& getBlendMap() const;
+	const TerrainTexturePack& getTexturePack() const;
 
 private:
 	RawModel generateTerrain( Loader loader );
@@ -28,6 +31,7 @@ private:
 	GLfloat x;
 	GLfloat z;
 	RawModel model;
-	ModelTexture texture;
+	TerrainTexture blend_map;
+	TerrainTexturePack texture_pack;
 };
 

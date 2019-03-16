@@ -1,11 +1,12 @@
 #include "Terrain.h"
 
-Terrain::Terrain( GLuint x, GLuint z, Loader loader, ModelTexture texture )
+Terrain::Terrain( GLuint x, GLuint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map )
 	:
-	texture( texture ),
 	x( x * SIZE ),
 	z( z * SIZE ),
-	model( generateTerrain( loader ) )
+	model( generateTerrain( loader ) ),
+	texture_pack( texture_pack ),
+	blend_map( blend_map )
 {}
 
 const GLfloat& Terrain::getX() const
@@ -23,9 +24,14 @@ const RawModel& Terrain::getModel() const
 	return model;
 }
 
-const ModelTexture& Terrain::getTexture() const
+const TerrainTexture& Terrain::getBlendMap() const
 {
-	return texture;
+	return blend_map;
+}
+
+const TerrainTexturePack& Terrain::getTexturePack() const
+{
+	return texture_pack;
 }
 
 RawModel Terrain::generateTerrain( Loader loader )

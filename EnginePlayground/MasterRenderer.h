@@ -49,9 +49,13 @@ private:
 	std::vector<Terrain> terrains;
 
 	// Projection Matrix
-	static constexpr float FOV = 70.0f;
-	static constexpr float NEAR_PLANE = 0.1f;
-	static constexpr float FAR_PLANE = 1000.0f;
+	static constexpr GLfloat FOV = 70.0f;
+	static constexpr GLfloat NEAR_PLANE = 0.1f;
+	static constexpr GLfloat FAR_PLANE = 1000.0f;
 	glm::mat4 projection_matrix;
+
+	static constexpr GLfloat RED = ( 148.0f / 255.0f );
+	static constexpr GLfloat GREEN = ( 183.0f / 255.0f );
+	static constexpr GLfloat BLUE = ( 239.0f / 255.0f );
 };
 

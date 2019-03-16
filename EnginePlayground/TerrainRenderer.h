@@ -18,5 +18,8 @@ public:
 
 private:
 	TerrainShader shader;
+
+private:
+	void bindTextures( const Terrain& terrain ) const;
 };
 

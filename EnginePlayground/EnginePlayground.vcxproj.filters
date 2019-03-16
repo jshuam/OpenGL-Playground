@@ -93,6 +93,12 @@
     <ClInclude Include="TerrainRenderer.h">
       <Filter>Src\RenderEngine</Filter>
     </ClInclude>
+    <ClInclude Include="TerrainTexture.h">
+      <Filter>Src\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainTexturePack.h">
+      <Filter>Src\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -142,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="TerrainRenderer.cpp">
       <Filter>Src\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainTexture.cpp">
+      <Filter>Src\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainTexturePack.cpp">
+      <Filter>Src\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +205,27 @@
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\wooden_container.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\dirt.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\grassFlowers.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\grassy2.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\mud.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\path.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\pinkFlowers.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\blendMap.png">
       <Filter>Res</Filter>
     </Image>
   </ItemGroup>

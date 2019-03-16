@@ -16,6 +16,8 @@ public:
 	void loadViewMatrix( const Camera& camera ) const;
 	void loadLight( const Light& light ) const;
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
+	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
+	void connectTextureUnits();
 
 protected:
 	void bindAttributes() override;
@@ -32,5 +34,11 @@ private:
 	GLuint location_light_colour;
 	GLuint location_shine_damper;
 	GLuint location_reflectivity;
+	GLuint location_sky_colour;
+	GLuint location_background_texture;
+	GLuint location_r_texture;
+	GLuint location_g_texture;
+	GLuint location_b_texture;
+	GLuint location_blend_map;
 };
 

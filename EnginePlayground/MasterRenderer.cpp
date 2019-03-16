@@ -12,7 +12,7 @@ void MasterRenderer::prepare() const
 {
 	glEnable( GL_DEPTH_TEST );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	glClearColor( (148.0f / 255.0f), (183.0f / 255.0f), (239.0f / 255.0f), 1 );
+	glClearColor( RED, GREEN, BLUE, 1 );
 }
 
 void MasterRenderer::createProjectionMatrix()
@@ -43,11 +43,13 @@ void MasterRenderer::render( const Light& light, const Camera& camera )
 {
 	prepare();
 	shader.start();
+	shader.loadSkyColour( RED, GREEN, BLUE );
 	shader.loadLight( light );
 	shader.loadViewMatrix( camera );
 	renderer.render( entities );
 	shader.stop();
 	terrain_shader.start();
+	terrain_shader.loadSkyColour( RED, GREEN, BLUE );
 	terrain_shader.loadLight( light );
 	terrain_shader.loadViewMatrix( camera );
 	terrain_renderer.render( terrains );
