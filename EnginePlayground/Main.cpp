@@ -27,7 +27,7 @@ int main()
 		std::cout << "\n" << e.what() << std::endl;
 	}
 
-	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720, "OpenGL Playground" );
+	GLFWwindow* window = DisplayManager::createDisplay( 1280, 720 );
 
 	Loader loader;
 	RawModel tree( OBJLoader::loadObjModel( "lowPolyTree", loader ) );
@@ -39,8 +39,8 @@ int main()
 	TexturedModel fern_texture( fern, loader.loadTexture( "fern" ) );
 
 	std::vector<Entity> entities;
-	std::uniform_real_distribution<GLfloat> x_dist( 15, 200 );
-	std::uniform_real_distribution<GLfloat> z_dist( 15, 200 );
+	std::uniform_real_distribution<GLfloat> x_dist( 15, 250 );
+	std::uniform_real_distribution<GLfloat> z_dist( 15, 250 );
 	std::random_device rt;
 	std::mt19937 mt( rt() );
 	for( int i = 0; i < 500; i++ )
@@ -59,8 +59,15 @@ int main()
 	Camera camera;
 
 	MasterRenderer renderer;
+	GLfloat old_dt = glfwGetTime(), timer = old_dt;
+	GLfloat new_dt = 0;
+	GLfloat dt = 0;
+	GLuint frames = 0;
 	while( !glfwWindowShouldClose( window ) )
 	{
+		new_dt = glfwGetTime();
+		dt = new_dt - old_dt;
+		old_dt = new_dt;
 		for( auto& entity : entities )
 		{
 			renderer.processEntity( entity );
@@ -69,9 +76,16 @@ int main()
 		{
 			renderer.processTerrain( terrain );
 		}
-		camera.move( glfwGetTime() );
+		camera.move( dt );
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();
+		frames++;
+		if( glfwGetTime() - timer > 1.0 )
+		{
+			timer++;
+			DisplayManager::updateTitle( frames );
+			frames = 0;
+		}
 	}
 
 	renderer.cleanUp();

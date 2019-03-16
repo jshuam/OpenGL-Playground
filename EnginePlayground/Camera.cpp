@@ -5,32 +5,36 @@ Camera::Camera()
 	position { 150, 1, 150 }
 {}
 
-void Camera::move( const GLfloat& delta_time )
+void Camera::move( const GLfloat& dt )
 {
-	this->delta_time = glfwGetTime() - delta_time;
+	GLfloat local_speed = 2.0f;
+	if( DisplayManager::getKey( GLFW_KEY_LEFT_SHIFT ) == GLFW_PRESS )
+	{
+		local_speed = boost_speed;
+	}
 	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
-		position.z -= speed * delta_time;
+		position.z -= local_speed * dt;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS )
 	{
-		position.z += speed * delta_time;
+		position.z += local_speed * dt;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_D ) == GLFW_PRESS )
 	{
-		position.x += speed * delta_time;
+		position.x += local_speed * dt;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_A ) == GLFW_PRESS )
 	{
-		position.x -= speed * delta_time;
+		position.x -= local_speed * dt;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_SPACE ) == GLFW_PRESS )
 	{
-		position.y += speed * delta_time;
+		position.y += local_speed * dt;
 	}
 	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS )
 	{
-		position.y -= speed * delta_time;
+		position.y -= local_speed * dt;
 	}
 }
 
@@ -53,3 +57,6 @@ const GLfloat& Camera::getRoll() const
 {
 	return roll;
 }
+
+GLfloat Camera::speed = 2.0f;
+GLfloat Camera::boost_speed = 10.0f;

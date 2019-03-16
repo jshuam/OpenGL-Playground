@@ -9,7 +9,7 @@
 class DisplayManager
 {
 public:
-	static GLFWwindow* createDisplay( int width, int height, std::string title )
+	static GLFWwindow* createDisplay( int width, int height, std::string title = title )
 	{
 		// Specifying minimum version of OpenGL that will be used
 		glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
@@ -43,10 +43,13 @@ public:
 	}
 	static void updateDisplay()
 	{
-		//delta_time = glfwGetTime();
 		// Swapping the front and back buffer to update the display
 		glfwSwapBuffers( window );
 		glfwPollEvents();
+	}
+	static void updateTitle( const GLuint& fps )
+	{
+		glfwSetWindowTitle( window, ( title + std::to_string( fps ) ).c_str() );
 	}
 	static void closeDisplay()
 	{
@@ -71,4 +74,5 @@ private:
 	static GLint pixel_width;
 	static GLint pixel_height;
 	static GLdouble delta_time;
+	static std::string title;
 };
