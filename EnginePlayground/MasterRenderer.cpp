@@ -5,8 +5,7 @@ MasterRenderer::MasterRenderer()
 	createProjectionMatrix();
 	renderer = EntityRenderer( shader, projection_matrix );
 	terrain_renderer = TerrainRenderer( terrain_shader, projection_matrix );
-	glEnable( GL_CULL_FACE );
-	glCullFace( GL_BACK );
+	enableCulling();
 }
 
 void MasterRenderer::prepare() const
@@ -27,6 +26,17 @@ void MasterRenderer::cleanUp()
 {
 	shader.cleanUp();
 	terrain_shader.cleanUp();
+}
+
+void MasterRenderer::disableCulling()
+{
+	glDisable( GL_CULL_FACE );
+}
+
+void MasterRenderer::enableCulling()
+{
+	glEnable( GL_CULL_FACE );
+	glCullFace( GL_BACK );
 }
 
 void MasterRenderer::render( const Light& light, const Camera& camera )

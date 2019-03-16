@@ -20,9 +20,24 @@ void ModelTexture::setReflectivity( const GLfloat& reflectivity )
 	this->reflectivity = reflectivity;
 }
 
-const bool & ModelTexture::getTransparency() const
+void ModelTexture::setTransparency( const GLboolean& has_transparency )
+{
+	this->has_transparency = has_transparency;
+}
+
+void ModelTexture::setFakeLighting( const GLboolean& use_fake_lighting )
+{
+	this->use_fake_lighting = use_fake_lighting;
+}
+
+const GLboolean& ModelTexture::hasTransparency() const
 {
 	return has_transparency;
+}
+
+const GLboolean& ModelTexture::hasFakeLighting() const
+{
+	return use_fake_lighting;
 }
 
 const GLfloat& ModelTexture::getShineDamper() const

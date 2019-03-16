@@ -42,6 +42,11 @@ void StaticShader::loadShineVariables( const GLfloat& damper, const GLfloat& ref
 	loadFloat( location_reflectivity, reflectivity );
 }
 
+void StaticShader::loadFakeLighting( const GLboolean& use_fake_lighting ) const
+{
+	loadBool( location_use_fake_lighting, use_fake_lighting );
+}
+
 void StaticShader::bindAttributes()
 {
 	bindAttribute( 0, "position" );
@@ -58,4 +63,5 @@ void StaticShader::getAllUniformLocations()
 	location_light_colour = getUniformLocation( "light_colour" );
 	location_shine_damper = getUniformLocation( "shine_damper" );
 	location_reflectivity = getUniformLocation( "reflectivity" );
+	location_use_fake_lighting = getUniformLocation( "use_fake_lighting" );
 }

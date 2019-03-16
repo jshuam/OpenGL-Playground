@@ -84,7 +84,8 @@ void ShaderProgram::loadVector( const GLuint& location, const glm::vec3& vector 
 
 void ShaderProgram::loadBool( const GLuint& location, const GLboolean& value ) const
 {
-	glUniform1f( location, static_cast<GLfloat>( value ? 1 : 0 ) );
+	GLfloat to_load = value ? 1 : 0;
+	glUniform1f( location, to_load );
 }
 
 void ShaderProgram::loadMatrix( const GLuint& location, const glm::mat4& matrix ) const

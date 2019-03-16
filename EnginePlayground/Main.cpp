@@ -36,7 +36,10 @@ int main()
 
 	TexturedModel tree_texture( tree, loader.loadTexture( "lowPolyTree" ) );
 	TexturedModel grass_texture( grass, loader.loadTexture( "grassTexture" ) );
+	grass_texture.getTexture().setTransparency( true );
+	grass_texture.getTexture().setFakeLighting( true );
 	TexturedModel fern_texture( fern, loader.loadTexture( "fern" ) );
+	fern_texture.getTexture().setTransparency( true );
 
 	std::vector<Entity> entities;
 	std::uniform_real_distribution<GLfloat> x_dist( 15, 250 );

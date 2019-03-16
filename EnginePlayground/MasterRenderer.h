@@ -28,12 +28,16 @@ class MasterRenderer
 {
 public:
 	MasterRenderer();
-	void prepare() const;
 	void createProjectionMatrix();
 	void cleanUp();
-	void render( const Light& light, const Camera& camera );
+	void prepare() const;
 	void processEntity( const Entity& entity );
 	void processTerrain( const Terrain& terrain );
+	void render( const Light& light, const Camera& camera );
+
+public:
+	static void disableCulling();
+	static void enableCulling();
 
 private:
 	StaticShader shader;

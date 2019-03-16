@@ -16,6 +16,7 @@ public:
 	void loadViewMatrix( const Camera& camera ) const;
 	void loadLight( const Light& light ) const;
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
+	void loadFakeLighting( const GLboolean& use_fake_lighting ) const;
 
 protected:
 	void bindAttributes() override;
@@ -32,4 +33,5 @@ private:
 	GLuint location_light_colour;
 	GLuint location_shine_damper;
 	GLuint location_reflectivity;
+	GLuint location_use_fake_lighting;
 };
