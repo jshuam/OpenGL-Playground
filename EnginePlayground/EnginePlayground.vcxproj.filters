@@ -99,6 +99,7 @@
     <ClInclude Include="TerrainTexturePack.h">
       <Filter>Src\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -155,6 +156,7 @@
     <ClCompile Include="TerrainTexturePack.cpp">
       <Filter>Src\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">

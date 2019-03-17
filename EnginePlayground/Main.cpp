@@ -8,6 +8,7 @@
 #include "OBJLoader.h"
 #include "Light.h"
 #include "MasterRenderer.h"
+#include "Player.h"
 
 #include <random>
 
@@ -89,6 +90,11 @@ int main()
 	GLfloat new_dt = 0;
 	GLfloat dt = 0;
 	GLuint frames = 0;
+
+	RawModel dragon( OBJLoader::loadObjModel( "dragon", loader ) );
+	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "red" ) ) );
+	Player player( dragon_texture, glm::vec3( 150, 0, 140 ), 0, 0, 0, 1 );
+
 	while( !glfwWindowShouldClose( window ) )
 	{
 		new_dt = glfwGetTime();
@@ -103,6 +109,8 @@ int main()
 			renderer.processTerrain( terrain );
 		}
 		camera.move( dt );
+		player.move( dt );
+		renderer.processEntity( player );
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();
 		frames++;

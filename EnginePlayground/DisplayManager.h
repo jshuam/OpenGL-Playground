@@ -17,6 +17,9 @@ public:
 		glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
 		glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
+		// Setting callback functions
+		glfwSetScrollCallback( window, scrollCallback );
+
 		// Creating window with passed in width, height and title
 		try
 		{
@@ -63,10 +66,30 @@ public:
 	{
 		return pixel_height;
 	}
-
+	static const GLdouble& getMouseDWheel()
+	{
+		return mouse_d_wheel;
+	}
+	static const GLdouble& getMouseXPos()
+	{
+		return mouse_x_pos;
+	}
+	static const GLdouble& getMouseYPos()
+	{
+		return mouse_y_pos;
+	}
 	static const GLint getKey( const GLint& key )
 	{
 		return glfwGetKey( window, key );
+	}
+	static void scrollCallback( GLFWwindow* window, double x_offset, double y_offset )
+	{
+		mouse_d_wheel = x_offset;
+	}
+	static void cursorCallback( GLFWwindow* window, double x_position, double y_position )
+	{
+		mouse_x_pos = x_position;
+		mouse_x_pos = y_position;
 	}
 
 private:
@@ -75,4 +98,7 @@ private:
 	static GLint pixel_height;
 	static GLdouble delta_time;
 	static std::string title;
+	static GLdouble mouse_d_wheel;
+	static GLdouble mouse_x_pos;
+	static GLdouble mouse_y_pos;
 };

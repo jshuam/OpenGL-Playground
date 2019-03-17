@@ -54,3 +54,18 @@ const GLfloat& Entity::getScale() const
 	return scale;
 }
 
+void Entity::setPosX( const GLfloat& x_pos )
+{
+	this->position.x = x_pos;
+}
+
+void Entity::setPosY( const GLfloat& y_pos )
+{
+	this->position.y = y_pos;
+}
+
+void Entity::setPosZ( const GLfloat& z_pos )
+{
+	this->position.z = z_pos;
+}
+

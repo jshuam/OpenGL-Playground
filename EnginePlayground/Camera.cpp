@@ -1,41 +1,17 @@
 #include "Camera.h"
+#include "DisplayManager.h"
 
-Camera::Camera()
+Camera::Camera( Player player )
 	:
-	position { 150, 1, 150 }
+	player( player ),
+	position { 150, 15, 150 }
 {}
 
 void Camera::move( const GLfloat& dt )
 {
-	GLfloat local_speed = 2.0f;
-	if( DisplayManager::getKey( GLFW_KEY_LEFT_SHIFT ) == GLFW_PRESS )
-	{
-		local_speed = boost_speed;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
-	{
-		position.z -= local_speed * dt;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS )
-	{
-		position.z += local_speed * dt;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_D ) == GLFW_PRESS )
-	{
-		position.x += local_speed * dt;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_A ) == GLFW_PRESS )
-	{
-		position.x -= local_speed * dt;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_SPACE ) == GLFW_PRESS )
-	{
-		position.y += local_speed * dt;
-	}
-	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS )
-	{
-		position.y -= local_speed * dt;
-	}
+	calculateZoom();
+	calculatePitch();
+	calculateAngleAroundPlayer();
 }
 
 const glm::vec3& Camera::getPosition() const
@@ -58,5 +34,26 @@ const GLfloat& Camera::getRoll() const
 	return roll;
 }
 
-GLfloat Camera::speed = 2.0f;
-GLfloat Camera::boost_speed = 100.0f;
+void Camera::calculateZoom()
+{
+	GLfloat zoom_level = DisplayManager::getMouseDWheel() * 0.1f;
+	distance_from_player -= zoom_level;
+}
+
+void Camera::calculatePitch()
+{
+	if( DisplayManager::getKey( GLFW_MOUSE_BUTTON_2 ) == GLFW_PRESS )
+	{
+		GLfloat pitch_change = DisplayManager::getMouseYPos() * 0.1f;
+		pitch -= pitch_change;
+	}
+}
+
+void Camera::calculateAngleAroundPlayer()
+{
+	if( DisplayManager::getKey( GLFW_MOUSE_BUTTON_1 ) == GLFW_PRESS )
+	{
+		GLfloat angle_change = DisplayManager::getMouseXPos() * 0.3f;
+		angle_around_player -= angle_change;
+	}
+}

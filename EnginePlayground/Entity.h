@@ -20,6 +20,10 @@ public:
 	const GLfloat& getRotZ() const;
 	const GLfloat& getScale() const;
 
+	void setPosX( const GLfloat& x_pos );
+	void setPosY( const GLfloat& y_pos );
+	void setPosZ( const GLfloat& z_pos );
+
 private:
 	TexturedModel model;
 	glm::vec3 position;
