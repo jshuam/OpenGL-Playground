@@ -17,9 +17,6 @@ public:
 		glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
 		glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
-		// Setting callback functions
-		glfwSetScrollCallback( window, scrollCallback );
-
 		// Creating window with passed in width, height and title
 		try
 		{
@@ -29,6 +26,10 @@ public:
 		{
 			std::cout << "\n" << e.what() << std::endl;
 		}
+
+		// Setting callback functions
+		glfwSetScrollCallback( window, scrollCallback );
+		glfwSetCursorPosCallback( window, cursorCallback );
 
 		// Setting the OpenGL context to be the newly created window
 		glfwMakeContextCurrent( window );

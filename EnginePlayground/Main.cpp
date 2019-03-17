@@ -83,8 +83,6 @@ int main()
 
 	terrains.emplace_back( Terrain( 0, 0, loader, texture_pack, blend_map ) );
 
-	Camera camera;
-
 	MasterRenderer renderer;
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
 	GLfloat new_dt = 0;
@@ -94,6 +92,7 @@ int main()
 	RawModel dragon( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "red" ) ) );
 	Player player( dragon_texture, glm::vec3( 150, 0, 140 ), 0, 0, 0, 1 );
+	Camera camera( player );
 
 	while( !glfwWindowShouldClose( window ) )
 	{

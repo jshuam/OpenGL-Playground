@@ -6,3 +6,5 @@ GLint DisplayManager::pixel_height;
 GLdouble DisplayManager::delta_time;
 std::string DisplayManager::title = "OpenGL Playground - FPS: ";
 GLdouble DisplayManager::mouse_d_wheel = 0;
+GLdouble DisplayManager::mouse_x_pos = 0;
+GLdouble DisplayManager::mouse_y_pos = 0;

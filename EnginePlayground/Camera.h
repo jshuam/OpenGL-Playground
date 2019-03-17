@@ -20,6 +20,10 @@ private:
 	void calculateZoom();
 	void calculatePitch();
 	void calculateAngleAroundPlayer();
+	void calculateCameraPosition( const GLfloat& horizontal_distance, const GLfloat& vertical_distance );
+
+	const GLfloat& calculateHorizontalDistance() const;
+	const GLfloat& calculateVerticalDistance() const;
 
 private:
 	glm::vec3 position;
