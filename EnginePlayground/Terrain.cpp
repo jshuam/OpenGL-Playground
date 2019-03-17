@@ -74,6 +74,5 @@ RawModel Terrain::generateTerrain( Loader loader )
 			indices[pointer++] = bottomRight;
 		}
 	}
-	return loader.loadToVAO( vertices.data(), indices.data(), texture_coords.data(), normals.data(),
-							 vertices.size(), indices.size(), texture_coords.size(), normals.size() );
+	return loader.loadToVAO( vertices, indices, texture_coords, normals );
 }

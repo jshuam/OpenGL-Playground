@@ -8,16 +8,19 @@
 class Loader
 {
 public:
-	RawModel loadToVAO( GLfloat* vertices, GLint* indices, GLfloat* tex_coords, GLfloat* normals,
-						GLint vert_count, GLint ind_count, GLint tex_count, GLint norm_count );
+	RawModel loadToVAO( const std::vector<tinyobj::real_t>& vertices, const std::vector<tinyobj::index_t>& indices,
+						const std::vector<tinyobj::real_t>& tex_coords, const std::vector<tinyobj::real_t>& normals );
+	RawModel loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
+								const std::vector<GLfloat>& tex_coords, const std::vector<GLfloat>& normals );
 	void cleanUp();
 	GLuint loadTexture( std::string filename );
 
 private:
 	GLuint createVAO();
-	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, GLfloat* data, GLint& count );
+	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<tinyobj::real_t>& data );
 	void unbindVAO();
-	void bindIndicesBuffer( GLint* indices, GLint& count );
+	void bindIndicesBuffer( const std::vector<tinyobj::index_t>& indices );
+	void bindIndicesBuffer( const std::vector<GLint>& indices );
 	std::vector<GLuint> vaos;
 	std::vector<GLuint> vbos;
 	std::vector<GLuint> textures;

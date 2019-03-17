@@ -230,6 +230,7 @@
     <Image Include="res\blendMap.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\playerTexture.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc">

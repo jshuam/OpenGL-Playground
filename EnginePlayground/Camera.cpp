@@ -3,20 +3,31 @@
 
 #include <glm/trigonometric.hpp>
 
-Camera::Camera( Player player )
+Camera::Camera( Player* player )
 	:
 	player( player ),
-	position { 150, 15, 150 }
+	position { 0, 0, 0 }
 {}
 
 void Camera::move( const GLfloat& dt )
 {
-	calculateZoom();
-	calculatePitch();
-	calculateAngleAroundPlayer();
+	if( DisplayManager::mouseScrolling() )
+	{
+		calculateZoom();
+		DisplayManager::mouseScrolling() = false;
+	}
+	if( DisplayManager::mouseLClick() )
+	{
+		calculatePitch();
+	}
+	if( DisplayManager::mouseRClick() )
+	{
+		calculateAngleAroundPlayer();
+	}
 	GLfloat horizontal_distance = calculateHorizontalDistance();
 	GLfloat vertical_distance = calculateVerticalDistance();
 	calculateCameraPosition( horizontal_distance, vertical_distance );
+	yaw = 180 - ( player->getRotY() + angle_around_player );
 }
 
 const glm::vec3& Camera::getPosition() const
@@ -41,44 +52,38 @@ const GLfloat& Camera::getRoll() const
 
 void Camera::calculateZoom()
 {
-	GLfloat zoom_level = DisplayManager::getMouseDWheel() * 0.1f;
+	GLfloat zoom_level = DisplayManager::getMouseDWheel();
 	distance_from_player -= zoom_level;
 }
 
 void Camera::calculatePitch()
 {
-	if( DisplayManager::getKey( GLFW_MOUSE_BUTTON_2 ) == GLFW_PRESS )
-	{
-		GLfloat pitch_change = DisplayManager::getMouseYPos() * 0.1f;
-		pitch -= pitch_change;
-	}
+	GLfloat pitch_change = DisplayManager::getMouseYPos() * 0.3f;
+	pitch -= pitch_change;
 }
 
 void Camera::calculateAngleAroundPlayer()
 {
-	if( DisplayManager::getKey( GLFW_MOUSE_BUTTON_1 ) == GLFW_PRESS )
-	{
-		GLfloat angle_change = DisplayManager::getMouseXPos() * 0.3f;
-		angle_around_player -= angle_change;
-	}
+	GLfloat angle_change = DisplayManager::getMouseXPos() * 0.3f;
+	angle_around_player -= angle_change;
 }
 
 void Camera::calculateCameraPosition( const GLfloat& horizontal_distance, const GLfloat& vertical_distance )
 {
-	GLfloat theta = player.getRotY() + angle_around_player;
+	GLfloat theta = player->getRotY() + angle_around_player;
 	GLfloat offset_x = horizontal_distance * glm::sin( glm::radians( theta ) );
 	GLfloat offset_z = horizontal_distance * glm::cos( glm::radians( theta ) );
-	position.x = player.getPosition().x - offset_x;
-	position.z = player.getPosition().z - offset_z;
-	position.y = player.getPosition().y + vertical_distance;
+	position.x = player->getPosition().x - offset_x;
+	position.z = player->getPosition().z - offset_z;
+	position.y = player->getPosition().y + vertical_distance;
 }
 
 const GLfloat& Camera::calculateHorizontalDistance() const
 {
-	return (GLfloat) ( distance_from_player * glm::cos( glm::radians( pitch ) ) );
+	return distance_from_player * glm::cos( glm::radians( pitch ) );
 }
 
 const GLfloat& Camera::calculateVerticalDistance() const
 {
-	return (GLfloat) ( distance_from_player * glm::sin( glm::radians( yaw ) ) );
+	return distance_from_player * glm::sin( glm::radians( pitch ) );
 }

@@ -30,6 +30,7 @@ public:
 		// Setting callback functions
 		glfwSetScrollCallback( window, scrollCallback );
 		glfwSetCursorPosCallback( window, cursorCallback );
+		glfwSetMouseButtonCallback( window, mouseButtonCallback );
 
 		// Setting the OpenGL context to be the newly created window
 		glfwMakeContextCurrent( window );
@@ -73,24 +74,58 @@ public:
 	}
 	static const GLdouble& getMouseXPos()
 	{
-		return mouse_x_pos;
+		return mouse_x_offset;
 	}
 	static const GLdouble& getMouseYPos()
 	{
-		return mouse_y_pos;
+		return mouse_y_offset;
 	}
-	static const GLint getKey( const GLint& key )
+	static const GLint& getKey( const GLint& key )
 	{
 		return glfwGetKey( window, key );
 	}
+	static GLboolean& mouseScrolling()
+	{
+		return mouse_scrolling;
+	}
+	static GLboolean& mouseLClick()
+	{
+		return mouse_l_click;
+	}
+	static GLboolean& mouseRClick()
+	{
+		return mouse_r_click;
+	}
+	static void mouseButtonCallback( GLFWwindow* window, int button, int action, int mods )
+	{
+		if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS )
+		{
+			mouse_l_click = true;
+		}
+		else if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE )
+		{
+			mouse_l_click = false;
+		}
+		if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS )
+		{
+			mouse_r_click = true;
+		}
+		else if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE )
+		{
+			mouse_r_click = false;
+		}
+	}
 	static void scrollCallback( GLFWwindow* window, double x_offset, double y_offset )
 	{
-		mouse_d_wheel = x_offset;
+		mouse_scrolling = true;
+		mouse_d_wheel = y_offset;
 	}
 	static void cursorCallback( GLFWwindow* window, double x_position, double y_position )
 	{
+		mouse_x_offset = x_position - mouse_x_pos;
+		mouse_y_offset = y_position - mouse_y_pos;
 		mouse_x_pos = x_position;
-		mouse_x_pos = y_position;
+		mouse_y_pos = y_position;
 	}
 
 private:
@@ -102,4 +137,9 @@ private:
 	static GLdouble mouse_d_wheel;
 	static GLdouble mouse_x_pos;
 	static GLdouble mouse_y_pos;
+	static GLdouble mouse_x_offset;
+	static GLdouble mouse_y_offset;
+	static GLboolean mouse_scrolling;
+	static GLboolean mouse_l_click;
+	static GLboolean mouse_r_click;
 };

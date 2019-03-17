@@ -8,7 +8,7 @@
 class Camera
 {
 public:
-	Camera( Player player );
+	Camera( Player* player );
 	void move( const GLfloat& dt );
 
 	const glm::vec3& getPosition() const;
@@ -27,13 +27,13 @@ private:
 
 private:
 	glm::vec3 position;
-	GLfloat pitch;
-	GLfloat yaw;
+	GLfloat pitch = 20;
+	GLfloat yaw = 0;
 	GLfloat roll;
 	static GLfloat speed;
 	static GLfloat boost_speed;
 
-	Player player;
+	Player* player;
 	GLfloat distance_from_player = 50;
 	GLfloat angle_around_player = 0;
 };
