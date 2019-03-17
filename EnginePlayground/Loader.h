@@ -8,8 +8,6 @@
 class Loader
 {
 public:
-	RawModel loadToVAO( const std::vector<tinyobj::real_t>& vertices, const std::vector<tinyobj::index_t>& indices,
-						const std::vector<tinyobj::real_t>& tex_coords, const std::vector<tinyobj::real_t>& normals );
 	RawModel loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
 								const std::vector<GLfloat>& tex_coords, const std::vector<GLfloat>& normals );
 	void cleanUp();
@@ -19,7 +17,6 @@ private:
 	GLuint createVAO();
 	void storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<tinyobj::real_t>& data );
 	void unbindVAO();
-	void bindIndicesBuffer( const std::vector<tinyobj::index_t>& indices );
 	void bindIndicesBuffer( const std::vector<GLint>& indices );
 	std::vector<GLuint> vaos;
 	std::vector<GLuint> vbos;

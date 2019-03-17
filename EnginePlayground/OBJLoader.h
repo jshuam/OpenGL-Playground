@@ -111,7 +111,7 @@ public:
 		std::vector<tinyobj::material_t> materials;
 		std::string warn;
 		std::string err;
-		tinyobj::LoadObj( &attrib, &shapes, &materials, &warn, &err, ( "res/" + filename + ".obj" ).c_str(), NULL, true );
+		tinyobj::LoadObj( &attrib, &shapes, &materials, &warn, &err, ( "res/" + filename + ".obj" ).c_str() );
 
 		std::vector<GLint> indices( shapes[0].mesh.indices.size() );
 		std::vector<GLfloat> textures( ( attrib.vertices.size() / 3 ) * 2 );

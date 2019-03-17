@@ -2,18 +2,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-RawModel Loader::loadToVAO( const std::vector<tinyobj::real_t>& vertices, const std::vector<tinyobj::index_t>& indices,
-							const std::vector<tinyobj::real_t>& tex_coords, const std::vector<tinyobj::real_t>& normals )
-{
-	GLuint vao_id = createVAO();
-	bindIndicesBuffer( indices );
-	storeDataInAttributeList( 0, 3, vertices );
-	storeDataInAttributeList( 1, 2, tex_coords );
-	storeDataInAttributeList( 2, 3, normals );
-	unbindVAO();
-	return RawModel( vao_id, indices.size() );
-}
-
 RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
 							const std::vector<GLfloat>& tex_coords, const std::vector<GLfloat>& normals )
 {
@@ -98,15 +86,6 @@ void Loader::storeDataInAttributeList( GLuint attribute_number, GLuint coordinat
 void Loader::unbindVAO()
 {
 	glBindVertexArray( 0 );
-}
-
-void Loader::bindIndicesBuffer( const std::vector<tinyobj::index_t>& indices )
-{
-	GLuint vbo_id;
-	glGenBuffers( 1, &vbo_id );
-	vbos.push_back( vbo_id );
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vbo_id );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size(), indices.data(), GL_STATIC_DRAW );
 }
 
 void Loader::bindIndicesBuffer( const std::vector<GLint>& indices )

@@ -89,7 +89,7 @@ int main()
 	GLfloat dt = 0;
 	GLuint frames = 0;
 
-	RawModel dragon( OBJLoader::loadObjModel( "person", loader ) );
+	RawModel dragon( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "red" ) ) );
 	Player player( dragon_texture, glm::vec3( 150, 0, 140 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
