@@ -28,7 +28,15 @@ void Player::move( const GLfloat& dt )
 
 void Player::checkInputs()
 {
-	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
+	if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS && DisplayManager::getKey( GLFW_KEY_LEFT_SHIFT ) == GLFW_PRESS )
+	{
+		this->current_speed = BOOST_SPEED;
+	}
+	else if( DisplayManager::getKey( GLFW_KEY_S ) == GLFW_PRESS && DisplayManager::getKey( GLFW_KEY_LEFT_SHIFT ) == GLFW_PRESS )
+	{
+		this->current_speed = -BOOST_SPEED;
+	}
+	else if( DisplayManager::getKey( GLFW_KEY_W ) == GLFW_PRESS )
 	{
 		this->current_speed = RUN_SPEED;
 	}

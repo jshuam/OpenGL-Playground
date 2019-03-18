@@ -22,6 +22,7 @@ private:
 	GLboolean in_air = false;
 
 	static constexpr GLfloat RUN_SPEED = 20;
+	static constexpr GLfloat BOOST_SPEED = 1000;
 	static constexpr GLfloat TURN_SPEED = 160;
 	static constexpr GLfloat GRAVITY = -50;
 	static constexpr GLfloat JUMP_POWER = 30;

@@ -33,7 +33,7 @@ int main()
 
 	/********************************* TEXTURES *********************************/
 
-	TerrainTexture background_texture( loader.loadTexture( "grassy" ) );
+	TerrainTexture background_texture( loader.loadTexture( "grass" ) );
 	TerrainTexture r_texture( loader.loadTexture( "mud" ) );
 	TerrainTexture g_texture( loader.loadTexture( "grassFlowers" ) );
 	TerrainTexture b_texture( loader.loadTexture( "path" ) );
@@ -66,15 +66,15 @@ int main()
 	for( int i = 0; i < 200; i++ )
 	{
 		entities.emplace_back( flower_texture, glm::vec3( x_dist( mt ), 0, x_dist( mt ) ), 0, 0, 0, 1 );
-		entities.emplace_back( fern_texture, glm::vec3( x_dist( mt ), 0, z_dist( mt ) ), 0, 0, 0, 0.4 );
+		entities.emplace_back( fern_texture, glm::vec3( x_dist( mt ), 0, z_dist( mt ) ), 0, 0, 0, 1 );
 	}
 	for( int i = 0; i < 350; i++ )
 	{
 		entities.emplace_back( grass_texture, glm::vec3( x_dist( mt ), 0, x_dist( mt ) ), 0, 0, 0, 1 );
 	}
-	for( int i = 0; i < 400; i++ )
+	for( int i = 0; i < 200; i++ )
 	{
-		entities.emplace_back( tree_texture, glm::vec3( x_dist( mt ), -0.5, z_dist( mt ) ), 0, 0, 0, 0.4 );
+		entities.emplace_back( tree_texture, glm::vec3( x_dist( mt ), -0.5, z_dist( mt ) ), 0, 0, 0, 1 );
 	}
 
 	Light light( glm::vec3( 20000, 40000, 20000 ), glm::vec3( 1, 1, 1 ) );
@@ -90,7 +90,9 @@ int main()
 	GLuint frames = 0;
 
 	RawModel dragon( OBJLoader::loadObjModel( "player", loader ) );
-	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "red" ) ) );
+	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "pink" ) ) );
+	dragon_texture.getTexture().setShineDamper( 1000 );
+	dragon_texture.getTexture().setReflectivity( 100 );
 	Player player( dragon_texture, glm::vec3( 150, 0, 140 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
 
