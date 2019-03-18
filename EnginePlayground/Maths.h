@@ -31,5 +31,14 @@ public:
 		return view_matrix;
 	}
 
+	static GLfloat barryCentric( const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const glm::vec2& pos )
+	{
+		GLfloat det = ( p2.z - p3.z ) * ( p1.x - p3.x ) + ( p3.x - p2.x ) * ( p1.z - p3.z );
+		GLfloat l1 = ( ( p2.z - p3.z ) * ( pos.x - p3.x ) + ( p3.x - p2.x ) * ( pos.y - p3.z ) ) / det;
+		GLfloat l2 = ( ( p3.z - p1.z ) * ( pos.x - p3.x ) + ( p1.x - p3.x ) * ( pos.y - p3.z ) ) / det;
+		GLfloat l3 = 1.0f - l1 - l2;
+		return l1 * p1.y + 12 * p2.y + 13 * p3.y;
+	}
+
 };
 

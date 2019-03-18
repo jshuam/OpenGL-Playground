@@ -1,3 +1,4 @@
+#include "Maths.h"
 #include "Terrain.h"
 
 #include <cassert>
@@ -38,11 +39,40 @@ const TerrainTexturePack& Terrain::getTexturePack() const
 	return texture_pack;
 }
 
+const GLfloat& Terrain::getTerrainHeight( const GLfloat& world_x, const GLfloat& world_z ) const
+{
+	GLfloat terrain_x = world_x - this->x;
+	GLfloat terrain_z = world_z - this->z;
+	GLfloat grid_square_size = SIZE / ( heights.size() - 1 );
+	GLint grid_x = glm::floor( terrain_x / grid_square_size );
+	GLint grid_z = glm::floor( terrain_z / grid_square_size );
+	if( grid_x >= heights.size() - 1 || grid_z >= heights.size() - 1 || grid_x < 0 || grid_z < 0 )
+	{
+		return 0;
+	}
+	GLfloat x_coord = glm::modf( terrain_x, grid_square_size ) / grid_square_size;
+	GLfloat z_coord = glm::modf( terrain_z, grid_square_size ) / grid_square_size;
+	GLfloat answer;
+	if( x_coord <= ( 1 - z_coord ) )
+	{
+		answer = Maths::barryCentric( glm::vec3( 0, heights[grid_z * VERTEX_COUNT + grid_x], 0 ),
+									  glm::vec3( 1, heights[grid_z * VERTEX_COUNT + ( grid_x + 1 )], 0 ),
+									  glm::vec3( 0, heights[( grid_z + 1 ) * VERTEX_COUNT + grid_x], 1 ), glm::vec2( grid_x, grid_z ) );
+	}
+	else
+	{
+		answer = Maths::barryCentric( glm::vec3( 1, heights[grid_z * VERTEX_COUNT + ( grid_x + 1 )], 0 ),
+									  glm::vec3( 0, heights[( grid_z + 1 ) * VERTEX_COUNT + grid_x], 1 ),
+									  glm::vec3( 1, heights[( grid_z + 1 ) * VERTEX_COUNT + ( grid_x + 1 )], 1 ), glm::vec2( grid_x, grid_z ) );
+	}
+	return answer;
+}
+
 RawModel Terrain::generateTerrain( Loader loader, std::string height_map )
 {
-	GLint width, height;
+	GLint image_width, image_height;
 	height_map = "res/" + height_map + ".png";
-	stbi_uc* data = stbi_load( height_map.c_str(), &width, &height, NULL, 1 );
+	stbi_uc* data = stbi_load( height_map.c_str(), &image_width, &image_height, NULL, 1 );
 
 	if( data == nullptr )
 	{
@@ -50,7 +80,9 @@ RawModel Terrain::generateTerrain( Loader loader, std::string height_map )
 		std::cin.get();
 		exit( -1 );
 	}
-	GLint VERTEX_COUNT = height;
+
+	VERTEX_COUNT = image_height;
+	heights.resize( VERTEX_COUNT * VERTEX_COUNT );
 
 	GLint count = VERTEX_COUNT * VERTEX_COUNT;
 	std::vector<GLfloat> vertices( count * 3 );
@@ -63,9 +95,11 @@ RawModel Terrain::generateTerrain( Loader loader, std::string height_map )
 		for( GLint j = 0; j < VERTEX_COUNT; j++ )
 		{
 			vertices[vertexPointer * 3] = (GLfloat) j / ( (GLfloat) VERTEX_COUNT - 1 ) * SIZE;
-			vertices[vertexPointer * 3 + 1] = getHeight(j, i, data, width, height);
+			GLfloat height = getHeight( j, i, data, image_width, image_height );
+			heights[i * VERTEX_COUNT + j] = height;
+			vertices[vertexPointer * 3 + 1] = height;
 			vertices[vertexPointer * 3 + 2] = (GLfloat) i / ( (GLfloat) VERTEX_COUNT - 1 ) * SIZE;
-			glm::vec3 normal = calculateNormal( j, i, data, width, height );
+			glm::vec3 normal = calculateNormal( j, i, data, image_width, image_height );
 			normals[vertexPointer * 3] = normal.x;
 			normals[vertexPointer * 3 + 1] = normal.y;
 			normals[vertexPointer * 3 + 2] = normal.z;

@@ -8,7 +8,7 @@ Player::Player( TexturedModel model, glm::vec3 position, GLfloat rot_x, GLfloat 
 	Entity( model, position, rot_x, rot_y, rot_z, scale )
 {}
 
-void Player::move( const GLfloat& dt )
+void Player::move( const GLfloat& dt, const Terrain& terrain )
 {
 	checkInputs();
 	increaseRotation( 0, current_turn_speed * dt, 0 );
@@ -18,10 +18,11 @@ void Player::move( const GLfloat& dt )
 	increasePosition( dx, 0, dz );
 	upwards_speed += GRAVITY * dt;
 	increasePosition( 0, upwards_speed * dt, 0 );
-	if( getPosition().y < TERRAIN_HEIGHT )
+	GLfloat terrain_height = terrain.getTerrainHeight( getPosition().x, getPosition().z );
+	if( getPosition().y < terrain_height )
 	{
 		upwards_speed = 0;
-		setPosY( TERRAIN_HEIGHT );
+		setPosY( terrain_height );
 		in_air = false;
 	}
 }

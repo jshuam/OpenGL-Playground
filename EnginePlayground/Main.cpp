@@ -110,7 +110,7 @@ int main()
 			renderer.processTerrain( terrain );
 		}
 		camera.move( dt );
-		player.move( dt );
+		player.move( dt, terrains[0] );
 		renderer.processEntity( player );
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();
