@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Terrain.h"
 
 class Player : public Entity
 {
@@ -8,7 +9,7 @@ public:
 	Player() = default;
 	~Player() = default;
 	Player( TexturedModel model, glm::vec3 position, GLfloat rot_x, GLfloat rot_y, GLfloat rot_z, GLfloat scale );
-	void move( const GLfloat& dt );
+	void move( const GLfloat& dt, const Terrain& terrain );
 
 private:
 	void checkInputs();
