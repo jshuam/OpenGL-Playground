@@ -81,7 +81,7 @@ int main()
 
 	std::vector<Terrain> terrains;
 
-	terrains.emplace_back( Terrain( 0, 0, loader, texture_pack, blend_map ) );
+	terrains.emplace_back( Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" ) );
 
 	MasterRenderer renderer;
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;

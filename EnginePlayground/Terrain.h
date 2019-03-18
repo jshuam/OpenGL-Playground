@@ -7,12 +7,14 @@
 #include "TerrainTexturePack.h"
 
 #include <GLFW/glfw3.h>
+#include <glm/vec3.hpp>
+#include <stb_image.h>
 
 class Terrain
 {
 public:
 	Terrain() = default;
-	Terrain( GLuint x, GLuint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map );
+	Terrain( GLuint x, GLuint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map, std::string height_map );
 	~Terrain() = default;
 
 	const GLfloat& getX() const;
@@ -22,11 +24,14 @@ public:
 	const TerrainTexturePack& getTexturePack() const;
 
 private:
-	RawModel generateTerrain( Loader loader );
+	RawModel generateTerrain( Loader loader, std::string height_map );
+	GLfloat getHeight( GLuint x, GLuint y, stbi_uc* image, GLint image_width, GLint image_height );
+	glm::vec3 calculateNormal( GLuint x, GLuint z, stbi_uc* image, GLint image_width, GLint image_height );
 
 private:
 	static constexpr GLfloat SIZE = 800;
-	static constexpr GLuint VERTEX_COUNT = 128;
+	static constexpr GLfloat MAX_HEIGHT = 40;
+	static constexpr GLfloat MAX_PIXEL_COLOUR = 127.5;
 
 	GLfloat x;
 	GLfloat z;

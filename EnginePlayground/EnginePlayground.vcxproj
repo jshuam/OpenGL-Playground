@@ -179,6 +179,7 @@
     <Image Include="res\grassTexture.png" />
     <Image Include="res\grassy.png" />
     <Image Include="res\grassy2.png" />
+    <Image Include="res\heightmap.png" />
     <Image Include="res\image.png" />
     <Image Include="res\lowPolyTree.png" />
     <Image Include="res\mud.png" />

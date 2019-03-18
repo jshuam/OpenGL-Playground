@@ -231,6 +231,7 @@
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\playerTexture.png" />
+    <Image Include="res\heightmap.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EnginePlayground.rc">

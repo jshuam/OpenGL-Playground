@@ -2,6 +2,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include <iostream>
+
 RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
 							const std::vector<GLfloat>& tex_coords, const std::vector<GLfloat>& normals )
 {
@@ -52,7 +54,9 @@ GLuint Loader::loadTexture( std::string filename )
 
 	if( data == nullptr )
 	{
-		throw( std::string( "Failed to load textures." ) );
+		std::cerr << "Failed to load textures." << std::endl;
+		std::cin.get();
+		exit( -1 );
 	}
 
 	GLint format = channels == 3 ? GL_RGB : GL_RGBA;
