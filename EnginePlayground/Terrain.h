@@ -8,7 +8,7 @@
 
 #include <GLFW/glfw3.h>
 #include <glm/vec3.hpp>
-#include <stb_image.h>
+#include "stb_image.h"
 
 class Terrain
 {
