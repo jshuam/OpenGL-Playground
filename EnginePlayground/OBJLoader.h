@@ -124,8 +124,11 @@ public:
 			GLint normal = shapes[0].mesh.indices[i].normal_index;
 
 			indices[i] = vertex;
-			textures[vertex * 2] = attrib.texcoords[texcoord * 2];
-			textures[vertex * 2 + 1] = attrib.texcoords[texcoord * 2 + 1];
+			if( texcoord != -1 )
+			{
+				textures[vertex * 2] = attrib.texcoords[texcoord * 2];
+				textures[vertex * 2 + 1] = 1 - ( attrib.texcoords[texcoord * 2 + 1] );
+			}
 			normals[vertex * 3] = attrib.normals[normal * 3];
 			normals[vertex * 3 + 1] = attrib.normals[normal * 3 + 1];
 			normals[vertex * 3 + 2] = attrib.normals[normal * 3 + 2];

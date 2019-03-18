@@ -78,7 +78,7 @@ void Loader::storeDataInAttributeList( GLuint attribute_number, GLuint coordinat
 	glGenBuffers( 1, &vbo_id );
 	vbos.push_back( vbo_id );
 	glBindBuffer( GL_ARRAY_BUFFER, vbo_id );
-	glBufferData( GL_ARRAY_BUFFER, data.size(), data.data(), GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, data.size() * sizeof( GLfloat ), data.data(), GL_STATIC_DRAW );
 	glVertexAttribPointer( attribute_number, coordinate_size, GL_FLOAT, false, 0, 0 );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 }
@@ -94,5 +94,5 @@ void Loader::bindIndicesBuffer( const std::vector<GLint>& indices )
 	glGenBuffers( 1, &vbo_id );
 	vbos.push_back( vbo_id );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vbo_id );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size(), indices.data(), GL_STATIC_DRAW );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof( GLint ), indices.data(), GL_STATIC_DRAW );
 }
