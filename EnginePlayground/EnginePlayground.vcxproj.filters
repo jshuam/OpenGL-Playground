@@ -99,7 +99,9 @@
     <ClInclude Include="TerrainTexturePack.h">
       <Filter>Src\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Src\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -156,7 +158,9 @@
     <ClCompile Include="TerrainTexturePack.cpp">
       <Filter>Src\Textures</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Src\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -173,6 +177,18 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\blendMap.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\box.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\diffuse.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\dirt.png">
+      <Filter>Res</Filter>
+    </Image>
     <Image Include="res\fern.png">
       <Filter>Res</Filter>
     </Image>
@@ -182,16 +198,49 @@
     <Image Include="res\grass.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\grassFlowers.png">
+      <Filter>Res</Filter>
+    </Image>
     <Image Include="res\grassTexture.png">
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\grassy.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\grassy2.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\grassy3.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\heightmap perlin.jpg">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\heightmap.png">
+      <Filter>Res</Filter>
+    </Image>
     <Image Include="res\image.png">
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\lowPolyTree.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\mossPath256.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\mud.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\path.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\pink.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\pinkFlowers.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\playerTexture.png">
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\red.png">
@@ -209,33 +258,5 @@
     <Image Include="res\wooden_container.png">
       <Filter>Res</Filter>
     </Image>
-    <Image Include="res\dirt.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\grassFlowers.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\grassy2.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\mud.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\path.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\pinkFlowers.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\blendMap.png">
-      <Filter>Res</Filter>
-    </Image>
-    <Image Include="res\playerTexture.png" />
-    <Image Include="res\heightmap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="EnginePlayground.rc">
-      <Filter>Res</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

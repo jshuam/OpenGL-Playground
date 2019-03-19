@@ -161,9 +161,6 @@
     <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="EnginePlayground.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="fragment_shader.txt" />
     <Text Include="terrain_fragment_shader.txt" />
     <Text Include="terrain_vertex_shader.txt" />
@@ -171,6 +168,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\blendMap.png" />
+    <Image Include="res\box.png" />
+    <Image Include="res\diffuse.png" />
     <Image Include="res\dirt.png" />
     <Image Include="res\fern.png" />
     <Image Include="res\flower.png" />
@@ -179,11 +178,15 @@
     <Image Include="res\grassTexture.png" />
     <Image Include="res\grassy.png" />
     <Image Include="res\grassy2.png" />
+    <Image Include="res\grassy3.png" />
+    <Image Include="res\heightmap perlin.jpg" />
     <Image Include="res\heightmap.png" />
     <Image Include="res\image.png" />
     <Image Include="res\lowPolyTree.png" />
+    <Image Include="res\mossPath256.png" />
     <Image Include="res\mud.png" />
     <Image Include="res\path.png" />
+    <Image Include="res\pink.png" />
     <Image Include="res\pinkFlowers.png" />
     <Image Include="res\playerTexture.png" />
     <Image Include="res\red.png" />

@@ -30,6 +30,11 @@ void ModelTexture::setFakeLighting( const GLboolean& use_fake_lighting )
 	this->use_fake_lighting = use_fake_lighting;
 }
 
+void ModelTexture::setNumRows( const GLuint& num_rows )
+{
+	this->num_rows = num_rows;
+}
+
 const GLboolean& ModelTexture::hasTransparency() const
 {
 	return has_transparency;
@@ -48,4 +53,9 @@ const GLfloat& ModelTexture::getShineDamper() const
 const GLfloat& ModelTexture::getReflectivity() const
 {
 	return reflectivity;
+}
+
+const GLuint& ModelTexture::getNumRows() const
+{
+	return num_rows;
 }

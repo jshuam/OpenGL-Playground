@@ -82,6 +82,11 @@ void ShaderProgram::loadVector( const GLuint& location, const glm::vec3& vector 
 	glUniform3f( location, vector.x, vector.y, vector.z );
 }
 
+void ShaderProgram::loadVector2D( const GLuint& location, const glm::vec2& vector ) const
+{
+	glUniform2f( location, vector.x, vector.y );
+}
+
 void ShaderProgram::loadBool( const GLuint& location, const GLboolean& value ) const
 {
 	GLfloat to_load = value ? 1 : 0;

@@ -18,6 +18,8 @@ public:
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadFakeLighting( const GLboolean& use_fake_lighting ) const;
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
+	void loadNumRows( const GLuint& num_rows ) const;
+	void loadOffset( const GLfloat& x, const GLfloat& y ) const;
 
 protected:
 	void bindAttributes() override;
@@ -36,4 +38,6 @@ private:
 	GLuint location_reflectivity;
 	GLuint location_use_fake_lighting;
 	GLuint location_sky_colour;
+	GLuint location_num_rows;
+	GLuint location_offset;
 };

@@ -35,6 +35,7 @@ void EntityRenderer::prepareTexturedModel( const TexturedModel& model )
 	glEnableVertexAttribArray( 1 );
 	glEnableVertexAttribArray( 2 );
 	ModelTexture texture = model.getTexture();
+	shader.loadNumRows( texture.getNumRows() );
 	if( texture.hasTransparency() )
 	{
 		MasterRenderer::disableCulling();
@@ -62,4 +63,5 @@ void EntityRenderer::prepareInstance( const Entity& entity )
 																		 entity.getRotZ(), 
 																		 entity.getScale() );
 	shader.loadTransformationMatrix( transformation_matrix );
+	shader.loadOffset( entity.getTextureXOffset(), entity.getTextureYOffset() );
 }

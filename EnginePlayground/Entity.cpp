@@ -1,14 +1,25 @@
 #include "Entity.h"
 
 Entity::Entity( TexturedModel model, glm::vec3 position, GLfloat rot_x, GLfloat rot_y, GLfloat rot_z, GLfloat scale )
-{
-	this->model = model;
-	this->position = position;
-	this->rot_x = rot_x;
-	this->rot_y = rot_y;
-	this->rot_z = rot_z;
-	this->scale = scale;
-}
+	:
+	model( model ),
+	position( position ),
+	rot_x( rot_x ),
+	rot_y( rot_y ),
+	rot_z( rot_z ),
+	scale( scale )
+{}
+
+Entity::Entity( TexturedModel model, GLuint index, glm::vec3 position, GLfloat rot_x, GLfloat rot_y, GLfloat rot_z, GLfloat scale )
+	:
+	model( model ),
+	texture_index( index ),
+	position( position ),
+	rot_x( rot_x ),
+	rot_y( rot_y ),
+	rot_z( rot_z ),
+	scale( scale )
+{}
 
 void Entity::increasePosition( const GLfloat& dx, const GLfloat& dy, const GLfloat& dz )
 {
@@ -52,6 +63,19 @@ const GLfloat& Entity::getRotZ() const
 const GLfloat& Entity::getScale() const
 {
 	return scale;
+}
+
+const GLfloat& Entity::getTextureXOffset() const
+{
+	GLuint column = texture_index % model.getTexture().getNumRows();
+	return (GLfloat) column / (GLfloat) model.getTexture().getNumRows();
+}
+
+const GLfloat& Entity::getTextureYOffset() const
+{
+	GLuint row = texture_index / model.getTexture().getNumRows();
+	return (GLfloat) row / (GLfloat) model.getTexture().getNumRows();
+	//GLfloat offset_y = 1.0f - ( ( 1.0f / model.getTexture().getNumRows() ) + (GLfloat) row / (GLfloat) model.getTexture().getNumRows() );
 }
 
 void Entity::setPosX( const GLfloat& x_pos )
