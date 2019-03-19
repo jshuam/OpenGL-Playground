@@ -69,7 +69,7 @@ int main()
 
 	Terrain terrain = Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" );
 
-	/*for( int i = 0; i < 200; i++ )
+	for( int i = 0; i < 200; i++ )
 	{
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
@@ -86,7 +86,7 @@ int main()
 		GLfloat z = float_dist( mt );
 		GLfloat y = terrain.getTerrainHeight( x, z );
 		entities.emplace_back( grass_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
-	}*/
+	}
 	for( int i = 0; i < 200; i++ )
 	{
 		GLfloat x = float_dist( mt );

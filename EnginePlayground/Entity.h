@@ -20,8 +20,8 @@ public:
 	const GLfloat& getRotY() const;
 	const GLfloat& getRotZ() const;
 	const GLfloat& getScale() const;
-	const GLfloat& getTextureXOffset() const;
-	const GLfloat& getTextureYOffset() const;
+	const GLfloat getTextureXOffset() const;
+	const GLfloat getTextureYOffset() const;
 
 	void setPosX( const GLfloat& x_pos );
 	void setPosY( const GLfloat& y_pos );

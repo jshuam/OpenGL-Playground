@@ -65,16 +65,17 @@ const GLfloat& Entity::getScale() const
 	return scale;
 }
 
-const GLfloat& Entity::getTextureXOffset() const
+const GLfloat Entity::getTextureXOffset() const
 {
-	GLuint column = texture_index % model.getTexture().getNumRows();
-	return (GLfloat) column / (GLfloat) model.getTexture().getNumRows();
+	GLuint column = texture_index % ( model.getTexture().getNumRows() );
+	GLfloat x_offset = ( (GLfloat) column / ( (GLfloat) model.getTexture().getNumRows() ) );;
+	return x_offset;
 }
 
-const GLfloat& Entity::getTextureYOffset() const
+const GLfloat Entity::getTextureYOffset() const
 {
-	GLuint row = texture_index / model.getTexture().getNumRows();
-	return (GLfloat) row / (GLfloat) model.getTexture().getNumRows();
+	GLuint row = texture_index / ( model.getTexture().getNumRows() );
+	return ( (GLfloat) row / ( (GLfloat) model.getTexture().getNumRows() ) );
 	//GLfloat offset_y = 1.0f - ( ( 1.0f / model.getTexture().getNumRows() ) + (GLfloat) row / (GLfloat) model.getTexture().getNumRows() );
 }
 
