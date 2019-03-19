@@ -81,7 +81,9 @@ int main()
 
 	std::vector<Terrain> terrains;
 
-	terrains.emplace_back( Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" ) );
+	Terrain t = Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" );
+
+	terrains.push_back(t);
 
 	MasterRenderer renderer;
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
@@ -89,7 +91,7 @@ int main()
 	GLfloat dt = 0;
 	GLuint frames = 0;
 
-	RawModel dragon( OBJLoader::loadObjModel( "player", loader ) );
+	RawModel dragon( OBJLoader::loadObjModel( "dragon", loader ) );
 	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "pink" ) ) );
 	dragon_texture.getTexture().setShineDamper( 1000 );
 	dragon_texture.getTexture().setReflectivity( 100 );

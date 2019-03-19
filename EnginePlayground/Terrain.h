@@ -41,6 +41,6 @@ private:
 	TerrainTexture blend_map;
 	TerrainTexturePack texture_pack;
 
-	std::vector<GLfloat> heights;
+	std::vector<std::vector<GLfloat>> heights;
 };
 
