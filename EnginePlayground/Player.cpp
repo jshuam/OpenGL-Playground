@@ -22,8 +22,8 @@ void Player::move( const GLfloat& dt, const Terrain& terrain )
 	if( getPosition().y < terrain_height )
 	{
 		upwards_speed = 0;
-		setPosY( terrain_height );
 		in_air = false;
+		setPosY( terrain_height );
 	}
 }
 

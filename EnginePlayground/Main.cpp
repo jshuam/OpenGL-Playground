@@ -59,31 +59,39 @@ int main()
 	fern_texture.getTexture().setTransparency( true );
 
 	std::vector<Entity> entities;
-	std::uniform_real_distribution<GLfloat> x_dist( 10, 790 );
-	std::uniform_real_distribution<GLfloat> z_dist( 10, 790 );
+	std::uniform_real_distribution<GLfloat> float_dist( 10, 790 );
 	std::random_device rt;
 	std::mt19937 mt( rt() );
+
+	Terrain terrain = Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" );
+
 	for( int i = 0; i < 200; i++ )
 	{
-		entities.emplace_back( flower_texture, glm::vec3( x_dist( mt ), 0, x_dist( mt ) ), 0, 0, 0, 1 );
-		entities.emplace_back( fern_texture, glm::vec3( x_dist( mt ), 0, z_dist( mt ) ), 0, 0, 0, 1 );
+		GLfloat x = float_dist( mt );
+		GLfloat z = float_dist( mt );
+		GLfloat y = terrain.getTerrainHeight( x, z );
+		entities.emplace_back( flower_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
+		x = float_dist( mt );
+		z = float_dist( mt );
+		y = terrain.getTerrainHeight( x, z );
+		entities.emplace_back( fern_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
 	}
 	for( int i = 0; i < 350; i++ )
 	{
-		entities.emplace_back( grass_texture, glm::vec3( x_dist( mt ), 0, x_dist( mt ) ), 0, 0, 0, 1 );
+		GLfloat x = float_dist( mt );
+		GLfloat z = float_dist( mt );
+		GLfloat y = terrain.getTerrainHeight( x, z );
+		entities.emplace_back( grass_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
 	}
 	for( int i = 0; i < 200; i++ )
 	{
-		entities.emplace_back( tree_texture, glm::vec3( x_dist( mt ), -0.5, z_dist( mt ) ), 0, 0, 0, 1 );
+		GLfloat x = float_dist( mt );
+		GLfloat z = float_dist( mt );
+		GLfloat y = terrain.getTerrainHeight( x, z );
+		entities.emplace_back( tree_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
 	}
 
 	Light light( glm::vec3( 20000, 40000, 20000 ), glm::vec3( 1, 1, 1 ) );
-
-	std::vector<Terrain> terrains;
-
-	Terrain t = Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" );
-
-	terrains.push_back(t);
 
 	MasterRenderer renderer;
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
@@ -91,11 +99,11 @@ int main()
 	GLfloat dt = 0;
 	GLuint frames = 0;
 
-	RawModel dragon( OBJLoader::loadObjModel( "dragon", loader ) );
+	RawModel dragon( OBJLoader::loadObjModel( "player", loader ) );
 	TexturedModel dragon_texture( dragon, ModelTexture( loader.loadTexture( "pink" ) ) );
 	dragon_texture.getTexture().setShineDamper( 1000 );
 	dragon_texture.getTexture().setReflectivity( 100 );
-	Player player( dragon_texture, glm::vec3( 150, 0, 140 ), 0, 0, 0, 0.5 );
+	Player player( dragon_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
 
 	while( !glfwWindowShouldClose( window ) )
@@ -107,12 +115,9 @@ int main()
 		{
 			renderer.processEntity( entity );
 		}
-		for( auto& terrain : terrains )
-		{
-			renderer.processTerrain( terrain );
-		}
+		renderer.processTerrain( terrain );
 		camera.move( dt );
-		player.move( dt, terrains[0] );
+		player.move( dt, terrain );
 		renderer.processEntity( player );
 		renderer.render( light, camera );
 		DisplayManager::updateDisplay();

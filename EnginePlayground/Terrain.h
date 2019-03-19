@@ -14,7 +14,7 @@ class Terrain
 {
 public:
 	Terrain() = default;
-	Terrain( GLuint x, GLuint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map, std::string height_map );
+	Terrain( GLint x, GLint z, Loader loader, TerrainTexturePack texture_pack, TerrainTexture blend_map, std::string height_map );
 	~Terrain() = default;
 
 	const GLfloat& getX() const;
@@ -32,15 +32,14 @@ private:
 private:
 	static constexpr GLfloat SIZE = 800;
 	static constexpr GLfloat MAX_HEIGHT = 40;
-	static constexpr GLfloat MAX_PIXEL_COLOUR = 127.5;
+	static constexpr GLfloat MAX_PIXEL_COLOUR = 256 * 256 * 256;
 
 	GLint VERTEX_COUNT;
 	GLfloat x;
 	GLfloat z;
+	std::vector<std::vector<GLfloat>> heights;
 	RawModel model;
 	TerrainTexture blend_map;
 	TerrainTexturePack texture_pack;
-
-	std::vector<std::vector<GLfloat>> heights;
 };
 
