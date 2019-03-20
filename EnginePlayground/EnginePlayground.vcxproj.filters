@@ -213,9 +213,6 @@
     <Image Include="res\grassy3.png">
       <Filter>Res</Filter>
     </Image>
-    <Image Include="res\heightmap perlin.jpg">
-      <Filter>Res</Filter>
-    </Image>
     <Image Include="res\heightmap.png">
       <Filter>Res</Filter>
     </Image>
@@ -256,6 +253,9 @@
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\wooden_container.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\heightmapPerlin.png">
       <Filter>Res</Filter>
     </Image>
   </ItemGroup>

@@ -65,7 +65,7 @@ int main()
 	std::random_device rt;
 	std::mt19937 mt( rt() );
 
-	Terrain terrain = Terrain( 0, 0, loader, texture_pack, blend_map, "heightMap" );
+	Terrain terrain = Terrain( 0, 0, loader, texture_pack, blend_map, "heightmapPerlin" );
 
 	for( int i = 0; i < 200; i++ )
 	{

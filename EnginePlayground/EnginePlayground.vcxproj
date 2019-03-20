@@ -179,7 +179,7 @@
     <Image Include="res\grassy.png" />
     <Image Include="res\grassy2.png" />
     <Image Include="res\grassy3.png" />
-    <Image Include="res\heightmap perlin.jpg" />
+    <Image Include="res\heightmapPerlin.png" />
     <Image Include="res\heightmap.png" />
     <Image Include="res\image.png" />
     <Image Include="res\lowPolyTree.png" />
