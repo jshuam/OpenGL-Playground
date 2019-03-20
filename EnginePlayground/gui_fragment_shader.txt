@@ -1,0 +1,14 @@
+#version 400
+
+in vec2 texture_coords;
+
+out vec4 out_colour;
+
+uniform sampler2D gui_texture;
+
+void main( void )
+{
+
+	out_colour = texture( gui_texture, texture_coords );
+
+}

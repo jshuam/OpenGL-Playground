@@ -31,6 +31,9 @@
     <Filter Include="Src\Terrains">
       <UniqueIdentifier>{0fac96c7-9cbb-4ba8-8c8f-73aabeb89c09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\GUI">
+      <UniqueIdentifier>{d5401bdd-732d-4b01-ba8a-e2434108bfaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
@@ -102,6 +105,15 @@
     <ClInclude Include="Player.h">
       <Filter>Src\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="GuiTexture.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiRenderer.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiShader.h">
+      <Filter>Src\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -161,6 +173,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="GuiTexture.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiRenderer.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiShader.cpp">
+      <Filter>Src\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -174,6 +195,12 @@
     </Text>
     <Text Include="terrain_vertex_shader.txt">
       <Filter>Src\Shaders</Filter>
+    </Text>
+    <Text Include="gui_fragment_shader.txt">
+      <Filter>Src\GUI</Filter>
+    </Text>
+    <Text Include="gui_vertex_shader.txt">
+      <Filter>Src\GUI</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

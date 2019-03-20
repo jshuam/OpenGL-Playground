@@ -4,6 +4,14 @@
 
 #include <iostream>
 
+RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices )
+{
+	GLuint vao_id = createVAO();
+	storeDataInAttributeList( 0, 2, vertices );
+	unbindVAO();
+	return RawModel( vao_id, vertices.size() / 2 );
+}
+
 RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
 							const std::vector<GLfloat>& tex_coords, const std::vector<GLfloat>& normals )
 {
@@ -15,7 +23,6 @@ RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, const std::vec
 	unbindVAO();
 	return RawModel( vao_id, indices.size() );
 }
-
 GLuint Loader::createVAO()
 {
 	GLuint vao_id;

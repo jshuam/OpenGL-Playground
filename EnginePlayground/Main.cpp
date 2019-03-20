@@ -9,6 +9,8 @@
 #include "Light.h"
 #include "MasterRenderer.h"
 #include "Player.h"
+#include "GuiTexture.h"
+#include "GuiRenderer.h"
 
 #include <random>
 
@@ -104,6 +106,12 @@ int main()
 	Player player( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
 
+	std::vector<GuiTexture> guis;
+	guis.emplace_back( GuiTexture( loader.loadTexture( "flower" ), glm::vec2( 0.5, 0.5 ), glm::vec2( 0.25, 0.25 ) ) );
+	guis.emplace_back( GuiTexture( loader.loadTexture( "flower" ), glm::vec2( 0.75, 0.75 ), glm::vec2( 0.25, 0.25 ) ) );
+
+	GuiRenderer gui_renderer( loader );
+
 	while( !glfwWindowShouldClose( window ) )
 	{
 		new_dt = glfwGetTime();
@@ -118,6 +126,7 @@ int main()
 		player.move( dt, terrain );
 		renderer.processEntity( player );
 		renderer.render( light, camera );
+		gui_renderer.render( guis );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )
@@ -128,6 +137,7 @@ int main()
 		}
 	}
 
+	gui_renderer.cleanUp();
 	renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();

@@ -1,7 +1,5 @@
 #include "ShaderProgram.h"
 
-
-
 void ShaderProgram::start() const
 {
 	glUseProgram( program_id );
