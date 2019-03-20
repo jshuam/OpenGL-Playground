@@ -91,7 +91,10 @@ int main()
 		entities.emplace_back( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 );
 	}
 
-	Light light( glm::vec3( 20000, 40000, 20000 ), glm::vec3( 1, 1, 1 ) );
+	std::vector<Light> lights;
+	lights.emplace_back( glm::vec3( 0, 10000, -7000 ), glm::vec3( 1, 1, 1 ) );
+	lights.emplace_back( glm::vec3( -200, 10, -200 ), glm::vec3( 10, 0, 0 ) );
+	lights.emplace_back( glm::vec3( 200, 10, 200 ), glm::vec3( 0, 0, 10 ) );
 
 	MasterRenderer renderer;
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
@@ -125,7 +128,7 @@ int main()
 		camera.move( dt );
 		player.move( dt, terrain );
 		renderer.processEntity( player );
-		renderer.render( light, camera );
+		renderer.render( lights, camera );
 		gui_renderer.render( guis );
 		DisplayManager::updateDisplay();
 		frames++;

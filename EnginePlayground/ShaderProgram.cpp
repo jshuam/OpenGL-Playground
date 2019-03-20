@@ -49,8 +49,9 @@ GLuint ShaderProgram::loadShader( std::string filename, GLuint type )
 			std::string error_log;
 			error_log.reserve( max_length );
 			glGetShaderInfoLog( shader_id, max_length, NULL, &error_log[0] );
-			std::cout << error_log << std::endl;
+			std::cout << error_log.c_str() << std::endl;
 			std::cout << "Could not compile shader." << std::endl;
+			std::cin.get();
 			exit( -1 );
 		}
 

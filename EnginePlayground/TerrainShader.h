@@ -14,7 +14,7 @@ public:
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
 	void loadViewMatrix( const Camera& camera ) const;
-	void loadLight( const Light& light ) const;
+	void loadLights( const std::vector<Light>& lights );
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
 	void connectTextureUnits();
@@ -30,8 +30,6 @@ private:
 	GLuint location_transform_mat;
 	GLuint location_projection_mat;
 	GLuint location_view_mat;
-	GLuint location_light_position;
-	GLuint location_light_colour;
 	GLuint location_shine_damper;
 	GLuint location_reflectivity;
 	GLuint location_sky_colour;
@@ -40,5 +38,8 @@ private:
 	GLuint location_g_texture;
 	GLuint location_b_texture;
 	GLuint location_blend_map;
+	GLuint location_max_lights;
+	std::vector<GLuint> location_light_position;
+	std::vector<GLuint> location_light_colour;
 };
 

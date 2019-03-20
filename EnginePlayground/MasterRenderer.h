@@ -33,7 +33,7 @@ public:
 	void prepare() const;
 	void processEntity( const Entity& entity );
 	void processTerrain( const Terrain& terrain );
-	void render( const Light& light, const Camera& camera );
+	void render( const std::vector<Light>& lights, const Camera& camera );
 
 public:
 	static void disableCulling();

@@ -30,10 +30,23 @@ void StaticShader::loadViewMatrix( const Camera& camera ) const
 	loadMatrix( location_view_mat, view_matrix );
 }
 
-void StaticShader::loadLight( const Light& light ) const
+void StaticShader::loadLights( const std::vector<Light>& lights )
 {
-	loadVector( location_light_position, light.getPosition() );
-	loadVector( location_light_colour, light.getColour() );
+	GLuint max_lights = lights.size();
+	loadFloat( location_max_lights, max_lights );
+	location_light_position.reserve( max_lights );
+	location_light_colour.reserve( max_lights );
+	for( GLuint i = 0; i < max_lights; i++ )
+	{
+		location_light_position.push_back( getUniformLocation( "light_position[" + std::to_string( i ) + "]" ) );
+		location_light_colour.push_back( getUniformLocation( "light_colour[" + std::to_string( i ) + "]" ) );
+	}
+
+	for( GLuint i = 0; i < max_lights; i++ )
+	{
+		loadVector( location_light_position[i], lights[i].getPosition() );
+		loadVector( location_light_colour[i], lights[i].getColour() );
+	}
 }
 
 void StaticShader::loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const
@@ -74,12 +87,11 @@ void StaticShader::getAllUniformLocations()
 	location_transform_mat = getUniformLocation( "transformation_matrix" );
 	location_projection_mat = getUniformLocation( "projection_matrix" );
 	location_view_mat = getUniformLocation( "view_matrix" );
-	location_light_position = getUniformLocation( "light_position" );
-	location_light_colour = getUniformLocation( "light_colour" );
 	location_shine_damper = getUniformLocation( "shine_damper" );
 	location_reflectivity = getUniformLocation( "reflectivity" );
 	location_use_fake_lighting = getUniformLocation( "use_fake_lighting" );
 	location_sky_colour = getUniformLocation( "sky_colour" );
 	location_num_rows = getUniformLocation( "num_rows" );
 	location_offset = getUniformLocation( "offset" );
+	location_max_lights = getUniformLocation( "max_lights" );
 }
