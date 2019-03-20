@@ -44,18 +44,15 @@ int main()
 	/****************************************************************************/
 
 	RawModel tree( OBJLoader::loadObjModel( "lowPolyTree", loader ) );
-	RawModel grass( OBJLoader::loadObjModel( "grassModel", loader ) );
+	RawModel diffuse( OBJLoader::loadObjModel( "grassModel", loader ) );
 	RawModel fern( OBJLoader::loadObjModel( "fern", loader ) );
-	RawModel flower( OBJLoader::loadObjModel( "grassModel", loader ) );
 
 	TexturedModel tree_texture( tree, loader.loadTexture( "lowPolyTree" ) );
-	tree_texture.getTexture().setNumRows( 4 );
-	TexturedModel grass_texture( grass, loader.loadTexture( "grassTexture" ) );
-	grass_texture.getTexture().setTransparency( true );
-	grass_texture.getTexture().setFakeLighting( true );
-	TexturedModel flower_texture( grass, loader.loadTexture( "flower" ) );
-	flower_texture.getTexture().setTransparency( true );
-	flower_texture.getTexture().setFakeLighting( true );
+	tree_texture.getTexture().setNumRows( 2 );
+	TexturedModel diffuse_texture( diffuse, loader.loadTexture( "diffuse" ) );
+	diffuse_texture.getTexture().setNumRows( 3 );
+	diffuse_texture.getTexture().setTransparency( true );
+	diffuse_texture.getTexture().setFakeLighting( true );
 	TexturedModel fern_texture( fern, loader.loadTexture( "fern" ) );
 	fern_texture.getTexture().setNumRows( 2 );
 	fern_texture.getTexture().setTransparency( true );
@@ -64,6 +61,7 @@ int main()
 	std::uniform_real_distribution<GLfloat> float_dist( 10, 790 );
 	std::uniform_int_distribution<GLuint> tree_dist( 0, 15 );
 	std::uniform_int_distribution<GLuint> fern_dist( 0, 3 );
+	std::uniform_int_distribution<GLuint> diffuse_dist( 0, 8 );
 	std::random_device rt;
 	std::mt19937 mt( rt() );
 
@@ -74,10 +72,6 @@ int main()
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
 		GLfloat y = terrain.getTerrainHeight( x, z );
-		entities.emplace_back( flower_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
-		x = float_dist( mt );
-		z = float_dist( mt );
-		y = terrain.getTerrainHeight( x, z );
 		entities.emplace_back( fern_texture, fern_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 );
 	}
 	for( int i = 0; i < 350; i++ )
@@ -85,7 +79,7 @@ int main()
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
 		GLfloat y = terrain.getTerrainHeight( x, z );
-		entities.emplace_back( grass_texture, glm::vec3( x, y, z ), 0, 0, 0, 1 );
+		entities.emplace_back( diffuse_texture, diffuse_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 3 );
 	}
 	for( int i = 0; i < 200; i++ )
 	{
