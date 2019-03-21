@@ -6,7 +6,6 @@
 
 class StaticShader : public ShaderProgram
 {
-
 public:
 	StaticShader();
 	~StaticShader() = default;

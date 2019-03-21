@@ -6,7 +6,7 @@
 GuiRenderer::GuiRenderer( Loader loader )
 {
 	std::vector<GLfloat> vertices { -1, 1, -1, -1, 1, 1, 1, -1 };
-	quad = loader.loadToVAO( vertices );
+	quad = loader.loadToVAO( vertices, 2 );
 }
 
 void GuiRenderer::render( std::vector<GuiTexture>& guis )

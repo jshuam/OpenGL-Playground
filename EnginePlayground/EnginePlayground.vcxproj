@@ -124,11 +124,14 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MasterRenderer.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SkyboxRenderer.h" />
+    <ClInclude Include="SkyboxShader.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainRenderer.h" />
     <ClInclude Include="TerrainShader.h" />
     <ClInclude Include="TerrainTexture.h" />
     <ClInclude Include="TerrainTexturePack.h" />
+    <ClInclude Include="TextureData.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Maths.h" />
@@ -158,29 +161,37 @@
     <ClCompile Include="RawModel.cpp" />
     <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="SkyboxRenderer.cpp" />
+    <ClCompile Include="SkyboxShader.cpp" />
     <ClCompile Include="StaticShader.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainRenderer.cpp" />
     <ClCompile Include="TerrainShader.cpp" />
     <ClCompile Include="TerrainTexture.cpp" />
     <ClCompile Include="TerrainTexturePack.cpp" />
+    <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TexturedModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragment_shader.txt" />
     <Text Include="gui_fragment_shader.txt" />
     <Text Include="gui_vertex_shader.txt" />
+    <Text Include="skybox_fragment_shader.txt" />
+    <Text Include="skybox_vertex_shader.txt" />
     <Text Include="terrain_fragment_shader.txt" />
     <Text Include="terrain_vertex_shader.txt" />
     <Text Include="vertex_shader.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\back.png" />
     <Image Include="res\blendMap.png" />
+    <Image Include="res\bottom.png" />
     <Image Include="res\box.png" />
     <Image Include="res\diffuse.png" />
     <Image Include="res\dirt.png" />
     <Image Include="res\fern.png" />
     <Image Include="res\flower.png" />
+    <Image Include="res\front.png" />
     <Image Include="res\grass.png" />
     <Image Include="res\grassFlowers.png" />
     <Image Include="res\grassTexture.png" />
@@ -191,6 +202,7 @@
     <Image Include="res\heightmap.png" />
     <Image Include="res\image.png" />
     <Image Include="res\lamp.png" />
+    <Image Include="res\left.png" />
     <Image Include="res\lowPolyTree.png" />
     <Image Include="res\mossPath256.png" />
     <Image Include="res\mud.png" />
@@ -199,7 +211,9 @@
     <Image Include="res\pinkFlowers.png" />
     <Image Include="res\playerTexture.png" />
     <Image Include="res\red.png" />
+    <Image Include="res\right.png" />
     <Image Include="res\stallTexture.png" />
+    <Image Include="res\top.png" />
     <Image Include="res\tree.png" />
     <Image Include="res\white.png" />
     <Image Include="res\wooden_container.png" />

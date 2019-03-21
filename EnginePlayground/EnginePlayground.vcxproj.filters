@@ -34,6 +34,9 @@
     <Filter Include="Src\GUI">
       <UniqueIdentifier>{d5401bdd-732d-4b01-ba8a-e2434108bfaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Skybox">
+      <UniqueIdentifier>{fd781594-910d-4646-9fa4-76ef3a837c68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
@@ -114,6 +117,15 @@
     <ClInclude Include="GuiShader.h">
       <Filter>Src\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="SkyboxRenderer.h">
+      <Filter>Src\Skybox</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyboxShader.h">
+      <Filter>Src\Skybox</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Src\Textures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -182,6 +194,15 @@
     <ClCompile Include="GuiShader.cpp">
       <Filter>Src\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SkyboxRenderer.cpp">
+      <Filter>Src\Skybox</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxShader.cpp">
+      <Filter>Src\Skybox</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureData.cpp">
+      <Filter>Src\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -201,6 +222,12 @@
     </Text>
     <Text Include="gui_vertex_shader.txt">
       <Filter>Src\GUI</Filter>
+    </Text>
+    <Text Include="skybox_vertex_shader.txt">
+      <Filter>Src\Skybox</Filter>
+    </Text>
+    <Text Include="skybox_fragment_shader.txt">
+      <Filter>Src\Skybox</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +312,26 @@
     <Image Include="res\heightmapPerlin.png">
       <Filter>Res</Filter>
     </Image>
-    <Image Include="res\lamp.png" />
+    <Image Include="res\back.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\bottom.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\front.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\left.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\right.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\top.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\lamp.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

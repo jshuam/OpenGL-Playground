@@ -1,0 +1,11 @@
+#version 400
+
+in vec3 texture_coords;
+out vec4 out_colour;
+
+uniform samplerCube cube_map;
+
+void main( void )
+{
+	out_colour = texture( cube_map, texture_coords );
+}

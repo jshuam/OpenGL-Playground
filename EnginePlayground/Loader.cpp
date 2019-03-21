@@ -4,12 +4,12 @@
 
 #include <iostream>
 
-RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices )
+RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, GLuint dimensions )
 {
 	GLuint vao_id = createVAO();
-	storeDataInAttributeList( 0, 2, vertices );
+	storeDataInAttributeList( 0, dimensions, vertices );
 	unbindVAO();
-	return RawModel( vao_id, vertices.size() / 2 );
+	return RawModel( vao_id, vertices.size() / dimensions );
 }
 
 RawModel Loader::loadToVAO( const std::vector<GLfloat>& vertices, const std::vector<GLint>& indices,
@@ -81,6 +81,37 @@ GLuint Loader::loadTexture( std::string filename )
 
 	textures.push_back( texture );
 	return texture;
+}
+
+TextureData Loader::loadPNGFile( std::string filename )
+{
+	GLint width, height, channels;
+	stbi_uc* buffer = stbi_load( ( "res/" + filename + ".png" ).c_str(), &width, &height, &channels, 4 );
+	if( channels != 4 )
+	{
+		std::cerr << "Cube Map Texture is not RGBA." << std::endl;
+		std::cin.get();
+		exit( -1 );
+	}
+	return TextureData( width, height, buffer );
+}
+
+GLuint Loader::loadCubeMap( std::vector<std::string> cubeMapTextures )
+{
+	GLuint tex_id;
+	glGenTextures( 1, &tex_id );
+	glActiveTexture( GL_TEXTURE0 );
+	glBindTexture( GL_TEXTURE_CUBE_MAP, tex_id );
+
+	for( int i = 0; i < cubeMapTextures.size(); i++ )
+	{
+		TextureData data = loadPNGFile( cubeMapTextures[i] );
+		glTexImage2D( GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, data.getWidth(), data.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, data.getBuffer() );
+	}
+	glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	textures.push_back( tex_id );
+	return tex_id;
 }
 
 void Loader::storeDataInAttributeList( GLuint attribute_number, GLuint coordinate_size, const std::vector<tinyobj::real_t>& data )
