@@ -13,11 +13,11 @@ class EntityRenderer
 {
 public:
 	EntityRenderer() = default;
-	EntityRenderer( StaticShader shader, glm::mat4 projection_matrix, const GLuint& num_lights );
+	EntityRenderer( StaticShader* shader, glm::mat4 projection_matrix, GLuint num_lights );
 	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities );
 
 private:
-	StaticShader shader;
+	StaticShader* shader;
 	void prepareTexturedModel( const TexturedModel& model );
 	void unbindTexturedModel();
 	void prepareInstance( const Entity& entity );

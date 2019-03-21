@@ -1,10 +1,10 @@
 #include "MasterRenderer.h"
 
-MasterRenderer::MasterRenderer( const GLuint& num_lights )
+MasterRenderer::MasterRenderer( GLuint num_lights )
 {
 	createProjectionMatrix();
-	renderer = EntityRenderer( shader, projection_matrix, num_lights );
-	terrain_renderer = TerrainRenderer( terrain_shader, projection_matrix, num_lights );
+	renderer = EntityRenderer( &shader, projection_matrix, num_lights );
+	terrain_renderer = TerrainRenderer( &terrain_shader, projection_matrix, num_lights );
 	enableCulling();
 }
 
@@ -62,7 +62,7 @@ void MasterRenderer::processEntity( const Entity& entity )
 {
 	const TexturedModel& entity_model = entity.getModel();
 	auto batch = entities.find( entity_model );
-	if( batch != entities.end())
+	if( batch != entities.end() )
 	{
 		batch->second.push_back( entity );
 	}

@@ -30,25 +30,24 @@ void StaticShader::loadViewMatrix( const Camera& camera ) const
 	loadMatrix( location_view_mat, view_matrix );
 }
 
-void StaticShader::loadNumLights( const GLuint& num_lights ) const
+void StaticShader::loadNumLights( GLuint num_lights )
 {
 	loadFloat( location_max_lights, num_lights );
+	location_light_position.resize( num_lights );
+	location_light_colour.resize( num_lights );
+	for( GLuint i = 0; i < num_lights; i++ )
+	{
+		location_light_position[i] = getUniformLocation( "light_position[" + std::to_string( i ) + "]" );
+		location_light_colour[i] = getUniformLocation( "light_colour[" + std::to_string( i ) + "]" );
+	}
 }
 
 void StaticShader::loadLights( const std::vector<Light>& lights )
 {
-	for( GLuint i = 0; i < MAX_LIGHTS; i++ )
+	for( GLuint i = 0; i < lights.size(); i++ )
 	{
-		if( i < lights.size() )
-		{
-			loadVector( location_light_position[i], lights[i].getPosition() );
-			loadVector( location_light_colour[i], lights[i].getColour() );
-		}
-		else
-		{
-			loadVector( location_light_position[i], glm::vec3( 0.0, 0.0, 0.0 ) );
-			loadVector( location_light_colour[i], glm::vec3( 0.0, 0.0, 0.0 ) );
-		}
+		loadVector( location_light_position[i], lights[i].getPosition() );
+		loadVector( location_light_colour[i], lights[i].getColour() );
 	}
 }
 
@@ -97,11 +96,4 @@ void StaticShader::getAllUniformLocations()
 	location_num_rows = getUniformLocation( "num_rows" );
 	location_offset = getUniformLocation( "offset" );
 	location_max_lights = getUniformLocation( "max_lights" );
-	location_light_position.reserve( 4 );
-	location_light_colour.reserve( 4 );
-	for( GLuint i = 0; i < 4; i++ )
-	{
-		location_light_position.push_back( getUniformLocation( "light_position[" + std::to_string( i ) + "]" ) );
-		location_light_colour.push_back( getUniformLocation( "light_colour[" + std::to_string( i ) + "]" ) );
-	}
 }

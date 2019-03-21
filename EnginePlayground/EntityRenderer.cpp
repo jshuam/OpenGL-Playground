@@ -2,13 +2,14 @@
 #include "EntityRenderer.h"
 #include "MasterRenderer.h"
 
-EntityRenderer::EntityRenderer( StaticShader shader, glm::mat4 projection_matrix, const GLuint& num_lights )
+EntityRenderer::EntityRenderer( StaticShader* shader, glm::mat4 projection_matrix, GLuint num_lights )
+	:
+	shader( shader )
 {
-	this->shader = shader;
-	shader.start();
-	shader.loadProjectionMatrix( projection_matrix );
-	shader.loadNumLights( num_lights );
-	shader.stop();
+	this->shader->start();
+	this->shader->loadProjectionMatrix( projection_matrix );
+	this->shader->loadNumLights( num_lights );
+	this->shader->stop();
 }
 
 void EntityRenderer::render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities )
@@ -36,13 +37,13 @@ void EntityRenderer::prepareTexturedModel( const TexturedModel& model )
 	glEnableVertexAttribArray( 1 );
 	glEnableVertexAttribArray( 2 );
 	ModelTexture texture = model.getTexture();
-	shader.loadNumRows( texture.getNumRows() );
+	shader->loadNumRows( texture.getNumRows() );
 	if( texture.hasTransparency() )
 	{
 		MasterRenderer::disableCulling();
 	}
-	shader.loadFakeLighting( texture.hasFakeLighting() );
-	shader.loadShineVariables( texture.getShineDamper(), texture.getReflectivity() );
+	shader->loadFakeLighting( texture.hasFakeLighting() );
+	shader->loadShineVariables( texture.getShineDamper(), texture.getReflectivity() );
 	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, model.getTexture().getID() );
 }
@@ -58,11 +59,11 @@ void EntityRenderer::unbindTexturedModel()
 
 void EntityRenderer::prepareInstance( const Entity& entity )
 {
-	glm::mat4 transformation_matrix = Maths::createTransformationMatrix( entity.getPosition(), 
-																		 entity.getRotX(), 
-																		 entity.getRotY(), 
-																		 entity.getRotZ(), 
+	glm::mat4 transformation_matrix = Maths::createTransformationMatrix( entity.getPosition(),
+																		 entity.getRotX(),
+																		 entity.getRotY(),
+																		 entity.getRotZ(),
 																		 entity.getScale() );
-	shader.loadTransformationMatrix( transformation_matrix );
-	shader.loadOffset( entity.getTextureXOffset(), entity.getTextureYOffset() );
+	shader->loadTransformationMatrix( transformation_matrix );
+	shader->loadOffset( entity.getTextureXOffset(), entity.getTextureYOffset() );
 }

@@ -9,7 +9,7 @@ class TerrainRenderer
 {
 public:
 	TerrainRenderer() = default;
-	TerrainRenderer( TerrainShader shader, glm::mat4 projection_matrix, const GLuint& num_lights );
+	TerrainRenderer( TerrainShader* shader, glm::mat4 projection_matrix, GLuint num_lights );
 	~TerrainRenderer() = default;
 	void render( const std::vector<Terrain>& terrains ) const;
 	void prepareTerrain( const Terrain& terrain ) const;
@@ -17,7 +17,7 @@ public:
 	void loadModelMatrix( const Terrain& terrain ) const;
 
 private:
-	TerrainShader shader;
+	TerrainShader* shader;
 
 private:
 	void bindTextures( const Terrain& terrain ) const;

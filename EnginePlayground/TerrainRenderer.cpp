@@ -1,15 +1,15 @@
 #include "Maths.h"
 #include "TerrainRenderer.h"
 
-TerrainRenderer::TerrainRenderer( TerrainShader shader, glm::mat4 projection_matrix, const GLuint& num_lights )
+TerrainRenderer::TerrainRenderer( TerrainShader* shader, glm::mat4 projection_matrix, GLuint num_lights )
 	:
 	shader( shader )
 {
-	shader.start();
-	shader.loadProjectionMatrix( projection_matrix );
-	shader.loadNumLights( num_lights );
-	shader.connectTextureUnits();
-	shader.stop();
+	shader->start();
+	shader->loadProjectionMatrix( projection_matrix );
+	shader->loadNumLights( num_lights );
+	shader->connectTextureUnits();
+	shader->stop();
 }
 
 void TerrainRenderer::render( const std::vector<Terrain>& terrains ) const
@@ -31,7 +31,7 @@ void TerrainRenderer::prepareTerrain( const Terrain& terrain ) const
 	glEnableVertexAttribArray( 1 );
 	glEnableVertexAttribArray( 2 );
 	bindTextures( terrain );
-	shader.loadShineVariables( 1, 0 );
+	shader->loadShineVariables( 1, 0 );
 }
 
 void TerrainRenderer::unbindTexturedModel() const
@@ -45,7 +45,7 @@ void TerrainRenderer::unbindTexturedModel() const
 void TerrainRenderer::loadModelMatrix( const Terrain& terrain ) const
 {
 	glm::mat4 transformation_matrix = Maths::createTransformationMatrix( glm::vec3( terrain.getX(), 0, terrain.getZ() ), 0, 0, 0, 1 );
-	shader.loadTransformationMatrix( transformation_matrix );
+	shader->loadTransformationMatrix( transformation_matrix );
 }
 
 void TerrainRenderer::bindTextures( const Terrain& terrain ) const

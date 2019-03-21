@@ -30,7 +30,7 @@ void TerrainShader::loadViewMatrix( const Camera& camera ) const
 	loadMatrix( location_view_mat, view_matrix );
 }
 
-void TerrainShader::loadNumLights( const GLuint & num_lights )
+void TerrainShader::loadNumLights( GLuint num_lights )
 {
 	loadFloat( location_max_lights, num_lights );
 	location_light_position.reserve( num_lights );
@@ -44,18 +44,10 @@ void TerrainShader::loadNumLights( const GLuint & num_lights )
 
 void TerrainShader::loadLights( const std::vector<Light>& lights )
 {
-	for( GLuint i = 0; i < MAX_LIGHTS; i++ )
+	for( GLuint i = 0; i < lights.size(); i++ )
 	{
-		if( i < lights.size() )
-		{
-			loadVector( location_light_position[i], lights[i].getPosition() );
-			loadVector( location_light_colour[i], lights[i].getColour() );
-		}
-		else
-		{
-			loadVector( location_light_position[i], glm::vec3( 0.0, 0.0, 0.0 ) );
-			loadVector( location_light_colour[i], glm::vec3( 0.0, 0.0, 0.0 ) );
-		}
+		loadVector( location_light_position[i], lights[i].getPosition() );
+		loadVector( location_light_colour[i], lights[i].getColour() );
 	}
 }
 

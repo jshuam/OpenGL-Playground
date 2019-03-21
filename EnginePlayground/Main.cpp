@@ -92,11 +92,11 @@ int main()
 	}
 
 	std::vector<Light> lights;
-	lights.emplace_back( glm::vec3( 0, 10000, -7000 ), glm::vec3( 1, 1, 1 ) );
-	lights.emplace_back( glm::vec3( -200, 10, -200 ), glm::vec3( 10, 0, 0 ) );
-	lights.emplace_back( glm::vec3( 200, 10, 200 ), glm::vec3( 0, 0, 10 ) );
+	lights.emplace_back( glm::vec3( 400, 1000, 400 ), glm::vec3( 1, 1, 1 ) );
+	lights.emplace_back( glm::vec3( 0, 1000, 800 ), glm::vec3( 1000, 0, 0 ) );
+	lights.emplace_back( glm::vec3( 800, 1000, 0 ), glm::vec3( 0, 0, 1000 ) );
 
-	MasterRenderer renderer;
+	MasterRenderer renderer( lights.size() );
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
 	GLfloat new_dt = 0;
 	GLfloat dt = 0;
