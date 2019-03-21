@@ -14,6 +14,7 @@ public:
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
 	void loadViewMatrix( const Camera& camera ) const;
+	void loadNumLights( const GLuint& num_lights ) const;
 	void loadLights( const std::vector<Light>& lights );
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadFakeLighting( const GLboolean& use_fake_lighting ) const;
@@ -26,6 +27,7 @@ protected:
 	void getAllUniformLocations() override;
 
 private:
+	static constexpr const GLuint MAX_LIGHTS = 4;
 	static constexpr const char* vertex_file = "vertex_shader.txt";
 	static constexpr const char* fragment_file = "fragment_shader.txt";
 

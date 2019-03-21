@@ -14,6 +14,7 @@ public:
 	void loadTransformationMatrix( const glm::mat4& matrix ) const;
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
 	void loadViewMatrix( const Camera& camera ) const;
+	void loadNumLights( const GLuint& num_lights );
 	void loadLights( const std::vector<Light>& lights );
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
@@ -24,6 +25,7 @@ protected:
 	void getAllUniformLocations() override;
 
 private:
+	static constexpr const GLuint MAX_LIGHTS = 4;
 	static constexpr const char* vertex_file = "terrain_vertex_shader.txt";
 	static constexpr const char* fragment_file = "terrain_fragment_shader.txt";
 

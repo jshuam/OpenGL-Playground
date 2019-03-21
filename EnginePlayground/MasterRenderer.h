@@ -27,7 +27,7 @@ namespace std
 class MasterRenderer
 {
 public:
-	MasterRenderer();
+	MasterRenderer( const GLuint& num_lights );
 	void createProjectionMatrix();
 	void cleanUp();
 	void prepare() const;

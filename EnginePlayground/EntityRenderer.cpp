@@ -2,11 +2,12 @@
 #include "EntityRenderer.h"
 #include "MasterRenderer.h"
 
-EntityRenderer::EntityRenderer( StaticShader shader, glm::mat4 projection_matrix )
+EntityRenderer::EntityRenderer( StaticShader shader, glm::mat4 projection_matrix, const GLuint& num_lights )
 {
 	this->shader = shader;
 	shader.start();
 	shader.loadProjectionMatrix( projection_matrix );
+	shader.loadNumLights( num_lights );
 	shader.stop();
 }
 

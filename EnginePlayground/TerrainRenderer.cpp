@@ -1,12 +1,13 @@
 #include "Maths.h"
 #include "TerrainRenderer.h"
 
-TerrainRenderer::TerrainRenderer( TerrainShader shader, glm::mat4 projection_matrix )
+TerrainRenderer::TerrainRenderer( TerrainShader shader, glm::mat4 projection_matrix, const GLuint& num_lights )
 	:
 	shader( shader )
 {
 	shader.start();
 	shader.loadProjectionMatrix( projection_matrix );
+	shader.loadNumLights( num_lights );
 	shader.connectTextureUnits();
 	shader.stop();
 }

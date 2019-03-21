@@ -110,8 +110,6 @@ int main()
 	Camera camera( &player );
 
 	std::vector<GuiTexture> guis;
-	guis.emplace_back( GuiTexture( loader.loadTexture( "flower" ), glm::vec2( 0.5, 0.5 ), glm::vec2( 0.25, 0.25 ) ) );
-	guis.emplace_back( GuiTexture( loader.loadTexture( "flower" ), glm::vec2( 0.75, 0.75 ), glm::vec2( 0.25, 0.25 ) ) );
 
 	GuiRenderer gui_renderer( loader );
 

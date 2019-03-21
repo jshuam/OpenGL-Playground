@@ -30,22 +30,32 @@ void TerrainShader::loadViewMatrix( const Camera& camera ) const
 	loadMatrix( location_view_mat, view_matrix );
 }
 
-void TerrainShader::loadLights( const std::vector<Light>& lights )
+void TerrainShader::loadNumLights( const GLuint & num_lights )
 {
-	GLuint max_lights = lights.size();
-	loadFloat( location_max_lights, max_lights );
-	location_light_position.reserve( max_lights );
-	location_light_colour.reserve( max_lights );
-	for( GLuint i = 0; i < max_lights; i++ )
+	loadFloat( location_max_lights, num_lights );
+	location_light_position.reserve( num_lights );
+	location_light_colour.reserve( num_lights );
+	for( GLuint i = 0; i < num_lights; i++ )
 	{
 		location_light_position.push_back( getUniformLocation( "light_position[" + std::to_string( i ) + "]" ) );
 		location_light_colour.push_back( getUniformLocation( "light_colour[" + std::to_string( i ) + "]" ) );
 	}
+}
 
-	for( GLuint i = 0; i < max_lights; i++ )
+void TerrainShader::loadLights( const std::vector<Light>& lights )
+{
+	for( GLuint i = 0; i < MAX_LIGHTS; i++ )
 	{
-		loadVector( location_light_position[i], lights[i].getPosition() );
-		loadVector( location_light_colour[i], lights[i].getColour() );
+		if( i < lights.size() )
+		{
+			loadVector( location_light_position[i], lights[i].getPosition() );
+			loadVector( location_light_colour[i], lights[i].getColour() );
+		}
+		else
+		{
+			loadVector( location_light_position[i], glm::vec3( 0.0, 0.0, 0.0 ) );
+			loadVector( location_light_colour[i], glm::vec3( 0.0, 0.0, 0.0 ) );
+		}
 	}
 }
 

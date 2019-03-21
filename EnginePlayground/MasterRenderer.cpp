@@ -1,10 +1,10 @@
 #include "MasterRenderer.h"
 
-MasterRenderer::MasterRenderer()
+MasterRenderer::MasterRenderer( const GLuint& num_lights )
 {
 	createProjectionMatrix();
-	renderer = EntityRenderer( shader, projection_matrix );
-	terrain_renderer = TerrainRenderer( terrain_shader, projection_matrix );
+	renderer = EntityRenderer( shader, projection_matrix, num_lights );
+	terrain_renderer = TerrainRenderer( terrain_shader, projection_matrix, num_lights );
 	enableCulling();
 }
 
