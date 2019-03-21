@@ -190,6 +190,7 @@
     <Image Include="res\heightmapPerlin.png" />
     <Image Include="res\heightmap.png" />
     <Image Include="res\image.png" />
+    <Image Include="res\lamp.png" />
     <Image Include="res\lowPolyTree.png" />
     <Image Include="res\mossPath256.png" />
     <Image Include="res\mud.png" />

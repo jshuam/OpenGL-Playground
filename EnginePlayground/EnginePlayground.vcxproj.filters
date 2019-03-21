@@ -285,5 +285,6 @@
     <Image Include="res\heightmapPerlin.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\lamp.png" />
   </ItemGroup>
 </Project>

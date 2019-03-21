@@ -42,4 +42,5 @@ private:
 	GLuint location_max_lights;
 	std::vector<GLuint> location_light_position;
 	std::vector<GLuint> location_light_colour;
+	std::vector<GLuint> location_attenuation;
 };

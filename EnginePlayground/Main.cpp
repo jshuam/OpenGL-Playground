@@ -48,6 +48,7 @@ int main()
 	RawModel tree( OBJLoader::loadObjModel( "lowPolyTree", loader ) );
 	RawModel diffuse( OBJLoader::loadObjModel( "grassModel", loader ) );
 	RawModel fern( OBJLoader::loadObjModel( "fern", loader ) );
+	RawModel lamp( OBJLoader::loadObjModel( "lamp", loader ) );
 
 	TexturedModel tree_texture( tree, loader.loadTexture( "lowPolyTree" ) );
 	tree_texture.getTexture().setNumRows( 2 );
@@ -58,6 +59,8 @@ int main()
 	TexturedModel fern_texture( fern, loader.loadTexture( "fern" ) );
 	fern_texture.getTexture().setNumRows( 2 );
 	fern_texture.getTexture().setTransparency( true );
+	TexturedModel lamp_texture( lamp, loader.loadTexture( "lamp" ) );
+	lamp_texture.getTexture().setFakeLighting( true );
 
 	std::vector<Entity> entities;
 	std::uniform_real_distribution<GLfloat> float_dist( 10, 790 );
@@ -92,9 +95,14 @@ int main()
 	}
 
 	std::vector<Light> lights;
-	lights.emplace_back( glm::vec3( 400, 1000, 400 ), glm::vec3( 1, 1, 1 ) );
-	lights.emplace_back( glm::vec3( 0, 1000, 800 ), glm::vec3( 1000, 0, 0 ) );
-	lights.emplace_back( glm::vec3( 800, 1000, 0 ), glm::vec3( 0, 0, 1000 ) );
+	lights.emplace_back( glm::vec3( 0, 1000, 7000 ), glm::vec3( 0.4f, 0.4, 0.4f ) );
+	lights.emplace_back( glm::vec3( 185, terrain.getTerrainHeight( 185, 293 ) + 13, 293 ), glm::vec3( 3, 0, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
+	lights.emplace_back( glm::vec3( 370, terrain.getTerrainHeight( 370, 300 ) + 13, 300 ), glm::vec3( 0, 3, 3 ), glm::vec3( 1, 0.01f, 0.002f ) );
+	lights.emplace_back( glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ) + 13, 305 ), glm::vec3( 3, 3, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
+
+	entities.emplace_back( lamp_texture, glm::vec3( 185, terrain.getTerrainHeight( 185, 293 ), 293 ), 0, 0, 0, 1 );
+	entities.emplace_back( lamp_texture, glm::vec3( 370, terrain.getTerrainHeight( 370, 300 ), 300 ), 0, 0, 0, 1 );
+	entities.emplace_back( lamp_texture, glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ), 305 ), 0, 0, 0, 1 );
 
 	MasterRenderer renderer( lights.size() );
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;

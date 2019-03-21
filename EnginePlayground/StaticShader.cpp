@@ -35,10 +35,12 @@ void StaticShader::loadNumLights( GLuint num_lights )
 	loadFloat( location_max_lights, num_lights );
 	location_light_position.resize( num_lights );
 	location_light_colour.resize( num_lights );
+	location_attenuation.resize( num_lights );
 	for( GLuint i = 0; i < num_lights; i++ )
 	{
 		location_light_position[i] = getUniformLocation( "light_position[" + std::to_string( i ) + "]" );
 		location_light_colour[i] = getUniformLocation( "light_colour[" + std::to_string( i ) + "]" );
+		location_attenuation[i] = getUniformLocation( "attenuation[" + std::to_string( i ) + "]" );
 	}
 }
 
@@ -48,6 +50,7 @@ void StaticShader::loadLights( const std::vector<Light>& lights )
 	{
 		loadVector( location_light_position[i], lights[i].getPosition() );
 		loadVector( location_light_colour[i], lights[i].getColour() );
+		loadVector( location_attenuation[i], lights[i].getAttenuation() );
 	}
 }
 
