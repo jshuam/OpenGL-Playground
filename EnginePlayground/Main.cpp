@@ -104,7 +104,7 @@ int main()
 	entities.emplace_back( lamp_texture, glm::vec3( 370, terrain.getTerrainHeight( 370, 300 ), 300 ), 0, 0, 0, 1 );
 	entities.emplace_back( lamp_texture, glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ), 305 ), 0, 0, 0, 1 );
 
-	MasterRenderer renderer( lights.size() );
+	MasterRenderer renderer( loader, lights.size() );
 	GLfloat old_dt = glfwGetTime(), timer = old_dt;
 	GLfloat new_dt = 0;
 	GLfloat dt = 0;

@@ -1,10 +1,11 @@
 #include "MasterRenderer.h"
 
-MasterRenderer::MasterRenderer( GLuint num_lights )
+MasterRenderer::MasterRenderer( Loader loader, GLuint num_lights )
 {
 	createProjectionMatrix();
 	renderer = EntityRenderer( &shader, projection_matrix, num_lights );
 	terrain_renderer = TerrainRenderer( &terrain_shader, projection_matrix, num_lights );
+	skybox_renderer = SkyboxRenderer( loader, projection_matrix );
 	enableCulling();
 }
 
@@ -54,6 +55,7 @@ void MasterRenderer::render( const std::vector<Light>& lights, const Camera& cam
 	terrain_shader.loadViewMatrix( camera );
 	terrain_renderer.render( terrains );
 	terrain_shader.stop();
+	skybox_renderer.render( camera );
 	terrains.clear();
 	entities.clear();
 }

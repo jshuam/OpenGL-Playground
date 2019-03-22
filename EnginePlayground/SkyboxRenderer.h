@@ -12,14 +12,16 @@
 class SkyboxRenderer
 {
 public:
-	SkyboxRenderer( Loader& loader, const glm::mat4& projection_matrix );
+	SkyboxRenderer() = default;
+	SkyboxRenderer( Loader loader, glm::mat4 projection_matrix );
+	~SkyboxRenderer() = default;
 
 	void render( const Camera& camera );
 
 private:
 	static constexpr const GLfloat SIZE = 500.0f;
 
-	const std::vector<GLfloat> VERTICES = {
+	std::vector<GLfloat> VERTICES = {
 		-SIZE,  SIZE, -SIZE,
 		-SIZE, -SIZE, -SIZE,
 		SIZE, -SIZE, -SIZE,
@@ -63,7 +65,7 @@ private:
 		 SIZE, -SIZE,  SIZE
 	};
 
-	const std::vector<std::string> TEXTURE_FILES =
+	std::vector<std::string> TEXTURE_FILES =
 	{
 		"right",
 		"left",

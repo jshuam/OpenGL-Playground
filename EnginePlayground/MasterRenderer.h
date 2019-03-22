@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EntityRenderer.h"
+#include "SkyboxRenderer.h"
 #include "TerrainRenderer.h"
 #include "TerrainShader.h"
 
@@ -27,7 +28,7 @@ namespace std
 class MasterRenderer
 {
 public:
-	MasterRenderer( GLuint num_lights );
+	MasterRenderer( Loader loader, GLuint num_lights );
 	void createProjectionMatrix();
 	void cleanUp();
 	void prepare() const;
@@ -42,6 +43,7 @@ public:
 private:
 	StaticShader shader;
 	EntityRenderer renderer;
+	SkyboxRenderer skybox_renderer;
 	std::unordered_map<TexturedModel, std::vector<Entity>> entities;
 
 	TerrainShader terrain_shader;
@@ -54,8 +56,8 @@ private:
 	static constexpr GLfloat FAR_PLANE = 1000.0f;
 	glm::mat4 projection_matrix;
 
-	static constexpr GLfloat RED = ( 148.0f / 255.0f );
-	static constexpr GLfloat GREEN = ( 183.0f / 255.0f );
-	static constexpr GLfloat BLUE = ( 239.0f / 255.0f );
+	static constexpr GLfloat RED = 0.5444f;
+	static constexpr GLfloat GREEN = 0.62f;
+	static constexpr GLfloat BLUE = 0.69f;
 };
 

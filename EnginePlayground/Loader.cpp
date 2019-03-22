@@ -86,10 +86,10 @@ GLuint Loader::loadTexture( std::string filename )
 TextureData Loader::loadPNGFile( std::string filename )
 {
 	GLint width, height, channels;
-	stbi_uc* buffer = stbi_load( ( "res/" + filename + ".png" ).c_str(), &width, &height, &channels, 4 );
-	if( channels != 4 )
+	stbi_uc* buffer = stbi_load( ( "res/" + filename + ".png" ).c_str(), &width, &height, &channels, STBI_rgb_alpha );
+	if( buffer == nullptr )
 	{
-		std::cerr << "Cube Map Texture is not RGBA." << std::endl;
+		std::cout << "Couldn't load cube map png file." << std::endl;
 		std::cin.get();
 		exit( -1 );
 	}

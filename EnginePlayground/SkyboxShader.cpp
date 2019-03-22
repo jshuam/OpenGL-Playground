@@ -22,6 +22,9 @@ void SkyboxShader::loadProjectionMatrix( const glm::mat4& matrix ) const
 void SkyboxShader::loadViewMatrix( const Camera& camera ) const
 {
 	glm::mat4 view_matrix = Maths::createViewMatrix( camera );
+	view_matrix[3][0] = 0;
+	view_matrix[3][1] = 0;
+	view_matrix[3][2] = 0;
 	loadMatrix( location_view_mat, view_matrix );
 }
 
