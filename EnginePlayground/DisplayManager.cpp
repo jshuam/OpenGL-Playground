@@ -13,3 +13,6 @@ GLdouble DisplayManager::mouse_y_offset = 0;
 GLboolean DisplayManager::mouse_scrolling = false;
 GLboolean DisplayManager::mouse_l_click = false;
 GLboolean DisplayManager::mouse_r_click = false;
+GLfloat DisplayManager::old_dt = glfwGetTime();
+GLfloat DisplayManager::new_dt = 0;
+GLfloat DisplayManager::dt = 0;

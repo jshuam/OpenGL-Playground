@@ -333,5 +333,23 @@
     <Image Include="res\lamp.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\nightLeft.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\nightRight.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\nightTop.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\nightBack.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\nightBottom.png">
+      <Filter>Res</Filter>
+    </Image>
+    <Image Include="res\nightFront.png">
+      <Filter>Res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

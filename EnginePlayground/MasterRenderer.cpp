@@ -55,7 +55,7 @@ void MasterRenderer::render( const std::vector<Light>& lights, const Camera& cam
 	terrain_shader.loadViewMatrix( camera );
 	terrain_renderer.render( terrains );
 	terrain_shader.stop();
-	skybox_renderer.render( camera );
+	skybox_renderer.render( camera, glm::vec3( RED, GREEN, BLUE ) );
 	terrains.clear();
 	entities.clear();
 }

@@ -105,10 +105,8 @@ int main()
 	entities.emplace_back( lamp_texture, glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ), 305 ), 0, 0, 0, 1 );
 
 	MasterRenderer renderer( loader, lights.size() );
-	GLfloat old_dt = glfwGetTime(), timer = old_dt;
-	GLfloat new_dt = 0;
-	GLfloat dt = 0;
 	GLuint frames = 0;
+	GLfloat timer = glfwGetTime();
 
 	RawModel player_model( OBJLoader::loadObjModel( "player", loader ) );
 	TexturedModel player_texture( player_model, ModelTexture( loader.loadTexture( "pink" ) ) );
@@ -123,16 +121,14 @@ int main()
 
 	while( !glfwWindowShouldClose( window ) )
 	{
-		new_dt = glfwGetTime();
-		dt = new_dt - old_dt;
-		old_dt = new_dt;
+		DisplayManager::calculateDeltaTime();
 		for( auto& entity : entities )
 		{
 			renderer.processEntity( entity );
 		}
 		renderer.processTerrain( terrain );
-		camera.move( dt );
-		player.move( dt, terrain );
+		camera.move( DisplayManager::getDeltaTime() );
+		player.move( DisplayManager::getDeltaTime(), terrain );
 		renderer.processEntity( player );
 		renderer.render( lights, camera );
 		gui_renderer.render( guis );

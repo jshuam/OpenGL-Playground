@@ -127,6 +127,16 @@ public:
 		mouse_x_pos = x_position;
 		mouse_y_pos = y_position;
 	}
+	static void calculateDeltaTime()
+	{
+		new_dt = glfwGetTime();
+		dt = new_dt - old_dt;
+		old_dt = new_dt;
+	}
+	static const GLfloat& getDeltaTime()
+	{
+		return dt;
+	}
 
 private:
 	static GLFWwindow* window;
@@ -142,4 +152,7 @@ private:
 	static GLboolean mouse_scrolling;
 	static GLboolean mouse_l_click;
 	static GLboolean mouse_r_click;
+	static GLfloat old_dt;
+	static GLfloat new_dt;
+	static GLfloat dt;
 };

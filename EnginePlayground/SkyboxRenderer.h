@@ -16,7 +16,10 @@ public:
 	SkyboxRenderer( Loader loader, glm::mat4 projection_matrix );
 	~SkyboxRenderer() = default;
 
-	void render( const Camera& camera );
+	void render( const Camera& camera, const glm::vec3& fog_colour );
+
+private:
+	void bindTextures();
 
 private:
 	static constexpr const GLfloat SIZE = 500.0f;
@@ -65,7 +68,7 @@ private:
 		 SIZE, -SIZE,  SIZE
 	};
 
-	std::vector<std::string> TEXTURE_FILES =
+	std::vector<std::string> DAY_TEXTURE_FILES =
 	{
 		"right",
 		"left",
@@ -75,8 +78,20 @@ private:
 		"front"
 	};
 
+	std::vector<std::string> NIGHT_TEXTURE_FILES =
+	{
+		"nightRight",
+		"nightLeft",
+		"nightTop",
+		"nightBottom",
+		"nightBack",
+		"nightFront"
+	};
+
 	RawModel cube;
-	GLuint texture;
+	GLuint day_texture;
+	GLuint night_texture;
 	SkyboxShader shader;
+	GLfloat time = 0;
 };
 
