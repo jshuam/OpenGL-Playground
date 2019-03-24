@@ -72,13 +72,21 @@ public:
 	{
 		return mouse_d_wheel;
 	}
-	static const GLdouble& getMouseXPos()
+	static const GLdouble& getMouseXOffset()
 	{
 		return mouse_x_offset;
 	}
-	static const GLdouble& getMouseYPos()
+	static const GLdouble& getMouseYOffset()
 	{
 		return mouse_y_offset;
+	}
+	static const GLdouble& getMouseXPos()
+	{
+		return mouse_x_pos;
+	}
+	static const GLdouble& getMouseYPos()
+	{
+		return mouse_y_pos;
 	}
 	static const GLint& getKey( const GLint& key )
 	{

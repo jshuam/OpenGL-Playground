@@ -36,6 +36,8 @@ public:
 	void processTerrain( const Terrain& terrain );
 	void render( const std::vector<Light>& lights, const Camera& camera );
 
+	const glm::mat4& getProjectionMatrix() const;
+
 public:
 	static void disableCulling();
 	static void enableCulling();

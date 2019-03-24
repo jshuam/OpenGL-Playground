@@ -60,6 +60,11 @@ void MasterRenderer::render( const std::vector<Light>& lights, const Camera& cam
 	entities.clear();
 }
 
+const glm::mat4& MasterRenderer::getProjectionMatrix() const
+{
+	return projection_matrix;
+}
+
 void MasterRenderer::processEntity( const Entity& entity )
 {
 	const TexturedModel& entity_model = entity.getModel();

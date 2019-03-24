@@ -126,6 +126,9 @@
     <ClInclude Include="TextureData.h">
       <Filter>Src\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="MousePicker.h">
+      <Filter>Src\Toolbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="TextureData.cpp">
       <Filter>Src\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="MousePicker.cpp">
+      <Filter>Src\Toolbox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

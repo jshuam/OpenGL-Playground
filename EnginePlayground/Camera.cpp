@@ -58,13 +58,13 @@ void Camera::calculateZoom()
 
 void Camera::calculatePitch()
 {
-	GLfloat pitch_change = DisplayManager::getMouseYPos() * 0.3f;
+	GLfloat pitch_change = DisplayManager::getMouseYOffset() * 0.3f;
 	pitch -= pitch_change;
 }
 
 void Camera::calculateAngleAroundPlayer()
 {
-	GLfloat angle_change = DisplayManager::getMouseXPos() * 0.3f;
+	GLfloat angle_change = DisplayManager::getMouseXOffset() * 0.3f;
 	angle_around_player -= angle_change;
 }
 

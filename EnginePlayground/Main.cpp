@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "GuiTexture.h"
 #include "GuiRenderer.h"
+#include "MousePicker.h"
 
 #include <random>
 
@@ -112,12 +113,16 @@ int main()
 	TexturedModel player_texture( player_model, ModelTexture( loader.loadTexture( "pink" ) ) );
 	player_texture.getTexture().setShineDamper( 1000 );
 	player_texture.getTexture().setReflectivity( 100 );
+	Entity lamp_entity = Entity( lamp_texture, glm::vec3( 5, 0, 5 ), 0, 0, 0, 1 );
+	entities.push_back( lamp_entity );
 	Player player( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
 
 	std::vector<GuiTexture> guis;
 
 	GuiRenderer gui_renderer( loader );
+
+	MousePicker picker = MousePicker( camera, renderer.getProjectionMatrix(), &terrain );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
@@ -128,6 +133,16 @@ int main()
 		}
 		renderer.processTerrain( terrain );
 		camera.move( DisplayManager::getDeltaTime() );
+
+		picker.update();
+		glm::vec3 terrain_point = picker.getCurrentTerrainPoint();
+		if( picker.currentTerrainPointFound() )
+		{
+			lamp_entity.setPosX( terrain_point.x );
+			lamp_entity.setPosY( terrain_point.y );
+			lamp_entity.setPosZ( terrain_point.z );
+		}
+
 		player.move( DisplayManager::getDeltaTime(), terrain );
 		renderer.processEntity( player );
 		renderer.render( lights, camera );
