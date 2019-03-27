@@ -4,15 +4,15 @@ uniform float max_lights;
 
 in vec2 pass_texture_coords;
 in vec3 surface_normal;
-in vec3 to_light_vec[4];
+in vec3 to_light_vec[10];
 in vec3 to_camera_vec;
 in float visibility;
 
 out vec4 out_colour;
 
 uniform sampler2D texture_sampler;
-uniform vec3 light_colour[4];
-uniform vec3 attenuation[4];
+uniform vec3 light_colour[10];
+uniform vec3 attenuation[10];
 uniform float shine_damper;
 uniform float reflectivity;
 uniform vec3 sky_colour;

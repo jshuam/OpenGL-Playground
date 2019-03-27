@@ -28,3 +28,15 @@ const glm::vec3& Light::getAttenuation() const
 {
 	return attenuation;
 }
+
+void Light::setPosition( const glm::vec3& position )
+{
+	this->position = position;
+}
+
+void Light::setPosition( const GLfloat& x, const GLfloat& y, const GLfloat& z )
+{
+	this->position.x = x;
+	this->position.y = y;
+	this->position.z = z;
+}
