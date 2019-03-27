@@ -36,7 +36,7 @@ private:
 	glm::vec3 current_ray;
 	glm::mat4 projection_matrix;
 	glm::mat4 view_matrix;
-	Camera camera;
+	const Camera& camera;
 	Terrain* terrain;
 	glm::vec3 current_terrain_point;
 	bool current_terrain_point_found;

@@ -27,6 +27,8 @@ public:
 	void setPosY( const GLfloat& y_pos );
 	void setPosZ( const GLfloat& z_pos );
 
+	void setPosition( const glm::vec3& position );
+
 private:
 	TexturedModel model;
 	GLuint texture_index = 0;

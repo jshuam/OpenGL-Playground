@@ -114,7 +114,6 @@ int main()
 	player_texture.getTexture().setShineDamper( 1000 );
 	player_texture.getTexture().setReflectivity( 100 );
 	Entity lamp_entity = Entity( lamp_texture, glm::vec3( 5, 0, 5 ), 0, 0, 0, 1 );
-	entities.push_back( lamp_entity );
 	Player player( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
 	Camera camera( &player );
 
@@ -138,12 +137,11 @@ int main()
 		glm::vec3 terrain_point = picker.getCurrentTerrainPoint();
 		if( picker.currentTerrainPointFound() )
 		{
-			lamp_entity.setPosX( terrain_point.x );
-			lamp_entity.setPosY( terrain_point.y );
-			lamp_entity.setPosZ( terrain_point.z );
+			lamp_entity.setPosition( terrain_point );
 		}
 
 		player.move( DisplayManager::getDeltaTime(), terrain );
+		renderer.processEntity( lamp_entity );
 		renderer.processEntity( player );
 		renderer.render( lights, camera );
 		gui_renderer.render( guis );

@@ -94,3 +94,8 @@ void Entity::setPosZ( const GLfloat& z_pos )
 	this->position.z = z_pos;
 }
 
+void Entity::setPosition( const glm::vec3& position )
+{
+	this->position = position;
+}
+
