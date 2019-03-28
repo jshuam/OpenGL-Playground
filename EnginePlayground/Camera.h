@@ -8,7 +8,7 @@
 class Camera
 {
 public:
-	Camera( Player* player );
+	Camera( std::shared_ptr<Player> player );
 	void move( const GLfloat& dt );
 
 	const glm::vec3& getPosition() const;
@@ -33,7 +33,7 @@ private:
 	static GLfloat speed;
 	static GLfloat boost_speed;
 
-	Player* player;
+	std::shared_ptr<Player> player;
 	GLfloat distance_from_player = 50;
 	GLfloat angle_around_player = 0;
 };

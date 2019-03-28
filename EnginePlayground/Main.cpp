@@ -63,7 +63,7 @@ int main()
 	TexturedModel lamp_texture( lamp, loader.loadTexture( "lamp" ) );
 	lamp_texture.getTexture().setFakeLighting( true );
 
-	std::vector<Entity> entities;
+	std::vector<std::shared_ptr<Entity>> entities;
 	std::uniform_real_distribution<GLfloat> float_dist( 10, 790 );
 	std::uniform_int_distribution<GLuint> tree_dist( 0, 15 );
 	std::uniform_int_distribution<GLuint> fern_dist( 0, 3 );
@@ -71,39 +71,40 @@ int main()
 	std::random_device rt;
 	std::mt19937 mt( rt() );
 
-	Terrain terrain = Terrain( 0, 0, loader, texture_pack, blend_map, "heightmapPerlin" );
+	std::vector<Terrain> terrains;
+	terrains.emplace_back( 0, 0, loader, texture_pack, blend_map, "heightmapPerlin" );
 
 	for( int i = 0; i < 200; i++ )
 	{
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
-		GLfloat y = terrain.getTerrainHeight( x, z );
-		entities.emplace_back( fern_texture, fern_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 );
+		GLfloat y = terrains[0].getTerrainHeight( x, z );
+		entities.emplace_back( std::make_shared<Entity>( fern_texture, fern_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
 	for( int i = 0; i < 350; i++ )
 	{
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
-		GLfloat y = terrain.getTerrainHeight( x, z );
-		entities.emplace_back( diffuse_texture, diffuse_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 3 );
+		GLfloat y = terrains[0].getTerrainHeight( x, z );
+		entities.emplace_back( std::make_shared<Entity>( diffuse_texture, diffuse_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 3 ) );
 	}
 	for( int i = 0; i < 200; i++ )
 	{
 		GLfloat x = float_dist( mt );
 		GLfloat z = float_dist( mt );
-		GLfloat y = terrain.getTerrainHeight( x, z );
-		entities.emplace_back( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 );
+		GLfloat y = terrains[0].getTerrainHeight( x, z );
+		entities.emplace_back( std::make_shared<Entity>( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
 
 	std::vector<Light> lights;
 	lights.emplace_back( glm::vec3( 0, 1000, 7000 ), glm::vec3( 0.4f, 0.4, 0.4f ) );
-	lights.emplace_back( glm::vec3( 185, terrain.getTerrainHeight( 185, 293 ) + 13, 293 ), glm::vec3( 3, 0, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
-	lights.emplace_back( glm::vec3( 370, terrain.getTerrainHeight( 370, 300 ) + 13, 300 ), glm::vec3( 0, 3, 3 ), glm::vec3( 1, 0.01f, 0.002f ) );
-	lights.emplace_back( glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ) + 13, 305 ), glm::vec3( 3, 3, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
+	lights.emplace_back( glm::vec3( 185, terrains[0].getTerrainHeight( 185, 293 ) + 13, 293 ), glm::vec3( 3, 0, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
+	lights.emplace_back( glm::vec3( 370, terrains[0].getTerrainHeight( 370, 300 ) + 13, 300 ), glm::vec3( 0, 3, 3 ), glm::vec3( 1, 0.01f, 0.002f ) );
+	lights.emplace_back( glm::vec3( 293, terrains[0].getTerrainHeight( 293, 305 ) + 13, 305 ), glm::vec3( 3, 3, 0 ), glm::vec3( 1, 0.01f, 0.002f ) );
 
-	entities.emplace_back( lamp_texture, glm::vec3( 185, terrain.getTerrainHeight( 185, 293 ), 293 ), 0, 0, 0, 1 );
-	entities.emplace_back( lamp_texture, glm::vec3( 370, terrain.getTerrainHeight( 370, 300 ), 300 ), 0, 0, 0, 1 );
-	entities.emplace_back( lamp_texture, glm::vec3( 293, terrain.getTerrainHeight( 293, 305 ), 305 ), 0, 0, 0, 1 );
+	entities.emplace_back( std::make_shared<Entity>( lamp_texture, glm::vec3( 185, terrains[0].getTerrainHeight( 185, 293 ), 293 ), 0, 0, 0, 1 ) );
+	entities.emplace_back( std::make_shared<Entity>( lamp_texture, glm::vec3( 370, terrains[0].getTerrainHeight( 370, 300 ), 300 ), 0, 0, 0, 1 ) );
+	entities.emplace_back( std::make_shared<Entity>( lamp_texture, glm::vec3( 293, terrains[0].getTerrainHeight( 293, 305 ), 305 ), 0, 0, 0, 1 ) );
 
 	GLuint frames = 0;
 	GLfloat timer = glfwGetTime();
@@ -112,40 +113,18 @@ int main()
 	TexturedModel player_texture( player_model, ModelTexture( loader.loadTexture( "pink" ) ) );
 	player_texture.getTexture().setShineDamper( 1000 );
 	player_texture.getTexture().setReflectivity( 100 );
-	Entity lamp_entity = Entity( lamp_texture, glm::vec3( 5, 0, 5 ), 0, 0, 0, 1 );
-	Player player( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
-	Camera camera( &player );
-
-	std::vector<GuiTexture> guis;
-
-	GuiRenderer gui_renderer( loader );
+	std::shared_ptr<Player> player = std::make_shared<Player>( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
+	Camera camera( player );
+	entities.push_back( player );
 
 	MasterRenderer renderer( loader, lights.size() );
-
-	MousePicker picker = MousePicker( camera, renderer.getProjectionMatrix(), &terrain );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
 		DisplayManager::calculateDeltaTime();
-		for( auto& entity : entities )
-		{
-			renderer.processEntity( entity );
-		}
-		renderer.processTerrain( terrain );
 		camera.move( DisplayManager::getDeltaTime() );
-
-		picker.update();
-		glm::vec3 terrain_point = picker.getCurrentTerrainPoint();
-		if( picker.currentTerrainPointFound() )
-		{
-			lamp_entity.setPosition( terrain_point );
-		}
-
-		player.move( DisplayManager::getDeltaTime(), terrain );
-		renderer.processEntity( lamp_entity );
-		renderer.processEntity( player );
-		renderer.render( lights, camera );
-		gui_renderer.render( guis );
+		player->move( DisplayManager::getDeltaTime(), terrains[0] );
+		renderer.renderScene( entities, terrains, lights, camera );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )
@@ -156,7 +135,6 @@ int main()
 		}
 	}
 
-	gui_renderer.cleanUp();
 	renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();

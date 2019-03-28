@@ -3,7 +3,7 @@
 
 #include <glm/trigonometric.hpp>
 
-Camera::Camera( Player* player )
+Camera::Camera( std::shared_ptr<Player> player )
 	:
 	player( player ),
 	position { 0, 0, 0 }

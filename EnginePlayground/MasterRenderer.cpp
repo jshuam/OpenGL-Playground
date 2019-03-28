@@ -60,6 +60,21 @@ void MasterRenderer::render( const std::vector<Light>& lights, const Camera& cam
 	entities.clear();
 }
 
+void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<Light>& lights, const Camera & camera )
+{
+	for( auto& entity : entities )
+	{
+		processEntity( *entity );
+	}
+
+	for( auto& terrain : terrains )
+	{
+		processTerrain( terrain );
+	}
+
+	render( lights, camera );
+}
+
 const glm::mat4& MasterRenderer::getProjectionMatrix() const
 {
 	return projection_matrix;
