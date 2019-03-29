@@ -15,7 +15,7 @@ public:
 	void loadProjectionMatrix( const glm::mat4& matrix ) const;
 	void loadViewMatrix( const Camera& camera ) const;
 	void loadNumLights( GLuint num_lights );
-	void loadLights( const std::vector<Light>& lights );
+	void loadLights( const std::vector<std::shared_ptr<Light>>& lights );
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
 	void connectTextureUnits();

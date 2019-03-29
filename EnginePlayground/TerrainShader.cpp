@@ -44,13 +44,13 @@ void TerrainShader::loadNumLights( GLuint num_lights )
 	}
 }
 
-void TerrainShader::loadLights( const std::vector<Light>& lights )
+void TerrainShader::loadLights( const std::vector<std::shared_ptr<Light>>& lights )
 {
 	for( GLuint i = 0; i < lights.size(); i++ )
 	{
-		loadVector( location_light_position[i], lights[i].getPosition() );
-		loadVector( location_light_colour[i], lights[i].getColour() );
-		loadVector( location_attenuation[i], lights[i].getAttenuation() );
+		loadVector( location_light_position[i], lights[i]->getPosition() );
+		loadVector( location_light_colour[i], lights[i]->getColour() );
+		loadVector( location_attenuation[i], lights[i]->getAttenuation() );
 	}
 }
 

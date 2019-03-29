@@ -29,19 +29,19 @@ class MasterRenderer
 {
 public:
 	MasterRenderer( Loader loader, GLuint num_lights );
-	void createProjectionMatrix();
 	void cleanUp();
 	void prepare() const;
 	void processEntity( const Entity& entity );
 	void processTerrain( const Terrain& terrain );
-	void render( const std::vector<Light>& lights, const Camera& camera );
-	void renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<Light>& lights, const Camera& camera );
+	void render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera );
+	void renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera );
 
 	const glm::mat4& getProjectionMatrix() const;
 
 public:
 	static void disableCulling();
 	static void enableCulling();
+	void createProjectionMatrix();
 
 private:
 	StaticShader shader;
