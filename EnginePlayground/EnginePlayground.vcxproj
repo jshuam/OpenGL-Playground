@@ -145,6 +145,8 @@
     <ClInclude Include="StaticShader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TexturedModel.h" />
+    <ClInclude Include="WaterRenderer.h" />
+    <ClInclude Include="WaterShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -173,6 +175,8 @@
     <ClCompile Include="TerrainTexturePack.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TexturedModel.cpp" />
+    <ClCompile Include="WaterRenderer.cpp" />
+    <ClCompile Include="WaterShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragment_shader.txt" />

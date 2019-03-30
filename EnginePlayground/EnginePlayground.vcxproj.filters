@@ -37,6 +37,9 @@
     <Filter Include="Src\Skybox">
       <UniqueIdentifier>{fd781594-910d-4646-9fa4-76ef3a837c68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Water">
+      <UniqueIdentifier>{dcaae188-e5c0-44d5-81f6-fd050c4f0f74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DisplayManager.h">
@@ -129,6 +132,12 @@
     <ClInclude Include="MousePicker.h">
       <Filter>Src\Toolbox</Filter>
     </ClInclude>
+    <ClInclude Include="WaterRenderer.h">
+      <Filter>Src\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterShader.h">
+      <Filter>Src\Water</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -208,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="MousePicker.cpp">
       <Filter>Src\Toolbox</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterRenderer.cpp">
+      <Filter>Src\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterShader.cpp">
+      <Filter>Src\Water</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

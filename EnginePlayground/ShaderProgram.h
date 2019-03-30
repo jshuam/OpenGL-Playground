@@ -19,6 +19,7 @@ public:
 
 protected:
 	ShaderProgram() = default;
+	void init( const char* vertex_file, const char* fragment_file );
 	virtual void bindAttributes() = 0;
 	virtual void getAllUniformLocations() = 0;
 	void bindAttribute( GLuint attribute, std::string variable_name );
