@@ -147,6 +147,7 @@
     <ClInclude Include="TexturedModel.h" />
     <ClInclude Include="WaterRenderer.h" />
     <ClInclude Include="WaterShader.h" />
+    <ClInclude Include="WaterTile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="TexturedModel.cpp" />
     <ClCompile Include="WaterRenderer.cpp" />
     <ClCompile Include="WaterShader.cpp" />
+    <ClCompile Include="WaterTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragment_shader.txt" />
@@ -187,6 +189,8 @@
     <Text Include="terrain_fragment_shader.txt" />
     <Text Include="terrain_vertex_shader.txt" />
     <Text Include="vertex_shader.txt" />
+    <Text Include="water_fragment.txt" />
+    <Text Include="water_vertex.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\back.png" />

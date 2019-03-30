@@ -12,6 +12,7 @@
 #include "GuiTexture.h"
 #include "GuiRenderer.h"
 #include "MousePicker.h"
+#include "WaterRenderer.h"
 
 #include <random>
 
@@ -124,6 +125,11 @@ int main()
 
 	MousePicker picker( camera, renderer.getProjectionMatrix(), &terrains[0] );
 
+	WaterShader water_shader;
+	WaterRenderer water_renderer( loader, water_shader, renderer.getProjectionMatrix() );
+	std::vector<WaterTile> waters;
+	waters.emplace_back( 50, -50, 0 );
+
 	while( !glfwWindowShouldClose( window ) )
 	{
 		DisplayManager::calculateDeltaTime();
@@ -139,6 +145,7 @@ int main()
 		}
 
 		renderer.renderScene( entities, terrains, lights, camera );
+		water_renderer.render( waters, camera );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )
@@ -149,6 +156,7 @@ int main()
 		}
 	}
 
+	water_shader.cleanUp();
 	renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Camera.h"
 #include "ShaderProgram.h"
 
 #include <glad/glad.h>
@@ -7,8 +8,16 @@
 class WaterShader : public ShaderProgram
 {
 public:
-	WaterShader() = default;
+	WaterShader();
 	~WaterShader() = default;
+
+	void loadProjectionMatrix( const glm::mat4& projection_matrix );
+	void loadViewMatrix( const Camera& camera );
+	void loadModelMatrix( const glm::mat4& model_matrix );
+
+protected:
+	void bindAttributes() override;
+	void getAllUniformLocations() override;
 
 private:
 	static constexpr const char* vertex_file = "water_vertex.txt";

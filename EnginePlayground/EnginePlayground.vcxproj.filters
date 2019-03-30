@@ -138,6 +138,9 @@
     <ClInclude Include="WaterShader.h">
       <Filter>Src\Water</Filter>
     </ClInclude>
+    <ClInclude Include="WaterTile.h">
+      <Filter>Src\Water</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -224,6 +227,9 @@
     <ClCompile Include="WaterShader.cpp">
       <Filter>Src\Water</Filter>
     </ClCompile>
+    <ClCompile Include="WaterTile.cpp">
+      <Filter>Src\Water</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">
@@ -249,6 +255,12 @@
     </Text>
     <Text Include="skybox_fragment_shader.txt">
       <Filter>Src\Skybox</Filter>
+    </Text>
+    <Text Include="water_fragment.txt">
+      <Filter>Src\Water</Filter>
+    </Text>
+    <Text Include="water_vertex.txt">
+      <Filter>Src\Water</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
