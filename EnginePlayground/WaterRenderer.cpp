@@ -29,6 +29,7 @@ void WaterRenderer::prepareRender( const Camera& camera )
 	shader.start();
 	shader.loadViewMatrix( camera );
 	glBindVertexArray( quad.getVaoId() );
+	glEnableVertexAttribArray( 0 );
 }
 
 void WaterRenderer::unbind()

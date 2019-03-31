@@ -78,22 +78,49 @@ int main()
 
 	for( int i = 0; i < 200; i++ )
 	{
-		GLfloat x = float_dist( mt );
-		GLfloat z = float_dist( mt );
+		GLfloat x, z;
+		do
+		{
+			x = float_dist( mt );
+		}
+		while( x >= 310 && x <= 420 );
+		do
+		{
+			z = float_dist( mt );
+		}
+		while( z >= 310 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( fern_texture, fern_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
 	for( int i = 0; i < 350; i++ )
 	{
-		GLfloat x = float_dist( mt );
-		GLfloat z = float_dist( mt );
+		GLfloat x, z;
+		do
+		{
+			x = float_dist( mt );
+		}
+		while( x >= 310 && x <= 420 );
+		do
+		{
+			z = float_dist( mt );
+		}
+		while( z >= 310 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( diffuse_texture, diffuse_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 3 ) );
 	}
 	for( int i = 0; i < 200; i++ )
 	{
-		GLfloat x = float_dist( mt );
-		GLfloat z = float_dist( mt );
+		GLfloat x, z;
+		do
+		{
+			x = float_dist( mt );
+		}
+		while( x >= 310 && x <= 420 );
+		do
+		{
+			z = float_dist( mt );
+		}
+		while( z >= 310 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
@@ -128,7 +155,7 @@ int main()
 	WaterShader water_shader;
 	WaterRenderer water_renderer( loader, water_shader, renderer.getProjectionMatrix() );
 	std::vector<WaterTile> waters;
-	waters.emplace_back( 50, -50, 0 );
+	waters.emplace_back( 387.96, 376.147, -20 );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
