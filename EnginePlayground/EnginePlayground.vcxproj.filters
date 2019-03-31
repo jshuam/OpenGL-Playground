@@ -141,6 +141,9 @@
     <ClInclude Include="WaterTile.h">
       <Filter>Src\Water</Filter>
     </ClInclude>
+    <ClInclude Include="WaterFrameBuffer.h">
+      <Filter>Src\Water</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -228,6 +231,9 @@
       <Filter>Src\Water</Filter>
     </ClCompile>
     <ClCompile Include="WaterTile.cpp">
+      <Filter>Src\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterFrameBuffer.cpp">
       <Filter>Src\Water</Filter>
     </ClCompile>
   </ItemGroup>

@@ -145,6 +145,7 @@
     <ClInclude Include="StaticShader.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TexturedModel.h" />
+    <ClInclude Include="WaterFrameBuffer.h" />
     <ClInclude Include="WaterRenderer.h" />
     <ClInclude Include="WaterShader.h" />
     <ClInclude Include="WaterTile.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="TerrainTexturePack.cpp" />
     <ClCompile Include="TextureData.cpp" />
     <ClCompile Include="TexturedModel.cpp" />
+    <ClCompile Include="WaterFrameBuffer.cpp" />
     <ClCompile Include="WaterRenderer.cpp" />
     <ClCompile Include="WaterShader.cpp" />
     <ClCompile Include="WaterTile.cpp" />

@@ -13,6 +13,7 @@
 #include "GuiRenderer.h"
 #include "MousePicker.h"
 #include "WaterRenderer.h"
+#include "WaterFrameBuffer.h"
 
 #include <random>
 
@@ -157,6 +158,12 @@ int main()
 	std::vector<WaterTile> waters;
 	waters.emplace_back( 387.96, 376.147, -20 );
 
+	std::vector<GuiTexture> gui_textures;
+
+	WaterFrameBuffer water_fbo;
+	GuiRenderer gui_renderer( loader );
+	gui_textures.emplace_back( water_fbo.getReflectionTexture(), glm::vec2( -0.5f, 0.5f ), glm::vec2( 0.5, 0.5 ) );
+
 	while( !glfwWindowShouldClose( window ) )
 	{
 		DisplayManager::calculateDeltaTime();
@@ -171,8 +178,13 @@ int main()
 			light->setPosition( point.x, terrains[0].getTerrainHeight( point.x, point.z ) + 13, point.z );
 		}
 
+		water_fbo.bindReflectionFrameBuffer();
+		renderer.renderScene( entities, terrains, lights, camera );
+		water_fbo.unbindCurrentFrameBuffer();
+
 		renderer.renderScene( entities, terrains, lights, camera );
 		water_renderer.render( waters, camera );
+		gui_renderer.render( gui_textures );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )
@@ -183,8 +195,10 @@ int main()
 		}
 	}
 
+	water_fbo.cleanUp();
 	water_shader.cleanUp();
 	renderer.cleanUp();
+	gui_renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();
 
