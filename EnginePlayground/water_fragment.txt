@@ -4,8 +4,13 @@ in vec2 texture_coords;
 
 out vec4 out_colour;
 
+uniform sampler2D reflection_texture;
+uniform sampler2D refraction _texture;
 
 void main( void )
 {
-	out_colour = vec4( 0.0, 0.0, 1.0, 1.0 );
+	vec4 reflection_colour = texture( reflection_texture, texture_coords );
+	vec4 refraction_colour = texture( refraction_texture, texture_coords );
+
+	out_colour = mix( reflection_colour, refraction_colour, 0.5 );
 }

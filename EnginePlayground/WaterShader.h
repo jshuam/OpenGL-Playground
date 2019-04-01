@@ -15,6 +15,8 @@ public:
 	void loadViewMatrix( const Camera& camera );
 	void loadModelMatrix( const glm::mat4& model_matrix );
 
+	void connectTextureUnits();
+
 protected:
 	void bindAttributes() override;
 	void getAllUniformLocations() override;
@@ -26,5 +28,7 @@ private:
 	GLint location_model_matrix;
 	GLint location_view_matrix;
 	GLint location_projection_matrix;
+	GLint location_reflection_texture;
+	GLint location_refraction_texture;
 };
 
