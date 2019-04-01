@@ -33,8 +33,9 @@ public:
 	void prepare() const;
 	void processEntity( const Entity& entity );
 	void processTerrain( const Terrain& terrain );
-	void render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera );
-	void renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera );
+	void render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane );
+	void renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera
+					  , const glm::vec4& clip_plane );
 
 	const glm::mat4& getProjectionMatrix() const;
 

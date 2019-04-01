@@ -40,16 +40,18 @@ void MasterRenderer::enableCulling()
 	glCullFace( GL_BACK );
 }
 
-void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera )
+void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane )
 {
 	prepare();
 	shader.start();
+	shader.loadClipPlane( clip_plane );
 	shader.loadSkyColour( RED, GREEN, BLUE );
 	shader.loadLights( lights );
 	shader.loadViewMatrix( camera );
 	renderer.render( entities );
 	shader.stop();
 	terrain_shader.start();
+	terrain_shader.loadClipPlane( clip_plane );
 	terrain_shader.loadSkyColour( RED, GREEN, BLUE );
 	terrain_shader.loadLights( lights );
 	terrain_shader.loadViewMatrix( camera );
@@ -60,7 +62,8 @@ void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, 
 	entities.clear();
 }
 
-void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera )
+void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera
+								  , const glm::vec4& clip_plane )
 {
 	for( auto& entity : entities )
 	{
@@ -72,7 +75,7 @@ void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& en
 		processTerrain( terrain );
 	}
 
-	render( lights, camera );
+	render( lights, camera, clip_plane );
 }
 
 const glm::mat4& MasterRenderer::getProjectionMatrix() const

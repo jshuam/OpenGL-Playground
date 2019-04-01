@@ -109,7 +109,7 @@ void WaterFrameBuffer::initialiseReflectionFrameBuffer()
 void WaterFrameBuffer::initialiseRefractionFrameBuffer()
 {
 	refraction_frame_buffer = createFrameBuffer();
-	refraction_texture = createTextureAttachment( reflection_width, reflection_height );
+	refraction_texture = createTextureAttachment( refraction_width, refraction_height );
 	refraction_depth_texture = createDepthTextureAttachment( refraction_width, refraction_height );
 	unbindCurrentFrameBuffer();
 }

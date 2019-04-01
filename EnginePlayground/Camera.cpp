@@ -78,6 +78,37 @@ void Camera::calculateCameraPosition( const GLfloat& horizontal_distance, const 
 	position.y = player->getPosition().y + vertical_distance;
 }
 
+void Camera::setPosX( const GLfloat& x )
+{
+	this->position.x = x;
+}
+
+void Camera::setPosY( const GLfloat& y )
+{
+	this->position.y = y;
+}
+
+void Camera::setPosZ( const GLfloat& z )
+{
+	this->position.z = z;
+}
+
+void Camera::setPosition( const glm::vec3& position )
+{
+	this->position = position;
+}
+
+void Camera::setPosition( const GLfloat& x, const GLfloat& y, const GLfloat& z )
+{
+	glm::vec3 position( x, y, z );
+	this->position = position;
+}
+
+void Camera::invertPitch()
+{
+	this->pitch = -pitch;
+}
+
 const GLfloat& Camera::calculateHorizontalDistance() const
 {
 	return distance_from_player * glm::cos( glm::radians( pitch ) );

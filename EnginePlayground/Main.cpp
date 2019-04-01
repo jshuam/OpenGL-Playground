@@ -162,7 +162,8 @@ int main()
 
 	WaterFrameBuffer water_fbo;
 	GuiRenderer gui_renderer( loader );
-	gui_textures.emplace_back( water_fbo.getReflectionTexture(), glm::vec2( -0.5f, 0.5f ), glm::vec2( 0.5, 0.5 ) );
+	gui_textures.emplace_back( water_fbo.getRefractionTexture(), glm::vec2( 0.5f, 0.5f ), glm::vec2( 0.25f, 0.25f ) );
+	gui_textures.emplace_back( water_fbo.getReflectionTexture(), glm::vec2( -0.5f, 0.5f ), glm::vec2( 0.25f, 0.25f ) );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
@@ -171,6 +172,9 @@ int main()
 		player->move( DisplayManager::getDeltaTime(), terrains[0] );
 
 		picker.update();
+
+		glEnable( GL_CLIP_DISTANCE0 );
+
 		if( picker.currentTerrainPointFound() )
 		{
 			glm::vec3 point = picker.getCurrentTerrainPoint();
@@ -179,10 +183,19 @@ int main()
 		}
 
 		water_fbo.bindReflectionFrameBuffer();
-		renderer.renderScene( entities, terrains, lights, camera );
-		water_fbo.unbindCurrentFrameBuffer();
+		GLfloat distance = 2 * ( camera.getPosition().y - waters[0].getHeight() );
+		GLfloat camera_y = camera.getPosition().y;
+		camera.setPosY( camera_y - distance );
+		camera.invertPitch();
+		camera.setPosY( camera_y );
+		camera.invertPitch();
+		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 1, 0, -waters[0].getHeight() ) );
+		water_fbo.bindRefractionFrameBuffer();
+		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, -1, 0, waters[0].getHeight() ) );
 
-		renderer.renderScene( entities, terrains, lights, camera );
+		glDisable( GL_CLIP_DISTANCE0 );
+		water_fbo.unbindCurrentFrameBuffer();
+		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 0, 0, 0 ) );
 		water_renderer.render( waters, camera );
 		gui_renderer.render( gui_textures );
 		DisplayManager::updateDisplay();

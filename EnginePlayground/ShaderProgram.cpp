@@ -94,9 +94,14 @@ void ShaderProgram::loadVector( const GLuint& location, const glm::vec3& vector 
 	glUniform3f( location, vector.x, vector.y, vector.z );
 }
 
-void ShaderProgram::loadVector2D( const GLuint& location, const glm::vec2& vector ) const
+void ShaderProgram::loadVector( const GLuint& location, const glm::vec2& vector ) const
 {
 	glUniform2f( location, vector.x, vector.y );
+}
+
+void ShaderProgram::loadVector( const GLuint& location, const glm::vec4& vector ) const
+{
+	glUniform4f( location, vector.x, vector.y, vector.z, vector.w );
 }
 
 void ShaderProgram::loadBool( const GLuint& location, const GLboolean& value ) const

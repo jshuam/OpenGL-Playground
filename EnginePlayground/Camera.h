@@ -14,7 +14,14 @@ public:
 	const glm::vec3& getPosition() const;
 	const GLfloat& getPitch() const;
 	const GLfloat& getYaw() const;
-	const GLfloat& getRoll() const;
+	const GLfloat& getRoll() const; void setPosX( const GLfloat& x );
+
+	void setPosY( const GLfloat& y );
+	void setPosZ( const GLfloat& z );
+	void setPosition( const glm::vec3& position );
+	void setPosition( const GLfloat& x, const GLfloat& y, const GLfloat& z );
+
+	void invertPitch();
 
 private:
 	void calculateZoom();

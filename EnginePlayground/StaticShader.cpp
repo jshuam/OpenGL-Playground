@@ -69,7 +69,12 @@ void StaticShader::loadNumRows( const GLuint& num_rows ) const
 
 void StaticShader::loadOffset( const GLfloat& x, const GLfloat& y ) const
 {
-	loadVector2D( location_offset, glm::vec2( x, y ) );
+	loadVector( location_offset, glm::vec2( x, y ) );
+}
+
+void StaticShader::loadClipPlane( const glm::vec4& plane ) const
+{
+	loadVector( location_plane, plane );
 }
 
 void StaticShader::bindAttributes()
@@ -91,4 +96,5 @@ void StaticShader::getAllUniformLocations()
 	location_num_rows = getUniformLocation( "num_rows" );
 	location_offset = getUniformLocation( "offset" );
 	location_max_lights = getUniformLocation( "max_lights" );
+	location_plane = getUniformLocation( "plane" );
 }

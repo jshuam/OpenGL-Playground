@@ -27,8 +27,9 @@ protected:
 	static GLuint loadShader( std::string filename, GLuint type );
 	GLuint getUniformLocation( std::string uniform_name );
 	void loadFloat( const GLuint& location, const GLfloat& value ) const;
+	void loadVector( const GLuint& location, const glm::vec2& vector ) const;
 	void loadVector( const GLuint& location, const glm::vec3& vector ) const;
-	void loadVector2D( const GLuint& location, const glm::vec2& vector ) const;
+	void loadVector( const GLuint& location, const glm::vec4& vector ) const;
 	void loadBool( const GLuint& location, const GLboolean& value ) const;
 	void loadMatrix( const GLuint& location, const glm::mat4& matrix ) const;
 	void loadInt( const GLuint& location, const GLuint& value ) const;

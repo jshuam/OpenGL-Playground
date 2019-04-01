@@ -20,6 +20,7 @@ public:
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
 	void loadNumRows( const GLuint& num_rows ) const;
 	void loadOffset( const GLfloat& x, const GLfloat& y ) const;
+	void loadClipPlane( const glm::vec4& plane ) const;
 
 protected:
 	void bindAttributes() override;
@@ -39,6 +40,7 @@ private:
 	GLuint location_num_rows;
 	GLuint location_offset;
 	GLuint location_max_lights;
+	GLuint location_plane;
 	std::vector<GLuint> location_light_position;
 	std::vector<GLuint> location_light_colour;
 	std::vector<GLuint> location_attenuation;
