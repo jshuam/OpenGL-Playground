@@ -181,9 +181,9 @@ int main()
 		GLfloat camera_y = camera.getPosition().y;
 		camera.setPosY( camera_y - distance );
 		camera.invertPitch();
+		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 1, 0, -waters[0].getHeight() ) );
 		camera.setPosY( camera_y );
 		camera.invertPitch();
-		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 1, 0, -waters[0].getHeight() ) );
 		water_fbos.bindRefractionFrameBuffer();
 		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, -1, 0, waters[0].getHeight() ) );
 
