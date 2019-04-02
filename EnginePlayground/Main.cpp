@@ -153,17 +153,11 @@ int main()
 
 	MousePicker picker( camera, renderer.getProjectionMatrix(), &terrains[0] );
 
+	WaterFrameBuffer water_fbos;
 	WaterShader water_shader;
-	WaterRenderer water_renderer( loader, water_shader, renderer.getProjectionMatrix() );
+	WaterRenderer water_renderer( loader, water_shader, renderer.getProjectionMatrix(), water_fbos );
 	std::vector<WaterTile> waters;
 	waters.emplace_back( 387.96, 376.147, -20 );
-
-	std::vector<GuiTexture> gui_textures;
-
-	WaterFrameBuffer water_fbo;
-	GuiRenderer gui_renderer( loader );
-	gui_textures.emplace_back( water_fbo.getRefractionTexture(), glm::vec2( 0.5f, 0.5f ), glm::vec2( 0.25f, 0.25f ) );
-	gui_textures.emplace_back( water_fbo.getReflectionTexture(), glm::vec2( -0.5f, 0.5f ), glm::vec2( 0.25f, 0.25f ) );
 
 	while( !glfwWindowShouldClose( window ) )
 	{
@@ -182,7 +176,7 @@ int main()
 			light->setPosition( point.x, terrains[0].getTerrainHeight( point.x, point.z ) + 13, point.z );
 		}
 
-		water_fbo.bindReflectionFrameBuffer();
+		water_fbos.bindReflectionFrameBuffer();
 		GLfloat distance = 2 * ( camera.getPosition().y - waters[0].getHeight() );
 		GLfloat camera_y = camera.getPosition().y;
 		camera.setPosY( camera_y - distance );
@@ -190,14 +184,13 @@ int main()
 		camera.setPosY( camera_y );
 		camera.invertPitch();
 		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 1, 0, -waters[0].getHeight() ) );
-		water_fbo.bindRefractionFrameBuffer();
+		water_fbos.bindRefractionFrameBuffer();
 		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, -1, 0, waters[0].getHeight() ) );
 
 		glDisable( GL_CLIP_DISTANCE0 );
-		water_fbo.unbindCurrentFrameBuffer();
+		water_fbos.unbindCurrentFrameBuffer();
 		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 0, 0, 0 ) );
 		water_renderer.render( waters, camera );
-		gui_renderer.render( gui_textures );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )
@@ -208,10 +201,9 @@ int main()
 		}
 	}
 
-	water_fbo.cleanUp();
+	water_fbos.cleanUp();
 	water_shader.cleanUp();
 	renderer.cleanUp();
-	gui_renderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager::closeDisplay();
 
