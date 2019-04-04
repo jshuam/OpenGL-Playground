@@ -144,6 +144,12 @@
     <ClInclude Include="WaterFrameBuffer.h">
       <Filter>Src\Water</Filter>
     </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Src\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Src\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -235,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="WaterFrameBuffer.cpp">
       <Filter>Src\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Src\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

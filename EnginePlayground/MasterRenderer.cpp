@@ -3,6 +3,7 @@
 MasterRenderer::MasterRenderer( Loader loader, GLuint num_lights )
 {
 	createProjectionMatrix();
+	frustum = Frustum( projection_matrix );
 	renderer = EntityRenderer( &shader, projection_matrix, num_lights );
 	terrain_renderer = TerrainRenderer( &terrain_shader, projection_matrix, num_lights );
 	skybox_renderer = SkyboxRenderer( loader, projection_matrix );
@@ -43,12 +44,13 @@ void MasterRenderer::enableCulling()
 void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane )
 {
 	prepare();
+	frustum.update( camera );
 	shader.start();
 	shader.loadClipPlane( clip_plane );
 	shader.loadSkyColour( RED, GREEN, BLUE );
 	shader.loadLights( lights );
 	shader.loadViewMatrix( camera );
-	renderer.render( entities );
+	renderer.render( entities, frustum );
 	shader.stop();
 	terrain_shader.start();
 	terrain_shader.loadClipPlane( clip_plane );

@@ -8,13 +8,14 @@
 #include "StaticShader.h"
 #include "Maths.h"
 #include <unordered_map>
+#include "Frustum.h"
 
 class EntityRenderer
 {
 public:
 	EntityRenderer() = default;
 	EntityRenderer( StaticShader* shader, glm::mat4 projection_matrix, GLuint num_lights );
-	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities );
+	void render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities, const Frustum& frustum );
 
 private:
 	StaticShader* shader;

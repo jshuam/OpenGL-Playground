@@ -12,7 +12,7 @@ EntityRenderer::EntityRenderer( StaticShader* shader, glm::mat4 projection_matri
 	this->shader->stop();
 }
 
-void EntityRenderer::render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities )
+void EntityRenderer::render( const std::unordered_map<TexturedModel, std::vector<Entity>> entities, const Frustum& frustum )
 {
 	for( auto& model : entities )
 	{
@@ -21,6 +21,8 @@ void EntityRenderer::render( const std::unordered_map<TexturedModel, std::vector
 		std::vector<Entity> batch = model.second;
 		for( auto& entity : batch )
 		{
+			if( frustum.withinFrustum( entity.getPosition() ) )
+				continue;
 			prepareInstance( entity );
 			glDrawElements( GL_TRIANGLES, textured_model.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0 );
 		}

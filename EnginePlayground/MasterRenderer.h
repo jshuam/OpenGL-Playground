@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EntityRenderer.h"
+#include "Frustum.h"
 #include "SkyboxRenderer.h"
 #include "TerrainRenderer.h"
 #include "TerrainShader.h"
@@ -45,6 +46,7 @@ public:
 	void createProjectionMatrix();
 
 private:
+	Frustum frustum;
 	StaticShader shader;
 	EntityRenderer renderer;
 	SkyboxRenderer skybox_renderer;
