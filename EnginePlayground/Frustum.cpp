@@ -74,18 +74,18 @@ void Frustum::extractPlanes( const glm::mat4& combo_matrix )
 	planes[5].c = combo_matrix[3][2] - combo_matrix[2][2];
 	planes[5].d = combo_matrix[3][3] - combo_matrix[2][3];
 
-	normalizePlane( planes[0] );
+	/*normalizePlane( planes[0] );
 	normalizePlane( planes[1] );
 	normalizePlane( planes[2] );
 	normalizePlane( planes[3] );
 	normalizePlane( planes[4] );
-	normalizePlane( planes[5] );
+	normalizePlane( planes[5] );*/
 }
 
 void Frustum::update( const Camera& camera )
 {
 	glm::mat4 view_matrix = Maths::createViewMatrix( camera );
-	glm::mat4 combo_matrix = view_matrix * projection_matrix;
+	glm::mat4 combo_matrix = projection_matrix * view_matrix;
 	extractPlanes( combo_matrix );
 }
 

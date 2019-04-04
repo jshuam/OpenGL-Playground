@@ -44,13 +44,12 @@ void MasterRenderer::enableCulling()
 void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane )
 {
 	prepare();
-	frustum.update( camera );
 	shader.start();
 	shader.loadClipPlane( clip_plane );
 	shader.loadSkyColour( RED, GREEN, BLUE );
 	shader.loadLights( lights );
 	shader.loadViewMatrix( camera );
-	renderer.render( entities, frustum );
+	renderer.render( entities );
 	shader.stop();
 	terrain_shader.start();
 	terrain_shader.loadClipPlane( clip_plane );
@@ -67,9 +66,13 @@ void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, 
 void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera
 								  , const glm::vec4& clip_plane )
 {
+	frustum.update( camera );
 	for( auto& entity : entities )
 	{
-		processEntity( *entity );
+		if( frustum.withinFrustum( entity->getPosition() ) )
+		{
+			processEntity( *entity );
+		}
 	}
 
 	for( auto& terrain : terrains )
