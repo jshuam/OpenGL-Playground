@@ -63,16 +63,11 @@ void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, 
 	entities.clear();
 }
 
-void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera
-								  , const glm::vec4& clip_plane )
+void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane )
 {
-	frustum.update( camera );
 	for( auto& entity : entities )
 	{
-		if( frustum.withinFrustum( entity->getPosition() ) )
-		{
-			processEntity( *entity );
-		}
+		processEntity( *entity );
 	}
 
 	for( auto& terrain : terrains )
