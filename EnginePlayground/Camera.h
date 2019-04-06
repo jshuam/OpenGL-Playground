@@ -12,6 +12,7 @@ public:
 	void move( const GLfloat& dt );
 
 	const glm::vec3& getPosition() const;
+	glm::vec3 getLookAt() const;
 	const GLfloat& getPitch() const;
 	const GLfloat& getYaw() const;
 	const GLfloat& getRoll() const; void setPosX( const GLfloat& x );

@@ -9,27 +9,31 @@
 class Frustum
 {
 private:
-	enum Halfspace
+
+	enum
 	{
-		NEGATIVE = -1,
-		ON_PLANE = 0,
-		POSITIVE = 1
+		TOP = 0,
+		BOTTOM,
+		LEFT,
+		RIGHT,
+		NEARP,
+		FARP
 	};
 
 public:
+
+	static enum { OUTSIDE, INTERSECT, INSIDE };
+
+	Plane pl[6];
+
+	glm::vec3 ntl, ntr, nbl, nbr, ftl, ftr, fbl, fbr;
+	GLfloat near_d, far_d, ratio, angle, tang;
+	GLfloat nw, nh, fw, fh;
+
 	Frustum() = default;
-	Frustum( glm::mat4 projection_matrix );
-	bool withinFrustum( const glm::vec3& point ) const;
-	void update( const Camera& camera );
+	~Frustum() = default;
 
-private:
-	void normalizePlane( Plane& plane );
-	void extractPlanes( const glm::mat4& combo_matrix );
-	Halfspace classifyPoint( const Plane& plane, const glm::vec3& point ) const;
-	GLfloat distanceToPoint( const Plane& plane, const glm::vec3& point ) const;
-
-private:
-	static constexpr const GLuint num_planes = 6;
-	Plane planes[num_planes];
-	glm::mat4 projection_matrix;
+	void setCamInternals( GLfloat angle, GLfloat ratio, GLfloat near_d, GLfloat far_d );
+	void setCamDef( const glm::vec3& p, const glm::vec3& l, const glm::vec3& u );
+	int pointInFrustum( const glm::vec3& p );
 };

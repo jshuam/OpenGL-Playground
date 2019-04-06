@@ -35,6 +35,11 @@ const glm::vec3& Camera::getPosition() const
 	return position;
 }
 
+glm::vec3 Camera::getLookAt() const
+{
+	return glm::vec3( position + glm::vec3( glm::cos( pitch ) * glm::sin( yaw ), glm::sin( pitch ), glm::cos( pitch ) * glm::cos( yaw ) ) );
+}
+
 const GLfloat& Camera::getPitch() const
 {
 	return pitch;

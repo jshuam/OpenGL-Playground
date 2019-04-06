@@ -3,7 +3,6 @@
 MasterRenderer::MasterRenderer( Loader loader, GLuint num_lights )
 {
 	createProjectionMatrix();
-	frustum = Frustum( projection_matrix );
 	renderer = EntityRenderer( &shader, projection_matrix, num_lights );
 	terrain_renderer = TerrainRenderer( &terrain_shader, projection_matrix, num_lights );
 	skybox_renderer = SkyboxRenderer( loader, projection_matrix );
@@ -21,6 +20,7 @@ void MasterRenderer::createProjectionMatrix()
 {
 	float aspect_ratio = static_cast<float>( DisplayManager::getWidth() ) / static_cast<float>( DisplayManager::getHeight() );
 	projection_matrix = glm::perspective( glm::radians( FOV ), aspect_ratio, NEAR_PLANE, FAR_PLANE );
+	frustum.setCamInternals( FOV, aspect_ratio, NEAR_PLANE, FAR_PLANE );
 }
 
 
@@ -66,10 +66,10 @@ void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, 
 void MasterRenderer::renderScene( const std::vector<std::shared_ptr<Entity>>& entities, const std::vector<Terrain>& terrains, const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera
 								  , const glm::vec4& clip_plane )
 {
-	frustum.update( camera );
+	frustum.setCamDef( camera.getPosition(), camera.getLookAt(), glm::vec3( 0, 1, 0 ) );
 	for( auto& entity : entities )
 	{
-		if( frustum.withinFrustum( entity->getPosition() ) )
+		if( frustum.pointInFrustum( entity->getPosition() ) == Frustum::INSIDE )
 		{
 			processEntity( *entity );
 		}

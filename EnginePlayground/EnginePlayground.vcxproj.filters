@@ -245,6 +245,7 @@
     <ClCompile Include="Frustum.cpp">
       <Filter>Src\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex_shader.txt">

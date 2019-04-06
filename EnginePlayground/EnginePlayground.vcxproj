@@ -166,6 +166,7 @@
     <ClCompile Include="MasterRenderer.cpp" />
     <ClCompile Include="ModelTexture.cpp" />
     <ClCompile Include="MousePicker.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RawModel.cpp" />
     <ClCompile Include="EntityRenderer.cpp" />
