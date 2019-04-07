@@ -39,6 +39,7 @@ void WaterShader::connectTextureUnits()
 	loadInt( location_refraction_texture, 1 );
 	loadInt( location_dudv_map, 2 );
 	loadInt( location_normal_map, 3 );
+	loadInt( location_depth_map, 4 );
 }
 
 void WaterShader::bindAttributes()
@@ -59,4 +60,5 @@ void WaterShader::getAllUniformLocations()
 	location_normal_map = getUniformLocation( "normal_map" );
 	location_light_colour = getUniformLocation( "light_colour" );
 	location_light_position = getUniformLocation( "light_position" );
+	location_depth_map = getUniformLocation( "depth_map" );
 }

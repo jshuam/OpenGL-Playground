@@ -38,5 +38,6 @@ private:
 	GLint location_normal_map;
 	GLint location_light_colour;
 	GLint location_light_position;
+	GLint location_depth_map;
 };
 

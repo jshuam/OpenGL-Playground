@@ -46,10 +46,16 @@ void WaterRenderer::prepareRender( const Camera& camera, const Light& sun )
 	glBindTexture( GL_TEXTURE_2D, dudv_texture );
 	glActiveTexture( GL_TEXTURE3 );
 	glBindTexture( GL_TEXTURE_2D, normal_map_texture );
+	glActiveTexture( GL_TEXTURE4 );
+	glBindTexture( GL_TEXTURE_2D, water_fbos.getRefractionDepthTexture() );
+
+	glEnable( GL_BLEND );
+	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 }
 
 void WaterRenderer::unbind()
 {
+	glDisable( GL_BLEND );
 	glDisableVertexAttribArray( 0 );
 	glBindVertexArray( 0 );
 	shader.stop();
