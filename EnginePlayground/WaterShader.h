@@ -14,7 +14,7 @@ public:
 	void loadProjectionMatrix( const glm::mat4& projection_matrix );
 	void loadViewMatrix( const Camera& camera );
 	void loadModelMatrix( const glm::mat4& model_matrix );
-
+	void loadMoveFactor( const GLfloat& factor );
 	void connectTextureUnits();
 
 protected:
@@ -30,5 +30,7 @@ private:
 	GLint location_projection_matrix;
 	GLint location_reflection_texture;
 	GLint location_refraction_texture;
+	GLint location_dudv_map;
+	GLint location_move_factor;
 };
 

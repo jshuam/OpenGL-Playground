@@ -84,12 +84,12 @@ int main()
 		{
 			x = float_dist( mt );
 		}
-		while( x >= 310 && x <= 420 );
+		while( x >= 330 && x <= 450 );
 		do
 		{
 			z = float_dist( mt );
 		}
-		while( z >= 310 && z <= 420 );
+		while( z >= 320 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( fern_texture, fern_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
@@ -100,12 +100,12 @@ int main()
 		{
 			x = float_dist( mt );
 		}
-		while( x >= 310 && x <= 420 );
+		while( x >= 330 && x <= 450 );
 		do
 		{
 			z = float_dist( mt );
 		}
-		while( z >= 310 && z <= 420 );
+		while( z >= 320 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( diffuse_texture, diffuse_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 3 ) );
 	}
@@ -116,12 +116,12 @@ int main()
 		{
 			x = float_dist( mt );
 		}
-		while( x >= 310 && x <= 420 );
+		while( x >= 330 && x <= 450 );
 		do
 		{
 			z = float_dist( mt );
 		}
-		while( z >= 310 && z <= 420 );
+		while( z >= 320 && z <= 420 );
 		GLfloat y = terrains[0].getTerrainHeight( x, z );
 		entities.emplace_back( std::make_shared<Entity>( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
@@ -145,13 +145,13 @@ int main()
 	std::shared_ptr<Player> player = std::make_shared<Player>( player_texture, glm::vec3( 0, 0, 0 ), 0, 0, 0, 0.5 );
 	Camera camera( player );
 	entities.push_back( player );
-	std::shared_ptr<Entity> lamp_entity = std::make_shared<Entity>( lamp_texture, glm::vec3( 5, terrains[0].getTerrainHeight( 5, 5 ) + 13, 5 ), 0, 0, 0, 1 );
+	/*std::shared_ptr<Entity> lamp_entity = std::make_shared<Entity>( lamp_texture, glm::vec3( 5, terrains[0].getTerrainHeight( 5, 5 ) + 13, 5 ), 0, 0, 0, 1 );
 	entities.push_back( lamp_entity );
 	std::shared_ptr<Light> light = std::make_shared<Light>( glm::vec3( 185, terrains[0].getTerrainHeight( 185, 293 ) + 13, 293 ), glm::vec3( 3, 0, 1 ), glm::vec3( 1, 0.01f, 0.002f ) );
-	lights.push_back( light );
+	lights.push_back( light );*/
 	MasterRenderer renderer( loader, lights.size() );
 
-	MousePicker picker( camera, renderer.getProjectionMatrix(), &terrains[0] );
+	//MousePicker picker( camera, renderer.getProjectionMatrix(), &terrains[0] );
 
 	WaterFrameBuffer water_fbos;
 	WaterShader water_shader;
@@ -165,16 +165,16 @@ int main()
 		camera.move( DisplayManager::getDeltaTime() );
 		player->move( DisplayManager::getDeltaTime(), terrains[0] );
 
-		picker.update();
+		//picker.update();
 
 		glEnable( GL_CLIP_DISTANCE0 );
 
-		if( picker.currentTerrainPointFound() )
+		/*if( picker.currentTerrainPointFound() )
 		{
 			glm::vec3 point = picker.getCurrentTerrainPoint();
 			lamp_entity->setPosition( point );
 			light->setPosition( point.x, terrains[0].getTerrainHeight( point.x, point.z ) + 13, point.z );
-		}
+		}*/
 
 		water_fbos.bindReflectionFrameBuffer();
 		GLfloat distance = 2 * ( camera.getPosition().y - waters[0].getHeight() );

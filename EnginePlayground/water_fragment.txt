@@ -1,11 +1,17 @@
 #version 400 core
 
 in vec4 clip_space;
+in vec2 texture_coords;
 
 out vec4 out_colour;
 
 uniform sampler2D reflection_texture;
 uniform sampler2D refraction_texture;
+uniform sampler2D dudv_map;
+
+uniform float move_factor;
+
+const float wave_strength = 0.02;
 
 void main( void )
 {
@@ -14,8 +20,20 @@ void main( void )
 	vec2 reflection_texture_coords = vec2( normalised_device_coords.x, -normalised_device_coords.y );
 	vec2 refraction_texture_coords = vec2( normalised_device_coords.x, normalised_device_coords.y );
 
+	vec2 distortion_1 = ( texture( dudv_map, vec2( texture_coords.x + move_factor, texture_coords.y ) ).rg * 2.0 - 1.0 ) * wave_strength;
+	vec2 distortion_2 = ( texture( dudv_map, vec2( -texture_coords.x + move_factor, texture_coords.y + move_factor ) ).rg * 2.0 - 1.0 ) * wave_strength;
+	vec2 total_distortion = distortion_1 + distortion_2;
+
+	reflection_texture_coords += total_distortion;
+	reflection_texture_coords.x = clamp( reflection_texture_coords.x, 0.001, 0.999 );
+	reflection_texture_coords.y = clamp( reflection_texture_coords.y, -0.999, -0.001 );
+
+	refraction_texture_coords += total_distortion;
+	refraction_texture_coords = clamp( refraction_texture_coords, 0.001, 0.999 );
+
 	vec4 reflection_colour = texture( reflection_texture, reflection_texture_coords );
 	vec4 refraction_colour = texture( refraction_texture, refraction_texture_coords );
 
 	out_colour = mix( reflection_colour, refraction_colour, 0.5 );
+	out_colour = mix( out_colour, vec4( 0.0, 0.3, 0.5, 1.0 ), 0.2 );
 }

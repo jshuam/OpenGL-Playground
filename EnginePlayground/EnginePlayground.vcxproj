@@ -236,6 +236,7 @@
     <Image Include="res\stallTexture.png" />
     <Image Include="res\top.png" />
     <Image Include="res\tree.png" />
+    <Image Include="res\waterdudv.png" />
     <Image Include="res\white.png" />
     <Image Include="res\wooden_container.png" />
   </ItemGroup>

@@ -20,6 +20,9 @@ private:
 	RawModel quad;
 	WaterFrameBuffer water_fbos;
 	WaterShader shader;
-
+	GLuint dudv_texture;
+	GLfloat move_factor = 0;
+	static constexpr const char* dudv_map = "waterdudv";
+	static constexpr const GLfloat wave_speed = 0.03f;
 };
 

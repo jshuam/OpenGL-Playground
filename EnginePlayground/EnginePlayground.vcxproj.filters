@@ -399,5 +399,6 @@
     <Image Include="res\nightFront.png">
       <Filter>Res</Filter>
     </Image>
+    <Image Include="res\waterdudv.png" />
   </ItemGroup>
 </Project>
