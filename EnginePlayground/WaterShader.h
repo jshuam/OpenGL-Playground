@@ -32,5 +32,6 @@ private:
 	GLint location_refraction_texture;
 	GLint location_dudv_map;
 	GLint location_move_factor;
+	GLint location_camera_position;
 };
 
