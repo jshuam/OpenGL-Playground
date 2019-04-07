@@ -400,5 +400,7 @@
       <Filter>Res</Filter>
     </Image>
     <Image Include="res\waterdudv.png" />
+    <Image Include="res\matchingnormalmap.png" />
+    <Image Include="res\normalmap.png" />
   </ItemGroup>
 </Project>

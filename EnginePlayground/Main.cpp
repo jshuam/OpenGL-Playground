@@ -126,7 +126,7 @@ int main()
 		entities.emplace_back( std::make_shared<Entity>( tree_texture, tree_dist( mt ), glm::vec3( x, y, z ), 0, 0, 0, 1 ) );
 	}
 
-	lights.emplace_back( std::make_shared<Light>( glm::vec3( 20000, 20000, 20000 ), glm::vec3( 1.0f, 1.0f, 1.0f ) ) );
+	lights.emplace_back( std::make_shared<Light>( glm::vec3( 400, 4000, 1600 ), glm::vec3( 0.6f, 0.6f, 0.6f ) ) );
 	lights.emplace_back( std::make_shared<Light>( glm::vec3( 185, terrains[0].getTerrainHeight( 185, 293 ) + 13, 293 ), glm::vec3( 3, 0, 0 ), glm::vec3( 1, 0.01f, 0.002f ) ) );
 	lights.emplace_back( std::make_shared<Light>( glm::vec3( 370, terrains[0].getTerrainHeight( 370, 300 ) + 13, 300 ), glm::vec3( 0, 3, 3 ), glm::vec3( 1, 0.01f, 0.002f ) ) );
 	lights.emplace_back( std::make_shared<Light>( glm::vec3( 293, terrains[0].getTerrainHeight( 293, 305 ) + 13, 305 ), glm::vec3( 3, 3, 0 ), glm::vec3( 1, 0.01f, 0.002f ) ) );
@@ -190,7 +190,7 @@ int main()
 		glDisable( GL_CLIP_DISTANCE0 );
 		water_fbos.unbindCurrentFrameBuffer();
 		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, 0, 0, 0 ) );
-		water_renderer.render( waters, camera );
+		water_renderer.render( waters, camera, *lights[0] );
 		DisplayManager::updateDisplay();
 		frames++;
 		if( glfwGetTime() - timer > 1.0 )

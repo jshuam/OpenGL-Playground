@@ -7,6 +7,7 @@ WaterRenderer::WaterRenderer( Loader& loader, WaterShader& shader, const glm::ma
 	water_fbos( water_fbos )
 {
 	dudv_texture = loader.loadTexture( dudv_map );
+	normal_map_texture = loader.loadTexture( normal_map );
 	shader.start();
 	shader.connectTextureUnits();
 	shader.loadProjectionMatrix( projection_matrix );
@@ -14,9 +15,9 @@ WaterRenderer::WaterRenderer( Loader& loader, WaterShader& shader, const glm::ma
 	setUpVAO( loader );
 }
 
-void WaterRenderer::render( const std::vector<WaterTile>& water, const Camera& camera )
+void WaterRenderer::render( const std::vector<WaterTile>& water, const Camera& camera, const Light& sun )
 {
-	prepareRender( camera );
+	prepareRender( camera, sun );
 
 	for( auto& tile : water )
 	{
@@ -27,13 +28,14 @@ void WaterRenderer::render( const std::vector<WaterTile>& water, const Camera& c
 	unbind();
 }
 
-void WaterRenderer::prepareRender( const Camera& camera )
+void WaterRenderer::prepareRender( const Camera& camera, const Light& sun )
 {
 	shader.start();
 	shader.loadViewMatrix( camera );
 	move_factor += wave_speed * DisplayManager::getDeltaTime();
 	move_factor = fmod( move_factor, 1 );
 	shader.loadMoveFactor( move_factor );
+	shader.loadLight( sun );
 	glBindVertexArray( quad.getVaoId() );
 	glEnableVertexAttribArray( 0 );
 	glActiveTexture( GL_TEXTURE0 );
@@ -42,6 +44,8 @@ void WaterRenderer::prepareRender( const Camera& camera )
 	glBindTexture( GL_TEXTURE_2D, water_fbos.getRefractionTexture() );
 	glActiveTexture( GL_TEXTURE2 );
 	glBindTexture( GL_TEXTURE_2D, dudv_texture );
+	glActiveTexture( GL_TEXTURE3 );
+	glBindTexture( GL_TEXTURE_2D, normal_map_texture );
 }
 
 void WaterRenderer::unbind()

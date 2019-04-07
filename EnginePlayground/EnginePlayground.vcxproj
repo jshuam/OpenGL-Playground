@@ -219,6 +219,7 @@
     <Image Include="res\lamp.png" />
     <Image Include="res\left.png" />
     <Image Include="res\lowPolyTree.png" />
+    <Image Include="res\matchingnormalmap.png" />
     <Image Include="res\mossPath256.png" />
     <Image Include="res\mud.png" />
     <Image Include="res\nightBack.png" />
@@ -227,6 +228,7 @@
     <Image Include="res\nightLeft.png" />
     <Image Include="res\nightRight.png" />
     <Image Include="res\nightTop.png" />
+    <Image Include="res\normalmap.png" />
     <Image Include="res\path.png" />
     <Image Include="res\pink.png" />
     <Image Include="res\pinkFlowers.png" />
