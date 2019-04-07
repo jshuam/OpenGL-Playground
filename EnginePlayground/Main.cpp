@@ -185,7 +185,7 @@ int main()
 		camera.setPosY( camera_y );
 		camera.invertPitch();
 		water_fbos.bindRefractionFrameBuffer();
-		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, -1, 0, waters[0].getHeight() ) );
+		renderer.renderScene( entities, terrains, lights, camera, glm::vec4( 0, -1, 0, waters[0].getHeight() ) + 1.0f );
 
 		glDisable( GL_CLIP_DISTANCE0 );
 		water_fbos.unbindCurrentFrameBuffer();
