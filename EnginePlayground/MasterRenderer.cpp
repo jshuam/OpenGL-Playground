@@ -23,6 +23,14 @@ void MasterRenderer::createProjectionMatrix()
 	projection_matrix = glm::perspective( glm::radians( FOV ), aspect_ratio, NEAR_PLANE, FAR_PLANE );
 }
 
+void MasterRenderer::processShaderProperties()
+{
+	if( DisplayManager::getKey( GLFW_KEY_1 ) == GLFW_PRESS )
+	{
+		cell_shading = !cell_shading;
+	}
+}
+
 
 void MasterRenderer::cleanUp()
 {
@@ -44,11 +52,13 @@ void MasterRenderer::enableCulling()
 void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, const Camera& camera, const glm::vec4& clip_plane )
 {
 	prepare();
+	processShaderProperties();
 	shader.start();
 	shader.loadClipPlane( clip_plane );
 	shader.loadSkyColour( RED, GREEN, BLUE );
 	shader.loadLights( lights );
 	shader.loadViewMatrix( camera );
+	shader.loadProperties( cell_shading );
 	renderer.render( entities );
 	shader.stop();
 	terrain_shader.start();
@@ -57,8 +67,9 @@ void MasterRenderer::render( const std::vector<std::shared_ptr<Light>>& lights, 
 	terrain_shader.loadLights( lights );
 	terrain_shader.loadViewMatrix( camera );
 	terrain_renderer.render( terrains );
+	terrain_shader.loadProperties( cell_shading );
 	terrain_shader.stop();
-	skybox_renderer.render( camera, glm::vec3( RED, GREEN, BLUE ) );
+	skybox_renderer.render( camera, glm::vec3( RED, GREEN, BLUE ), cell_shading );
 	terrains.clear();
 	entities.clear();
 }

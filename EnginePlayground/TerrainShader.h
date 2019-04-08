@@ -19,6 +19,7 @@ public:
 	void loadShineVariables( const GLfloat& damper, const GLfloat& reflectivity ) const;
 	void loadSkyColour( const GLfloat& r, const GLfloat& g, const GLfloat& b ) const;
 	void loadClipPlane( const glm::vec4& clip_plane ) const;
+	void loadProperties( const bool& cell_shading ) const;
 	void connectTextureUnits();
 
 protected:
@@ -42,6 +43,7 @@ private:
 	GLuint location_blend_map;
 	GLuint location_max_lights;
 	GLuint location_plane;
+	GLuint location_cell_shading;
 	std::vector<GLuint> location_light_position;
 	std::vector<GLuint> location_light_colour;
 	std::vector<GLuint> location_attenuation;

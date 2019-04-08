@@ -14,11 +14,12 @@ SkyboxRenderer::SkyboxRenderer( Loader loader, glm::mat4 projection_matrix )
 	shader.stop();
 }
 
-void SkyboxRenderer::render( const Camera& camera, const glm::vec3& fog_colour )
+void SkyboxRenderer::render( const Camera& camera, const glm::vec3& fog_colour, const bool& cell_shading )
 {
 	shader.start();
 	shader.loadViewMatrix( camera, DisplayManager::getDeltaTime() );
 	shader.loadFogColour( fog_colour.r, fog_colour.g, fog_colour.b );
+	shader.loadProperties( cell_shading );
 	glBindVertexArray( cube.getVaoId() );
 	glEnableVertexAttribArray( 0 );
 	bindTextures();

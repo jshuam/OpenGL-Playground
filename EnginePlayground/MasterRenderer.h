@@ -46,6 +46,9 @@ public:
 	void createProjectionMatrix();
 
 private:
+	void processShaderProperties();
+
+private:
 	Frustum frustum;
 	StaticShader shader;
 	EntityRenderer renderer;
@@ -65,5 +68,7 @@ private:
 	static constexpr GLfloat RED = 0.5444f;
 	static constexpr GLfloat GREEN = 0.62f;
 	static constexpr GLfloat BLUE = 0.69f;
+
+	bool cell_shading = false;
 };
 

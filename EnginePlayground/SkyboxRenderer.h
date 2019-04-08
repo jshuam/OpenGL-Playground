@@ -16,7 +16,10 @@ public:
 	SkyboxRenderer( Loader loader, glm::mat4 projection_matrix );
 	~SkyboxRenderer() = default;
 
-	void render( const Camera& camera, const glm::vec3& fog_colour );
+	void render( const Camera& camera, const glm::vec3& fog_colour, const bool& cell_shading );
+
+public:
+	SkyboxShader shader;
 
 private:
 	void bindTextures();
@@ -91,7 +94,6 @@ private:
 	RawModel cube;
 	GLuint day_texture;
 	GLuint night_texture;
-	SkyboxShader shader;
 	GLfloat time = 0;
 };
 

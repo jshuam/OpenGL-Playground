@@ -32,6 +32,11 @@ void SkyboxShader::loadBlendFactor( GLfloat blend_factor ) const
 	loadFloat( location_blend_factor, blend_factor );
 }
 
+void SkyboxShader::loadProperties( const bool& cell_shading ) const
+{
+	loadBool( location_cell_shading, cell_shading );
+}
+
 void SkyboxShader::connectTextureUnits()
 {
 	loadInt( location_cube_map_day, 0 );
@@ -51,4 +56,5 @@ void SkyboxShader::getAllUniformLocations()
 	location_cube_map_day = getUniformLocation( "cube_map_day" );
 	location_cube_map_night = getUniformLocation( "cube_map_night" );
 	location_blend_factor = getUniformLocation( "blend_factor" );
+	location_cell_shading = getUniformLocation( "cell_shading" );
 }

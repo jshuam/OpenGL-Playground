@@ -21,6 +21,7 @@ public:
 	void loadNumRows( const GLuint& num_rows ) const;
 	void loadOffset( const GLfloat& x, const GLfloat& y ) const;
 	void loadClipPlane( const glm::vec4& plane ) const;
+	void loadProperties( const bool& cell_shading ) const;
 
 protected:
 	void bindAttributes() override;
@@ -41,6 +42,7 @@ private:
 	GLuint location_offset;
 	GLuint location_max_lights;
 	GLuint location_plane;
+	GLuint location_cell_shading;
 	std::vector<GLuint> location_light_position;
 	std::vector<GLuint> location_light_colour;
 	std::vector<GLuint> location_attenuation;

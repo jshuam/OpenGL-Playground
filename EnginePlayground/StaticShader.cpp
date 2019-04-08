@@ -77,6 +77,11 @@ void StaticShader::loadClipPlane( const glm::vec4& plane ) const
 	loadVector( location_plane, plane );
 }
 
+void StaticShader::loadProperties( const bool& cell_shading ) const
+{
+	loadBool( location_cell_shading, cell_shading );
+}
+
 void StaticShader::bindAttributes()
 {
 	bindAttribute( 0, "position" );
@@ -97,4 +102,5 @@ void StaticShader::getAllUniformLocations()
 	location_offset = getUniformLocation( "offset" );
 	location_max_lights = getUniformLocation( "max_lights" );
 	location_plane = getUniformLocation( "plane" );
+	location_cell_shading = getUniformLocation( "cell_shading" );
 }

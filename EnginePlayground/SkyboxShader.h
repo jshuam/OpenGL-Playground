@@ -12,6 +12,7 @@ public:
 	void loadViewMatrix( const Camera& camera, const GLfloat& dt );
 	void loadFogColour( GLfloat r, GLfloat g, GLfloat b ) const;
 	void loadBlendFactor( GLfloat blend_factor ) const;
+	void loadProperties( const bool& cell_shading ) const;
 	void connectTextureUnits();
 
 protected:
@@ -32,5 +33,6 @@ private:
 	GLuint location_cube_map_day;
 	GLuint location_cube_map_night;
 	GLuint location_blend_factor;
+	GLuint location_cell_shading;
 };
 

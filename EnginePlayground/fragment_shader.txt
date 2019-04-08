@@ -17,6 +17,10 @@ uniform float shine_damper;
 uniform float reflectivity;
 uniform vec3 sky_colour;
 
+uniform float cell_shading;
+
+const float levels = 3.0;
+
 void main ( void )
 {
 	vec3 unit_normal = normalize( surface_normal );
@@ -31,12 +35,26 @@ void main ( void )
 		float att_factor = attenuation[i].x + attenuation[i].y * distance + attenuation[i].z * pow( distance, 2 );
 		vec3 unit_light = normalize( to_light_vec[i] );
 		float n_dot_l = dot( unit_normal, unit_light );
+
 		float brightness = max( n_dot_l, 0.0 );
+		if( cell_shading > 0.5 )
+		{
+			float level = floor( brightness * levels );
+			brightness = level / levels;
+		}
+
 		vec3 light_direction = -unit_light;
 		vec3 reflected_light_direction = reflect( light_direction, unit_normal );
 		float specular_factor = dot( reflected_light_direction, unit_to_camera_vec );
 		specular_factor = max( specular_factor, 0.0 );
+
 		float damped_factor = pow( specular_factor, shine_damper );
+		if( cell_shading > 0.5 )
+		{
+			float level = floor( damped_factor * levels );
+			damped_factor = level / levels;
+		}
+
 		total_diffuse = total_diffuse + ( brightness * light_colour[i] ) / att_factor;
 		total_specular = total_specular + ( damped_factor * reflectivity * light_colour[i] ) / att_factor;
 	}

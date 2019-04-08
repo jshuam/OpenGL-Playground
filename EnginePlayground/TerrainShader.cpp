@@ -62,6 +62,11 @@ void TerrainShader::loadClipPlane( const glm::vec4& clip_plane ) const
 	loadVector( location_plane, clip_plane );
 }
 
+void TerrainShader::loadProperties( const bool& cell_shading ) const
+{
+	loadBool( location_cell_shading, cell_shading );
+}
+
 void TerrainShader::connectTextureUnits()
 {
 	loadInt( location_background_texture, 0 );
@@ -93,4 +98,5 @@ void TerrainShader::getAllUniformLocations()
 	location_blend_map = getUniformLocation( "blend_map" );
 	location_max_lights = getUniformLocation( "max_lights" );
 	location_plane = getUniformLocation( "plane" );
+	location_cell_shading = getUniformLocation( "cell_shading" );
 }
