@@ -27,7 +27,19 @@ void MasterRenderer::processShaderProperties()
 {
 	if( DisplayManager::getKey( GLFW_KEY_1 ) == GLFW_PRESS )
 	{
-		cell_shading = !cell_shading;
+		cell_shading = true;
+	}
+	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS && DisplayManager::getKey( GLFW_KEY_1 ) == GLFW_PRESS )
+	{
+		cell_shading = false;
+	}
+	if( DisplayManager::getKey( GLFW_KEY_2 ) == GLFW_PRESS )
+	{
+		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	}
+	if( DisplayManager::getKey( GLFW_KEY_LEFT_CONTROL ) == GLFW_PRESS && DisplayManager::getKey( GLFW_KEY_2 ) == GLFW_PRESS )
+	{
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	}
 }
 
